@@ -6,7 +6,6 @@ export const postData = async (url, post) => {
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'POST',
         headers: {
-        
             // 'Authorization': token,
             'mode': 'no-cors',
             // 'Content-Type': 'application/json'

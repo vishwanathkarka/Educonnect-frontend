@@ -18,12 +18,29 @@ const Signup = () => {
     role: "",
     parentEmail: "",
     parentPhoneNo: "",
-    studentEmail:""
+    studentEmail:"",
+    htno:"",
+    gender:""
   };
   const [userData, setUserData] = useState(userInput);
   // for the fetching department form api
   const [departmentListFetch, setDepartmentListFetch] = useState();
   const [sectionListFetch, setSectionListFetch] = useState(null);
+  const {
+    firstName,
+    password,
+    lastName,
+    role,
+    parentEmail,
+    parentPhoneNo,
+    email,
+    phoneNo,
+    sections,
+    departments,
+    studentEmail,
+    htno,
+    gender,
+  } = userData;
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -51,7 +68,7 @@ const Signup = () => {
     }
 
     fetchSection();
-  }, [userData]);
+  }, [role]);
 
  
 
@@ -62,19 +79,7 @@ const Signup = () => {
   // creating formdata
   let bodyFormData = new FormData();
 
-  const {
-    firstName,
-    password,
-    lastName,
-    role,
-    parentEmail,
-    parentPhoneNo,
-    email,
-    phoneNo,
-    section,
-    departments,
-    studentEmail
-  } = userData;
+
   const handleInput = (name) => (el) => {
     if (name != "photo") {
       setUserData({ ...userData, [name]: el.target.value });
@@ -94,7 +99,21 @@ const Signup = () => {
     bodyFormData.append("photo", img);
     // const data = await postData("/signup",userData)
     const data = await postDataForm("/signup", bodyFormData);
-    console.log(data);
+    bodyFormData.delete("[0]data");
+    bodyFormData.delete("[0]photo");
+    console.log(bodyFormData)
+    setImg(null);
+    bodyFormData = new FormData();
+    ()=>setUserData( ...userData,{firstName: " ",
+    password: " ",
+    lastName: " ",
+    email: " ",
+    role: " ",
+    parentEmail: " ",
+    parentPhoneNo: " ",
+    studentEmail:" ",
+  htno:" "})
+    console.log(userData);
   };
   return (
     <>
@@ -111,6 +130,7 @@ const Signup = () => {
             placeholder="First Name"
             onChange={handleInput("firstName")}
             value={firstName}
+
           />
           <input
             type="text"
@@ -119,6 +139,19 @@ const Signup = () => {
             onChange={handleInput("lastName")}
             value={lastName}
           />
+           <input
+            type="text"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            placeholder="Hallt ticket number"
+            onChange={handleInput("htno")}
+            value={htno}
+          />
+          <div className=" w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4 flex items-center gap-2">
+ <input type="radio" name="gender" value="male"  className="" onClick={handleInput("gender")}   />
+      <label htmlFor="male" >Male</label>
+      <input type="radio" name="gender" value="female" onClick={handleInput("gender")}  />
+      <label htmlFor="female">Female</label>
+</div>
            <select
             className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="role"
@@ -192,7 +225,7 @@ const Signup = () => {
           <select
             className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="Department"
-            onChange={handleInput("department")}
+            onChange={handleInput("departments")}
             value={departments} 
             disabled= {role == "parent"?true:false}
           >
@@ -208,8 +241,8 @@ const Signup = () => {
           <select
             className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="section" disabled= {role == "parent"?true:false}
-            onChange={handleInput("section")}
-            value={section}
+            onChange={handleInput("sections")}
+            value={sections}
           >
             <option selected>Choose Section ...</option>
 
