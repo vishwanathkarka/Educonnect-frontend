@@ -10,6 +10,13 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      primary:"#6C63FF",
+      
+     },
+  
   },
   plugins: [],
 }
+
+// #6B62FF

@@ -254,7 +254,7 @@ const Signup = () => {
               ))}
           </select>
           <button
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
+            className="block w-full bg-primary rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
             type="submit"
           >
             {" "}

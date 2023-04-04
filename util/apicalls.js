@@ -23,6 +23,40 @@ export const postData = async (url, post) => {
     return data
 }
 
+export const authenticate = (data) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(data));
+     
+    }
+  };
+  export const isAuthenticated = () => {
+    if (typeof window == "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("user")) {
+      return JSON.parse(localStorage.getItem("user"));
+    } else {
+      return false;
+    }
+  };
+
+  export const signout = (next) => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+      next();
+      return axios
+        .get(`${process.base_url}}/signout`)
+        .then(function () {
+          // handle success
+          console.log("signout");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+    }
+  };
+
 export const postDataForm = async (url, post) => {
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'POST',

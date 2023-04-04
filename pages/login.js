@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Header from 'components/header';
 import {postData} from  '../util/apicalls';
 import Toast from "../util/toast"
+import {authenticate} from "../util/apicalls"
 import Cookie  from "js-cookie"
 import { useRouter } from 'next/router'
 
@@ -34,9 +35,10 @@ const onSubmitLogin = async el => {
   console.log(result)
   if(result.status == true){
   setToShowToast({...toShowToast,toastColor:"bg-success",msg:{title:"Logged successfully"},isShownToast:true})
-Cookie.set('token',result.token,{ expires: 7 })
-Cookie.set('user',JSON.stringify(result.user),{ expires: 7 })
-console.log("(((((((("+JSON.stringify(result.user))
+// Cookie.set('user',JSON.stringify(result),{ expires: 7 })
+authenticate(result);
+// Cookie.set('user',JSON.stringify(result.user),{ expires: 7 })
+// console.log("(((((((("+JSON.stringify(result.user))
 // router.push('/about')
   }
 console.log(toShowToast)
