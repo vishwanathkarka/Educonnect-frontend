@@ -28,10 +28,12 @@ console.log("600000"+ JSON.stringify(isAuthenticated().user))
  console.log(userDataForAttendace);
 
  }
- let departmentlist = await getData("/listdepartment");
+ if(isAuthenticated()){
+ let departmentlist = await postData("/listdepartmentspecific",isAuthenticated().user.departments[0]);
  if (departmentlist.success == true) {
   setDepartmentListFetch(departmentlist.listOfDepartment);
 }
+ }
 let sectionlist = await getData("/listsection");
 if (sectionlist.success == true) {
   setSectionListFetch(sectionlist.listOfSection);
@@ -42,7 +44,6 @@ console.log(departmentListFetch)
     fetchdata()
   },[]);
   
-
 async function attendanceSubmit(){
 let da =  await postData("/bulkattendanceadd",attendace)
 }

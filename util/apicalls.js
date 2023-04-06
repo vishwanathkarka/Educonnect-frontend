@@ -102,7 +102,7 @@ export const postDataJson = async (url, post, token) => {
 
 export const getData = async (url, token) => {
 
-        return fetch(`http://localhost:4000/api/v1${url}`, {
+        return await fetch(`http://localhost:4000/api/v1${url}`, {
             method: "GET"
           })
             .then(response => {
