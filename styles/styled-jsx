@@ -1,0 +1,5 @@
+<style jsx global>{`
+  body {
+    background: ${isDark ? "darkslategray" : "antiquewhite"};
+  }
+`}</style>

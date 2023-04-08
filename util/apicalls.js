@@ -110,3 +110,43 @@ export const getData = async (url, token) => {
             })
             .catch(err => console.log(err));
         }
+
+export const updateData = async (url,post,token) =>{
+    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+        method: 'PUT',
+        headers: {
+            // 'Authorization': token,
+            'mode': 'no-cors',
+            // 'Content-Type': 'application/json'
+            // "Content-Type": "multipart/form-data",
+            // "Accept": "application/json"
+            'Content-Type': 'application/json'
+            // "type": "formData"
+          
+        },
+        body: JSON.stringify(post)
+    })
+    const data = await res.json()
+    console.log(data)
+    return data
+}
+
+export const deleteData = async (url,post,token) =>{
+    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+        method: 'DELETE',
+        headers: {
+            // 'Authorization': token,
+            'mode': 'no-cors',
+            // 'Content-Type': 'application/json'
+            // "Content-Type": "multipart/form-data",
+            // "Accept": "application/json"
+            'Content-Type': 'application/json'
+            // "type": "formData"
+          
+        },
+        
+    })
+    const data = await res.json()
+    console.log(data)
+    return data
+}

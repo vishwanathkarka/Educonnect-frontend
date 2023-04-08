@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Avenir';
+    src: local('Rajdhani'), url(../Averta_Standard/AvertaStd-Bold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Avenir-regular-bold';
+    src: local('Rajdhani'), url(../Averta_Standard/AvertaStd-Regular.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Avenirregular';
+    src: local('Rajdhani'), url(../Averta_Standard/AvertaStd-Regular.ttf) format('truetype');
+  }
+  body{
+    background-color: #EAEBF5;
+    font-family: 'Avenir';
+}
+.show-hover{
+    display: none;
+    }
+    
+    .onHover:hover .show-hover {
+    display: block;
+    }
+    

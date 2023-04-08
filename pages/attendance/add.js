@@ -8,7 +8,7 @@ import loadingimg from "../../util/Spinner-1s-200px.gif"
 import Image from 'next/image'
 import{isAuthenticated} from "../../util/apicalls"
 import { useState } from "react";
-export default function add() {
+export default function add(props) {
 
 const[userDataForAttendace,setUserDataForAttendace] =  useState();
 const [attendace,setAttendace] = useState({data:[]});
@@ -16,7 +16,7 @@ const [loading,setLoading] = useState(false)
 const [departmentListFetch, setDepartmentListFetch] = useState();
   const [sectionListFetch, setSectionListFetch] = useState(null);
 console.log("600000"+ JSON.stringify(isAuthenticated().user))
-
+console.log("Dark teemme"+props.isDark)
   useEffect(() => {
     async function fetchdata(){
  let data = await postData("/getalluserforattendance",{"department":"641f4777c5cb1ab7e65ec29d","sections":"641f48f11edf6915d2ba0f41"})

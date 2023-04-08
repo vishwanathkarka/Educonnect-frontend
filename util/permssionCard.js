@@ -2,10 +2,9 @@
 import React, { useState,useEffect } from "react";
 import moment from "moment";
 // import { DelPermission } from "./helper/permissioncalls";
-import { isAuthenticated } from "../util/apicalls";
+import { isAuthenticated,updateData,deleteData } from "../util/apicalls";
 // import { EditPermission } from "./helper/permissioncalls";
-// import PermssionForm from "./PermssionForm";
-
+// import PermssionForm from "../components/permissionForm";
 // import {AcceptRequest,Userinfo} from "./helper/permissioncalls"
 export default function PermssionCard(props) {
   let [isApp, setIsApp] = useState(props.isApproved);
@@ -19,6 +18,7 @@ export default function PermssionCard(props) {
     is_PermisssionGranted:null
   })
   
+  console.log("props.isApproved"+props.isApproved)
   const DateDiff = () => {
     var date1 = moment(props.to);
     var date2 = moment(props.from);
@@ -26,6 +26,7 @@ export default function PermssionCard(props) {
     return days;
   };
 
+console.log("***())_(_)_"+props.isApproved )
 console.log("gggg",(Userinf.userinfo !== undefined )?(Userinf.userinfo.photo.secure_url):"hello")
 console.log(typeof Userinf);
 // useEffect(() => {
@@ -41,11 +42,12 @@ const [values, setValues] = useState({
     toDate: props.to,
     description: props.description,
   });
-// useEffect(() => {
-//   if(isAuthenticated().user.role == "Admin"){
-//     Userinfo(props.userid).then(res=> {setUserinfo(res)}).catch(err=> console.log(err))
-//   }
-//     },[])
+useEffect(() => {
+  if(isAuthenticated().user.role == "Admin"){
+    Userinfo(props.userid).then(res=> {setUserinfo(res)}).catch(err=> console.log(err))
+  }
+  
+    },[])
   const { subject, fromDate, toDate, description, id, loading, email } = values;
   console.log(props.id);
 console.log("999",Userinf)
@@ -215,7 +217,7 @@ console.log("999",Userinf)
           className=" h-[100vh] w-[100%] bg-[#020202a7] cursor-pointer  absolute"
           onClick={() => setNewRequest(!newRequest)}
         >
-          {" "}
+          
         </div>
         <div className="flex gap-[130px] items-center  "></div>
         <form
@@ -386,13 +388,24 @@ console.log("999",Userinf)
 
     //     }
     //      }
-   
+    let role =   isAuthenticated().user.role 
+    function roleBasedUpdate(value){
+if(role == "lecture"){
+    return {"isLectureApproved":value}
+}
+else if(role == "parent"){
+    return {"isParentApproved":value}
+}
+
+    }
+    // for admin to accept or Reject permission
+
     if (props.isApproved == 0) {
-      if (props.isAdmin) {
-        // setWorkAdmin(!workAdmin)
+      if (role == "lecture" || role =="parent") {
+
         return (
           <div className="flex gap-8" > 
-            <p className=" w-[100px] text-[green] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);AcceptRequest(props.id,1)}}>
+            <p className=" w-[100px] text-[green] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(1))}}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -422,7 +435,7 @@ console.log("999",Userinf)
               Approve
             </p>
 
-            <p className=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);AcceptRequest(props.id,2)}}>
+            <p className=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(2))}}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -461,11 +474,9 @@ console.log("999",Userinf)
               onClick={() =>
 {
                 setIsView(!isView);
-                DelPermission(
+                deleteData(
                   props.id,
-                  isAuthenticated().user.email,
-                  isAuthenticated().token,
-                  isAuthenticated().user.role
+                 
                 )
               }
             }
@@ -606,18 +617,18 @@ console.log("999",Userinf)
     return (
       <>
         
-        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-[#000000] text-center  md:px-[5rem] py-3 pb-[30px]">
+        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-[#000000] text-center  md:px-[5rem] py-3 pb-[30px] items-center">
           {props.isAdmin ? (
             <div className="flex gap-5">
               {" "}
-              <img
+          {isAuthenticated().user.role == "lecture" ?  <img
                 src={(props.img !== undefined )?(props.img):"https://visualpharm.com/assets/387/Person-595b40b75ba036ed117da139.svg"}
                 alt=""
                 width="60px"
                 height="65px"
                 className="rounded-[10px]"
                 srcset=""
-              />{" "}
+              />:""}
               <div className="flex flex-col">
                 {" "}
                 <h3>{(props.name !== undefined )?(props.name):"....."}</h3>{" "}
@@ -633,8 +644,6 @@ console.log("999",Userinf)
             {DateDiff()} {DateDiff() == 1 ? "Day" : "Days"}
           </p>
           {/* {IsPermissionApproved(isApp)} */}
-
-
           {
 props.isApproved == 0 ?  ( <p className=" w-[100px] text-[#FFD43B] flex justify-center  items-center gap-1">
 <svg
@@ -751,8 +760,6 @@ Pending
                   Rejected
                 </p>
         )
-
-
           }
           <p className=" cursor-pointer ">
             <svg

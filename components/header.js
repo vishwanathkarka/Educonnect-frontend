@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import Link from 'next/link';
+import Image from "next/image";
 import { signout, isAuthenticated } from "../util/apicalls";
 
 
@@ -18,8 +19,8 @@ function Header() {
     return (
       <ul className="flex  ml-auto items-center gap-9">
         <Link className="text-primary cursor-pointer" href="/login" >
-       
-          login
+       <Image src ="https://5.imimg.com/data5/RX/NO/MY-24297425/eacademics-school-28complete-school-management-software-with-mobile-app-29-500x500.png"></Image> 
+        
         </Link>
         <Link className=" bg-primary px-[6px] py-[3px]  rounded-[9px] cursor-pointer text-[white] font-semibold" href="/signup" >
           {" "}
