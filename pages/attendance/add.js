@@ -3,6 +3,7 @@
 
 import { useEffect } from "react";
 import Attendaceui from "@/util/attendaceui";
+import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
@@ -19,6 +20,7 @@ function Add() {
   const [departmentSection, setDepartmentSection] = useState({
     "department":router.query.department,
     "section":router.query.section
+    
   });
 
   const [dep, setdep] = useState(0);
@@ -97,6 +99,7 @@ function Add() {
   }
 
   function attendance(data) {
+    console.log("DDDTTAAAAA"+JSON.stringify(data));
     if (attendace.data.length == 0) {
       attendace.data.push(data);
       console.log("kkk");
@@ -104,15 +107,16 @@ function Add() {
       let iscontain = false;
       let updatedData = attendace.data.map((item) => {
         console.log("%%%%%" + item);
-        if (item.id == data.id) {
-          item.attendace = data.attendace;
-          // setAttendace([...attendace,attendace:item.attendace])
+        if (item.userId == data.userId) {
+          item.isPresent = data.isPresent;
+          // setAttendace([...attendace,"attendace":item.attendace])
           console.log("hhh");
           iscontain = true;
         }
       });
       if (iscontain == false) {
         attendace.data.push(data);
+        //  setAttendace([...attendace,{data}])
       }
     }
 
@@ -192,9 +196,10 @@ function Add() {
               name={data.firstName}
               img={data.photo.secure_url}
               section="CSE"
-              date="December 6th 2022"
+              date={new Date()}
               htno={data.htno}
               id={data._id}
+              key ={data._id}
               checked={true}
               attendnceData={attendance}
             />
