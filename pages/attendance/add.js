@@ -202,6 +202,7 @@ function Add() {
               key ={data._id}
               checked={true}
               attendnceData={attendance}
+              isAddAttendance = {true}
             />
           );
         })
