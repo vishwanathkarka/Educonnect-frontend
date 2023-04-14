@@ -7,6 +7,8 @@ import { isAuthenticated,updateData,deleteData } from "../util/apicalls";
 // import PermssionForm from "../components/permissionForm";
 // import {AcceptRequest,Userinfo} from "./helper/permissioncalls"
 export default function PermssionCard(props) {
+
+  console.log("ROOLLLL"+isAuthenticated().user.role)
   let [isApp, setIsApp] = useState(props.isApproved);
 
   let[workAdmin,setWorkAdmin]= useState(false)
@@ -475,8 +477,7 @@ else if(role == "parent"){
 {
                 setIsView(!isView);
                 deleteData(
-                  props.id,
-                 
+                  `/deleteleave/${props.id}`
                 )
               }
             }

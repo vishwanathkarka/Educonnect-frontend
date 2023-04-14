@@ -15,11 +15,11 @@ function Header() {
    return islogin ? HeaderLogin() : HeaderNotLogin()
   }
   function HeaderNotLogin() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     return (
-      <ul className="flex  ml-auto items-center gap-9">
+      <ul className="flex  ml-auto items-center gap-9" key={isAuthenticated().user._id}>
         <Link className="text-primary cursor-pointer" href="/login" >
-       <Image src ="https://5.imimg.com/data5/RX/NO/MY-24297425/eacademics-school-28complete-school-management-software-with-mobile-app-29-500x500.png"></Image> 
+       <Image src ="https://5.imimg.com/data5/RX/NO/MY-24297425/eacademics-school-28complete-school-management-software-with-mobile-app-29-500x500.png"/>
         
         </Link>
         <Link className=" bg-primary px-[6px] py-[3px]  rounded-[9px] cursor-pointer text-[white] font-semibold" href="/signup" >
@@ -37,7 +37,7 @@ function Header() {
       <>
         <div className="relative onHover p-5 ">
           <div className="flex  justify-center items-center gap-[12px] cursor-pointer">
-            <img className=" w-10 h-10 rounded-full bg-[green]  "  src={isAuthenticated().user.photo.secure_url?isAuthenticated().user.photo.secure_url:"https://undraw.co/favicon.ico"} /> 
+            <Image className=" w-10 h-10 rounded-full bg-[green]  "  src={isAuthenticated().user.photo.secure_url?isAuthenticated().user.photo.secure_url:"https://undraw.co/favicon.ico"} /> 
             <svg
               width="11"
               height="6"
@@ -56,7 +56,7 @@ function Header() {
           <div className=" show-hover onHover  rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
             <div className="  bg-[white]  shadow-xl rounded-xl">
               <div className="h-[88px] flex bg-[white]  p-4 rounded-tl-md rounded-tr-md">
-                <img
+                <Image
                   src={isAuthenticated().user.photo.secure_url?isAuthenticated().user.photo.secure_url:"https://undraw.co/favicon.ico"}
                   className="mr-3 w-12 h-12 rounded-full flex-no-shrink"
                   alt=""
@@ -71,7 +71,7 @@ function Header() {
   
               <ul className="">
                 <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <img
+                  <Image
                     src="https://static5.lottiefiles.com/images/v3/dashboard-icons/dashboard.svg"
                     alt="My Dashboard"
                     className="inline "
@@ -274,7 +274,7 @@ function Header() {
       <div className=" show-hover onHover  rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
         <div className="  bg-[white]  shadow-xl rounded-xl">
           <div className="h-[88px] flex bg-[white]  p-4 rounded-tl-md rounded-tr-md">
-            <img
+            <Image
               src={isAuthenticated().user.photo.secure_url?isAuthenticated().user.photo.secure_url:"https://undraw.co/favicon.ico"}
               className="mr-3 w-12 h-12 rounded-full flex-no-shrink"
               alt=""
@@ -289,7 +289,7 @@ function Header() {
 
           <ul className="">
             <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] " >
-              <img
+              <Image
                 src="https://static5.lottiefiles.com/images/v3/dashboard-icons/dashboard.svg"
                 alt="My Dashboard"
                 className="inline "

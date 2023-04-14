@@ -52,7 +52,7 @@ return(
     <Head>
         <title>Login Page</title>
     </Head>
-    <Header/>
+    {/* <Header/> */}
    {()=>{ isShownToast?Toast(toastColor,msg,handlingTost):""}}
    {isShownToast?<Toast bgColor={toastColor} msg={msg} handleShow={handlingTost}/>:""}
     <form className="mx-auto my-4 d-flex justify-content-center align-items-center flex-column " style={{maxWidth: '500px',height:'90vh'}} >

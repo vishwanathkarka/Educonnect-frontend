@@ -5,9 +5,11 @@ import ResultNotFound from '@/util/resultNotFound';
 import Attendaceui from '@/util/attendaceui';
  function View() {
     const[attendances,setAttendances]= useState() 
+
     useEffect(() => {
        async function fetchData(){
       let data = await getData(`/getindividualattendance/${isAuthenticated().user._id}`)
+      console.log(isAuthenticated().user._id)
       console.log(data)
       if(data.success == true){
       setAttendances(data.att)
