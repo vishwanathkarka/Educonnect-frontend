@@ -27,7 +27,7 @@ import Attendaceui from '@/util/attendaceui';
         }
    {
     attendances && attendances.map(attendance=>{ 
-       return <Attendaceui htno={moment(attendance.timeStamp).format("MMM Do YY")} key ={attendance._id} isPresent={attendance.isPresent} isAttendaceview ={true}  name = {attendance.lectureId.firstName}/>
+       return <Attendaceui htno={moment(attendance.timeStamp).format("MMM Do YY")} key ={attendance._id} link="#" isPresent={attendance.isPresent} isAttendaceview ={true}  name = {attendance.lectureId.firstName}/>
     })
    }
    </>

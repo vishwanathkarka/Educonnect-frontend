@@ -51,7 +51,6 @@ const Signup = () => {
       console.log(")))))))))" + departmentlist);
       if (departmentlist.success == true) {
         setDepartmentListFetch(departmentlist.listOfDepartment);
-
         console.log("^^^^^^^^" + departmentlist);
       }
     }

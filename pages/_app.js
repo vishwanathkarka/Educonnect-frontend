@@ -1,15 +1,20 @@
 import '@/styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react'
-
+import Header from '@/components/header'
+import { Fascinate_Inline } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
 export default function App({ Component, pageProps }) {
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
  
   return( 
   <>
+  {/* <Header/> */}
     {/* <style jsx global>{`
-    ${ isDark ? 'body {background: darkslategray;}' : 'body {background: antiquewhite;}' }
+    ${ isDark ? 'body {background: darkslategray; }' : 'body {background: #EAEBF5;}' }
   `}</style> */}
+   {/* <ThemeProvider> */}
   <Component {...pageProps} /> 
+  {/* </ThemeProvider> */}
   </>)
 }

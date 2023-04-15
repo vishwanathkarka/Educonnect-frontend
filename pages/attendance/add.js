@@ -175,6 +175,7 @@ function Add() {
           selected={activeSelect(data._id,router.query.section)}
                key={data.section._id} >
                 {data.section}
+                
               </option> )
 })}
         </select>
@@ -200,6 +201,7 @@ function Add() {
               htno={data.htno}
               id={data._id}
               key ={data._id}
+              link="#"
               checked={true}
               attendnceData={attendance}
               isAddAttendance = {true}
