@@ -14,7 +14,10 @@ export default function App({ Component, pageProps }) {
     ${ isDark ? 'body {background: darkslategray; }' : 'body {background: #EAEBF5;}' }
   `}</style> */}
    {/* <ThemeProvider> */}
+  
+
   <Component {...pageProps} /> 
+
   {/* </ThemeProvider> */}
   </>)
 }

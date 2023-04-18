@@ -10,10 +10,11 @@ function Payment() {
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
+  const [userCradational,setUserCradational] = useState(null)
+  // const {role,email,_id} = userCradational
   const [departmentSection, setDepartmentSection] = useState({
     "department":router.query.department,
     "section":router.query.section
-    
   });
 
   const [dep, setdep] = useState(0);
@@ -30,6 +31,8 @@ function Payment() {
 
     
   useEffect(() => {
+ setUserCradational(isAuthenticated().user.role);
+   console.log("ROOLLLL"+isAuthenticated().user.role)
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
@@ -37,27 +40,37 @@ function Payment() {
       );
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
       console.log("stautsssss"+JSON.stringify(data));
+    
       if (data.success == true) {
         setUserDataForAttendace(data.user);
         setLoading(true);
         console.log(userDataForAttendace);
       }
-      if (isAuthenticated()) {
-        let departmentlist = await postData(
-          "/listdepartmentspecific",
-          isAuthenticated().user.departments[0]
-        );
-        if (departmentlist.success == true) {
-          setDepartmentListFetch(departmentlist.listOfDepartment);
-        }
-      }
-      let sectionlist = await getData("/listsection");
-      if (sectionlist.success == true) {
-        setSectionListFetch(sectionlist.listOfSection);
-      }
+      // if (isAuthenticated()) {
+      //   let departmentlist = await postData(
+      //     "/listdepartmentspecific",
+      //     isAuthenticated().user.departments[0]
+      //   );
+      //   if (departmentlist.success == true) {
+      //     setDepartmentListFetch(departmentlist.listOfDepartment);
+      //   }
+      // }
+      // let sectionlist = await getData("/listsection");
+      // if (sectionlist.success == true) {
+      //   setSectionListFetch(sectionlist.listOfSection);
+      // }
       console.log(departmentListFetch);
     }
-    fetchdata();
+    const userPaymentInfo = async() =>{
+  const userdata =    await getData(`/getpaymentlist/${isAuthenticated().user._id}`)
+  if (userdata.success == true) {
+    setUserDataForAttendace(userdata.paymentList);
+    setLoading(true);
+    console.log(userDataForAttendace);
+  }
+    }
+isAuthenticated().user.role == "student" &&  userPaymentInfo()
+    isAuthenticated().user.role == "lecturer" &&  fetchdata();
     setUser(isAuthenticated().user);
   }, [section,department]);
   const inputHandle = (name) => (el) => {
@@ -133,10 +146,12 @@ function Payment() {
         return false
     }
       }
+
+      console.log("role"+userCradational)
   return (
     <>
-      <div className=" flex items-center gap-3 px-3 ">
-        <select
+     { userCradational && userCradational == "lecturer" &&  <div className=" flex items-center gap-3 px-3 ">
+       <select
           name=""
           id=""
           className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
@@ -177,7 +192,7 @@ function Payment() {
         >
           submit
         </button>
-      </div>
+      </div>}
       {!loading ? (
         <div className="h-[80vh] flex justify-center items-center">
           <Image src={loadingimg} alt="" />
@@ -185,16 +200,32 @@ function Payment() {
       ) : (
         userDataForAttendace.map((data) => {
           return (
+            userCradational == "lecturer"?
             <Attendaceui
-              name={data.firstName}
-              img={data.photo.secure_url}
+              name={data.title}
+              // img={data.photo.secure_url}
               section="CSE"
-              date={new Date()}
-              department = {data.departments[0].department.department}
+              // date={new Date()}
+              // department = {data.departments[0].department.department}
               htno={data.htno}
             //   id={data._id}
               key ={data._id}
-              link={"/payment/add/"+data._id}
+              link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
+            //   checked={true}
+            //   attendnceData={attendance}
+            />:
+          
+            <Attendaceui
+              name={data.description}
+              // img={data.photo.secure_url}
+              section="CSE"
+              date={data.lastDay
+              }
+              // department = {data.departments[0].department.department}
+              htno={data.amount+"/-"}
+            //   id={data._id}
+              key ={data._id}
+              link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
             //   checked={true}
             //   attendnceData={attendance}
             />

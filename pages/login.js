@@ -52,72 +52,49 @@ return(
     <Head>
         <title>Login Page</title>
     </Head>
-    {/* <Header/> */}
-   {()=>{ isShownToast?Toast(toastColor,msg,handlingTost):""}}
-   {isShownToast?<Toast bgColor={toastColor} msg={msg} handleShow={handlingTost}/>:""}
-    <form className="mx-auto my-4 d-flex justify-content-center align-items-center flex-column " style={{maxWidth: '500px',height:'90vh'}} >
-          <div className="form-group my-2  w-100">
-            <label htmlFor="exampleInputEmail1" value ={email}>Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            name="email" onChange={ handleInput("email")}  />
-            <div id="emailHelp" className="form-text text-muted">We ll never share your email with anyone else.</div>
+
+<div className='h-[100vh] '>
+<Header/>
+
+<div className=" flex  h-[80vh] justify-center items-center ">
+
+        <form
+          className="w-[33rem]  p-[2.5rem] rounded-lg bg-secoundblack  border-[#717377] border-[1px]"
+          enctype="multipart/form-data" 
+        >
+          <p className='text-[#717377] text-lg font-bold text-center '>WELCOME BACK</p>
+          <h3 className='text-white text-center mb-[2rem]'>Log in to your account</h3>
+          <p className='text-[#dcdcdc]'>E-Mail or Htno</p>
+ <input
+            type="text"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
+            placeholder="Enter your email id"
+            onChange={ handleInput("email")}
+            value ={email}
+
+          />
+           <p className='text-[#dcdcdc]'>Password</p>
+ <input
+            type="text"
+            class="block w-full rounded-md border-lightblack border-[1px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
+         
+            placeholder="Enter your password"
+            onChange={ handleInput("password")}
+            value ={password}
+
+          />
+ <button
+            className="block w-full bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
+            type="submit"
+            onClick={onSubmitLogin}
+          >
+            {" "}
+            Login now
+          </button>
+          <p className='text-[#717377]'>Not Registered yet? <Link href={"/signup"} className='text-white no-underline hover:text-white'> Register &rarr;</Link></p>
+          </form>
           </div>
-          <div className="form-group my-2  w-100">
-            <label htmlFor="exampleInputPassword1" value ={password}>Password</label>
-            <input type="password" className="form-control " id="exampleInputPassword1"
-            name="password"  onChange={ handleInput("password")} />
           </div>
-          
-          <button type="submit" className="my-4 btn btn-dark w-100" onClick={onSubmitLogin}>Login</button>
-
-          <p className="my-2">
-            You don t have an account? <Link href="/register">Register Now</Link>
-          </p>
-        </form>
-
- 
-
-
-
-
-
-
-{/* 
-<Form>
-  <FormGroup>
-    <Label
-      for="exampleEmail"
-      hidden
-    >
-      Email
-    </Label>
-    <Input
-      id="exampleEmail"
-      name="email"
-      placeholder="Email"
-      type="email"
-    />
-  </FormGroup>
-  {' '}
-  <FormGroup>
-    <Label
-      for="examplePassword"
-      hidden
-    >
-      Password
-    </Label>
-    <Input
-      id="examplePassword"
-      name="password"
-      placeholder="Password"
-      type="password"
-    />
-  </FormGroup>
-  {' '}
-  <Button>
-    Submit
-  </Button>
-</Form> */}
     </>
 )
 }

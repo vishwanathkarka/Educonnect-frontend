@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { postDataForm, getData } from "../util/apicalls";
 import { useRouter } from "next/router";
+import Header from "@/components/header";
 var FormData = require("form-data");
 
 const Signup = () => {
@@ -71,11 +72,6 @@ const Signup = () => {
 
  
 
-  // mapping all the department data from the api get request
-
-  // optionOfSection(sectionListFetch)
-  // optionOfSelction(sectionListFetch)
-  // creating formdata
   let bodyFormData = new FormData();
 
 
@@ -88,7 +84,7 @@ const Signup = () => {
       setImg(el.target.files[0]);
     }
   };
-  // console.log(userData);
+
 
   const handleSubmit = async (el) => {
     el.preventDefault();
@@ -96,7 +92,6 @@ const Signup = () => {
     console.log(userData);
     bodyFormData.append("data", JSON.stringify(userData));
     bodyFormData.append("photo", img);
-    // const data = await postData("/signup",userData)
     const data = await postDataForm("/signup", bodyFormData);
     bodyFormData.delete("[0]data");
     bodyFormData.delete("[0]photo");
@@ -116,16 +111,17 @@ const Signup = () => {
   };
   return (
     <>
-      <div className=" flex  justify-center align-middle  bg-slate-50">
+    <Header/>
+      <div className=" flex  justify-center align-middle  bg-slate-50 text-whitelight   ">
         <form
-          className="w-[35rem]  h-[90vh] m-auto bg-white p-[1rem]"
+          className="w-[35rem]   my-9 mx-9 rounded-md  bg-secoundblack p-[1rem] border-[#717377] border-[1px] px-4 shadow-xl"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
-          <h2 className="text-center">Signup</h2>
+          <h2 className="text-center text-white">Create new account <span className="text-primarycolor">&#x2022;</span></h2>
           <input
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 bg-secoundblack text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-[#717377] focus:ring-[#717377] sm:text-sm sm:leading-6  my-4"
             placeholder="First Name"
             onChange={handleInput("firstName")}
             value={firstName}
@@ -133,26 +129,26 @@ const Signup = () => {
           />
           <input
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset bg-secoundblack ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
             placeholder="Last Name"
             onChange={handleInput("lastName")}
             value={lastName}
           />
            <input
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
             placeholder="Hallt ticket number"
             onChange={handleInput("htno")}
             value={htno}
           />
-          <div className=" w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4 flex items-center gap-2">
+          <div className=" w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4 flex items-center gap-2">
  <input type="radio" name="gender" value="male"  className="" onClick={handleInput("gender")}   />
       <label htmlFor="male" >Male</label>
       <input type="radio" name="gender" value="female" onClick={handleInput("gender")}  />
       <label htmlFor="female">Female</label>
 </div>
            <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="role"
             onClick={console.log("Clicked uppp")}
             onChange={handleInput("role")}
@@ -162,10 +158,9 @@ const Signup = () => {
             <option value="student">student</option>
             <option value="parent">parent</option>
           </select>
-
           <input
             type="email"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 bg-secoundblack ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             placeholder="youremail@gmail.com"
             onChange={handleInput("email")}
             value={email}
@@ -173,7 +168,13 @@ const Signup = () => {
 
           <input
             type="file"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 
+             file:mr-4 file:py-2 file:px-4
+      file:rounded-full file:border-0
+      file:text-sm file:font-semibold
+      file:bg-violet-50 file:text-violet-700
+      hover:file:bg-violet-100 
+            text-gray-900 ring-1 bg-secoundblack  ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             placeholder="youremail@gmail.com"
             multiple
             onChange={handleInput("photo")}
@@ -183,7 +184,7 @@ const Signup = () => {
 
           <input
             type="email"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-2"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-2"
             placeholder={role=="student" ? "parentemail@gmail.com":"studentemail@gmail.com"}
             onChange={handleInput(role=="student"?"parentEmail":"studentEmail")}
             value={role=="student"?parentEmail:studentEmail}
@@ -193,7 +194,7 @@ const Signup = () => {
           </label>
           <input
             type="password"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             placeholder="*************"
             onChange={handleInput("password")}
             value={password}
@@ -201,7 +202,7 @@ const Signup = () => {
           <input
             type="text"
             maxLength="10"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-1"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 bg-secoundblack ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-1"
             placeholder="999999999999"
             onChange={handleInput("phoneNo")}
             value={phoneNo}
@@ -212,7 +213,7 @@ const Signup = () => {
           <input
             type="text"
             maxLength="10"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-1"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 bg-secoundblack ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-1"
             placeholder="999999999999"
             onChange={handleInput("parentPhoneNo")}
             value={parentPhoneNo}
@@ -222,7 +223,7 @@ const Signup = () => {
             Note: Enter parent phone
           </label>
           <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-0 bg-secoundblack py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="Department"
             onChange={handleInput("departments")}
             value={departments} 
@@ -238,7 +239,7 @@ const Signup = () => {
               ))}
           </select>
           <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-0 bg-secoundblack py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
             id="section" disabled= {role == "parent"?true:false}
             onChange={handleInput("sections")}
             value={sections}
@@ -253,11 +254,10 @@ const Signup = () => {
               ))}
           </select>
           <button
-            className="block w-full bg-primary rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
+            className="block w-full font-bold bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 "
             type="submit"
           >
-            {" "}
-            Submit
+           Create account
           </button>
         </form>
       </div>

@@ -9,10 +9,22 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+
+      backgroundImage: {
+      'darkimg':"url('/util/black.jpg')"
+      }
+    },
     colors: {
-      primary:"#6C63FF",
-      
+      primarycolor:"#6B62FF",
+      black:"#17141D",
+      lightwg:"#dcdcdc",
+      // whitelight:"#23272F",
+      whitelight:"#dcdcdc",
+      secoundblack:"#23272F",
+      lightblack:"#374151",
+      white:"#FFFFFF",
+      blacktext:"#8F9094"
      },
   
   },
