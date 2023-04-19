@@ -286,7 +286,8 @@ const [showMobileBar,setShowMobileBar] = useState(false)
           </div>
 
 {/* desktop naviagtion menu */}
-          <div className=" show-hover onHover block sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
+<div className=" lg:block md:hidden sm:hidden" >
+          <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
             <div className="  bg-secoundblack text-white  shadow-xl rounded-xl">
               <div className="h-[88px] flex  p-4 rounded-tl-md rounded-tr-md">
                 <Image
@@ -487,8 +488,9 @@ const [showMobileBar,setShowMobileBar] = useState(false)
               </ul>
             </div>
           </div>
+          </div>
 {/* mobile navigtion menu */}
-          <div className="h-[100vh] lg:hidden md:hidden  sm:block bg-secoundblack w-[80vw] absolute top-10 right-0">
+       { showMobileBar &&  <div className="h-[100vh] lg:hidden md:hidden  sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
             <div className=" ml-2 mt-2 border-lightblack border-2 inline-block rounded-md" onClick={()=>setShowMobileBar(!showMobileBar)}>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#374151" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -679,6 +681,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                 </li>
               </ul>
           </div>
+}
         </div>
       )}
       {!userData && (

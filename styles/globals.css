@@ -60,7 +60,7 @@
     stroke-width: 2;
     stroke-miterlimit: 10;
     stroke: #4bb71b;
-    fill: #fff;
+    fill: #1A1E23 ;
     animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
  
 }

@@ -2,9 +2,9 @@ import { useEffect, useState} from 'react';
 import Image from 'next/image';
 import Header from '@/components/header';
 import { getData,postData ,isAuthenticated } from '@/util/apicalls';
-import { useRouter } from 'next/router';
+
  function Add() {
-    const router = useRouter()
+    // const router = useRouter()
     const [userData,setUserData] = useState(null)
     const [paymentAdd,setPaymentAdd] = useState(null)
     useEffect( () => {
@@ -15,8 +15,8 @@ import { useRouter } from 'next/router';
 
   console.log(isAuthenticated().user.departments)
          }
-         router.query.user &&   fetchdata()
-     }, [router.query.user]);
+      fetchdata()
+     }, []);
 
      const handleInput  = (user) => (el)=>{
 setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":router.query.user});
@@ -25,7 +25,7 @@ console.log(paymentAdd)
      }
      const handleSubmit = async(el)=> {
 el.preventDefault();
-const paymentsatus =  await postData("/addpayment",paymentAdd);
+// const paymentsatus =  await postData("/addpayment",paymentAdd);
 console.log(paymentsatus)
      }
   return (

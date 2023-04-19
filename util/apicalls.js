@@ -2,22 +2,25 @@ import axios from "axios";
 
 
 
-export const postData = async (url, post) => {
+export const postData = async (url, post,token) => {
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'POST',
         headers: {
-            // 'Authorization': token,
+            'Authorization': token,
+            
             'mode': 'no-cors',
-            // 'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
             // "Content-Type": "multipart/form-data",
             // "Accept": "application/json"
-            'Content-Type': 'application/json'
+            "Accept": 'application/json'
             // "type": "formData"
           
         },
+        
         body: JSON.stringify(post)
     })
 
+    console.log(token)
     const data = await res.json()
     console.log(data)
     return data
@@ -57,11 +60,11 @@ export const authenticate = (data) => {
     }
   };
 
-export const postDataForm = async (url, post) => {
+export const postDataForm = async (url, post,token) => {
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'POST',
         headers: {
-            // 'Authorization': token,
+            'Authorization': token,
             'mode': 'no-cors',
             // 'Content-Type': 'application/json'
             // "Content-Type": "multipart/form-data",
@@ -101,7 +104,10 @@ export const postDataJson = async (url, post, token) => {
 export const getData = async (url, token) => {
 
         return await fetch(`http://localhost:4000/api/v1${url}`, {
-            method: "GET"
+            method: "GET",
+            headers: {
+            'Authorization': token
+            }
           })
             .then(response => {
               return response.json();
@@ -113,7 +119,7 @@ export const updateData = async (url,post,token) =>{
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'PUT',
         headers: {
-            // 'Authorization': token,
+            'Authorization': token,
             'mode': 'no-cors',
             // 'Content-Type': 'application/json'
             // "Content-Type": "multipart/form-data",
@@ -133,7 +139,7 @@ export const deleteData = async (url,post,token) =>{
     const res = await fetch(`http://localhost:4000/api/v1${url}`, {
         method: 'DELETE',
         headers: {
-            // 'Authorization': token,
+            'Authorization': token,
             'mode': 'no-cors',
             // 'Content-Type': 'application/json'
             // "Content-Type": "multipart/form-data",

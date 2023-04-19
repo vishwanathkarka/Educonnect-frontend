@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Header from "@/components/header";
 import { getData, postData,isAuthenticated } from "@/util/apicalls";
 import Attendaceui from "@/util/attendaceui";
+import Add from "@/components/demo"
+import PaymentUI from "@/util/paymentUI"
 import loadingimg from "../../util/Spinner-1s-200px.gif";
 function Payment() {
   const router = useRouter();
@@ -26,17 +29,19 @@ function Payment() {
  
  const {department,section}= router.query
   console.log("deppp" + dep);
-  // console.log("Dark teemme" + props.isDark);
-  // console.log("DEEEEEPPPP"+JSON.stringify(isAuthenticated().user.firstName));
 
-    
   useEffect(() => {
+    if(!isAuthenticated().user){
+      router.push("/login")
+    }
+    else{
  setUserCradational(isAuthenticated().user.role);
    console.log("ROOLLLL"+isAuthenticated().user.role)
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
+         isAuthenticated().token
       );
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
       console.log("stautsssss"+JSON.stringify(data));
@@ -62,7 +67,7 @@ function Payment() {
       console.log(departmentListFetch);
     }
     const userPaymentInfo = async() =>{
-  const userdata =    await getData(`/getpaymentlist/${isAuthenticated().user._id}`)
+  const userdata =    await getData(`/getpaymentlist/${isAuthenticated().user._id}`, isAuthenticated().token)
   if (userdata.success == true) {
     setUserDataForAttendace(userdata.paymentList);
     setLoading(true);
@@ -72,6 +77,7 @@ function Payment() {
 isAuthenticated().user.role == "student" &&  userPaymentInfo()
     isAuthenticated().user.role == "lecturer" &&  fetchdata();
     setUser(isAuthenticated().user);
+  }
   }, [section,department]);
   const inputHandle = (name) => (el) => {
     const { section, department } = router.query;
@@ -101,7 +107,7 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
   };
 
   async function attendanceSubmit() {
-    let da = await postData("/bulkattendanceadd", attendace);
+    let da = await postData("/bulkattendanceadd", attendace, isAuthenticated().token);
   }
 
   function attendance(data) {
@@ -150,11 +156,15 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
       console.log("role"+userCradational)
   return (
     <>
-     { userCradational && userCradational == "lecturer" &&  <div className=" flex items-center gap-3 px-3 ">
+    <Header/>
+
+    <div className="bg-secoundblack rounded-md h-[100vh] mx-8 my-9 ">
+   {/* { Add()} */}
+    { userCradational && userCradational == "lecturer" &&  <div className=" flex items-center gap-3 px-3   ">
        <select
           name=""
           id=""
-          className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+          className="block  rounded-md border-0 bg-lightblack text-lightwg py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
           onChange={inputHandle("department")}
         >
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
@@ -173,7 +183,7 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
             })}
         </select>
         <select
-          className="block rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+          className="block rounded-md border-0 py-1.5 bg-lightblack text-lightwg pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
           onChange={inputHandle("section")}
         >
          
@@ -187,12 +197,30 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
 })}
         </select>
         <button
-          className="bg-primary text-white py-2 px-3 h-[2.5rem] rounded"
+          className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded"
           onClick={attendanceSubmit}
         >
-          submit
+          Get
         </button>
       </div>}
+      {userCradational == "lecturer" ?
+       <div className="flex text-whitelight px-5 py-6 mx-4 my-0 gap-10     text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] ">
+      
+       <p className="flex-[0.5]">Details</p>
+       <p className="flex-[2]">Student Phone No</p>
+       <p className="flex-[2]">Email</p>
+     
+     </div>:
+      <div className="flex text-whitelight px-5 py-6 mx-4 my-3 gap-10   text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] ">
+        <p className="flex-[2]">Title</p>
+        <p className="flex-[3]">Description</p>
+        <p className="flex-[1]">Payment Id</p>
+        <p className="flex-[1]">Amount</p>
+        <p className="flex-[1]">Paid Date</p>
+        <p className="flex-[1]">Last for payment</p>
+        <p className="flex-[1]">Status</p>
+      </div>
+}
       {!loading ? (
         <div className="h-[80vh] flex justify-center items-center">
           <Image src={loadingimg} alt="" />
@@ -201,37 +229,50 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
         userDataForAttendace.map((data) => {
           return (
             userCradational == "lecturer"?
-            <Attendaceui
-              name={data.title}
-              // img={data.photo.secure_url}
-              section="CSE"
-              // date={new Date()}
-              // department = {data.departments[0].department.department}
-              htno={data.htno}
-            //   id={data._id}
+            <PaymentUI
+              name={data.firstName+" "+ data.lastName}
+              htno = {data.htno} 
+              img={data.photo.secure_url}
+              phoneno ={data.phoneNo} 
+              email = {data.email}   
+            
+add = " "
               key ={data._id}
               link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
             //   checked={true}
             //   attendnceData={attendance}
             />:
           
-            <Attendaceui
-              name={data.description}
-              // img={data.photo.secure_url}
-              section="CSE"
-              date={data.lastDay
-              }
-              // department = {data.departments[0].department.department}
-              htno={data.amount+"/-"}
-            //   id={data._id}
-              key ={data._id}
-              link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
-            //   checked={true}
-            //   attendnceData={attendance}
+            // <Attendaceui
+            //   name={data.description}
+            //   // img={data.photo.secure_url}
+            //   section="CSE"
+            //   date={data.lastDay
+            //   }
+            //   // department = {data.departments[0].department.department}
+            //   htno={data.amount+"/-"}
+            // //   id={data._id}
+            //   key ={data._id}
+            //   link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
+            // //   checked={true}
+            // //   attendnceData={attendance}
+            // />
+
+            <PaymentUI
+            title={data.title}
+            amount ={data.amount+"/-"}
+            description={data.description}
+            status={data.ispaid}
+            key= {data._id}
+            paymentId = {data._id}
+            lastday = {data.lastDay}
+            link = {`/payment/pay/${data._id}`}
             />
+
           );
         })
       )}
+      </div>
     </>
   );
 }

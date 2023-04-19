@@ -8,7 +8,7 @@ export default function Homework() {
   useEffect(() => {
    
    setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
- 
+
    const fetchdata = async () =>{
     if(sectionDepartment){
 const homeworkList = await getData(`/gethomework/${sectionDepartment.department}/${sectionDepartment.section}`)

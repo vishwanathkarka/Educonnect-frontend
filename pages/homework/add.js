@@ -90,7 +90,7 @@ console.log(homeworkInfo)
           onChange={handleInput("department")}
         >
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
-          {}
+         
           {user &&
             user.departments.map((data) => {
               return (
