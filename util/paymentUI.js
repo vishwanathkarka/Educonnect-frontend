@@ -5,7 +5,7 @@ import Image from 'next/image';
 function PaymentUI(props) {
   return (
    <>
-     <Link href={props.link } className='no-underline '>
+     <Link href={props.link } className='no-underline ' onClick={()=>props.userId(props.id)} >
    <div className='flex text-whitelight py-2 mx-4 gap-10  text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] '>
  {props.img &&
  <div className=''>
@@ -19,7 +19,7 @@ function PaymentUI(props) {
 {props.description &&  <p className='text-[#717377] capitalize flex-[3]' >{props.description}</p> }
 {props.paymentId &&    <p className='text-[#717377] font-bold flex-[1]'>{props.paymentId}</p> }
 {props.amount &&   <p className='text-primarycolor font-bold flex-[1]'>{props.amount}/-</p> }
-{props.phoneno &&   <p className='text-primarycolor font-bold flex-[1]'>{"+91 "+ props.phoneno}</p> }
+{props.phoneno &&   <p className='text-primarycolor font-bold flex-[1] '>{"+91 "+ props.phoneno}</p> }
 {props.email &&  <p className=' text-[#717377] font-bold flex-[1]'>{props.email}</p>}
 {props.paiddate &&   <p className=' text-[#717377] font-bold flex-[1]'>-</p> }
 {props.lastday && <p className='flex-[1]'>{moment(props.lastday ).format("MMMM Do YYYY")}</p> }

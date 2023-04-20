@@ -32,7 +32,7 @@ console.log(paymentsatus)
    <>
 
     <form
-          className="w-[35rem]  h-[90vh] m-auto  my-4 bg-secoundblack p-[1rem]"
+          className="w-[35rem]  h-[90vh] l-[50%]  my-4 bg-white p-[1rem] absolute l-[50vw]  m-auto"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >

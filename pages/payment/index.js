@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Header from "@/components/header";
 import { getData, postData,isAuthenticated } from "@/util/apicalls";
 import Attendaceui from "@/util/attendaceui";
-import Add from "@/components/demo"
+import PaymentAddForm from "@/components/paymentAddForm";
 import PaymentUI from "@/util/paymentUI"
 import loadingimg from "../../util/Spinner-1s-200px.gif";
 function Payment() {
@@ -12,6 +12,7 @@ function Payment() {
   let i = null;
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
+  const [paymentFormView,setPaymentFormView] = useState(false)
   const [attendace, setAttendace] = useState({ data: [] });
   const [userCradational,setUserCradational] = useState(null)
   // const {role,email,_id} = userCradational
@@ -25,6 +26,7 @@ function Payment() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [departmentListFetch, setDepartmentListFetch] = useState();
+  const [userId, setUserId] = useState(null)
   const [sectionListFetch, setSectionListFetch] = useState(null);
  
  const {department,section}= router.query
@@ -109,7 +111,10 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
   async function attendanceSubmit() {
     let da = await postData("/bulkattendanceadd", attendace, isAuthenticated().token);
   }
-
+function clickUserId(data){
+  setUserId(data)
+  setPaymentFormView(!paymentFormView)
+}
   function attendance(data) {
     console.log("DDDTTAAAAA"+JSON.stringify(data));
     if (attendace.data.length == 0) {
@@ -134,16 +139,11 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
 
     console.log(attendace);
   }
-  // const departmentList =()=>{
-
-  //      user.departments.map((data) => {
-
-  //                   return(  <option value={{"id":data.department._id,"index":i++}} key={data.department._id}>
-  //                       {data.department.department}
-  //                     </option> )
-  //     })
-  // }
-
+const closeForm = (status) => {
+if(status == true){
+setPaymentFormView(!paymentFormView)
+}
+}
   function activeSelect (option ,status){
     if(status == option){
         return true
@@ -157,9 +157,15 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
   return (
     <>
     <Header/>
+    {/* <div className="h-[100vh] flex items-center justify-center relative l-[50vw]">
+  
+    </div> */}
+     
+    {/* { <Add/>} */}
+ { paymentFormView&& <PaymentAddForm sid={userId} closeForm={closeForm} /> }
 
-    <div className="bg-secoundblack rounded-md h-[100vh] mx-8 my-9 ">
-   {/* { Add()} */}
+  <div className="bg-secoundblack rounded-md h-[100vh]  mx-8 my-9   ">
+  
     { userCradational && userCradational == "lecturer" &&  <div className=" flex items-center gap-3 px-3   ">
        <select
           name=""
@@ -168,7 +174,7 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
           onChange={inputHandle("department")}
         >
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
-          {}
+         
           {user &&
             user.departments.map((data) => {
               return (
@@ -235,10 +241,11 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
               img={data.photo.secure_url}
               phoneno ={data.phoneNo} 
               email = {data.email}   
-            
+              userId = {clickUserId}
 add = " "
               key ={data._id}
-              link={userCradational == "lecturer"?`/payment/add/${data._id}`:`/payment/pay/${data._id}`}
+              id = {data._id}
+              link={userCradational == "lecturer"?`#`:`/payment/pay/${data._id}`}
             //   checked={true}
             //   attendnceData={attendance}
             />:
