@@ -3,31 +3,30 @@ import HomeworkUi from '@/util/homeworkUi'
 import { isAuthenticated ,getData} from '@/util/apicalls';
 
 export default function Homework() {
-  const [sectionDepartment,setSectionDepartment] = useState(null)
+  // const [sectionDepartment,setSectionDepartment] = useState(null)
+  const [userData,setUserData] = useState(null)
   const [homework,setHomeWork] = useState(null);
   useEffect(() => {
-   
-   setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
+   setUserData(isAuthenticated().user)
+  //  setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
+  const fetchdata = async () =>{
 
-   const fetchdata = async () =>{
-    if(sectionDepartment){
-const homeworkList = await getData(`/gethomework/${sectionDepartment.department}/${sectionDepartment.section}`)
+const homeworkList = await getData(`/gethomework/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`)
 setHomeWork(homeworkList)
-    }
+
     console.log(homework)
   }
-
   fetchdata()
  
+
+ 
   }, []);
-
-
-  // console.log(homework)
-  
   
   return (
     <>
-<HomeworkUi title ="ddf"/>
+    <div className='h-[80vh] bg-secoundblack mx-4 py-3 px-3 rounded-lg'>
+<HomeworkUi title ="ddf" link ="#"/>
+</div>
  </>
   )
 }

@@ -17,7 +17,7 @@ module.exports = {
     },
     colors: {
       primarycolor:"#6B62FF",
-      black:"#17141D",
+      darkblack:"#1A1E23]",
       lightwg:"#dcdcdc",
       // whitelight:"#23272F",
       whitelight:"#dcdcdc",

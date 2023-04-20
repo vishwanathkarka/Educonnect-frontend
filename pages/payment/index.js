@@ -269,11 +269,13 @@ add = " "
             title={data.title}
             amount ={data.amount+"/-"}
             description={data.description}
-            status={data.ispaid}
+            status={data.ispaid == true? true:data.paymentId ?false:""}
             key= {data._id}
+            paiddate ={data.paidDate||"-"}
             paymentId = {data._id}
             lastday = {data.lastDay}
             link = {`/payment/pay/${data._id}`}
+        payid = {data.paymentId}
             />
 
           );

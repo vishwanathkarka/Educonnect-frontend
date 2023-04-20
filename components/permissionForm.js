@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { AddPermision } from "../user/helper/permissioncalls";
-import toast, { Toaster } from 'react-hot-toast';
-import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../auth/helper/index";
+import React, { useEffect, useState } from "react";
+// import { AddPermision } from "../user/helper/permissioncalls";
+// import toast, { Toaster } from 'react-hot-toast';
+// import { Navigate } from "react-router-dom";
+import { isAuthenticated } from "@/util/apicalls";
 
 export default function PermssionForm(props) {
   const [values, setValues] = useState({
@@ -14,21 +14,18 @@ export default function PermssionForm(props) {
     loading: false,
     email: null,
   });
-
+const [userData,setUserData] = useState(null)
   const { subject, fromDate, toDate, description, email } = values;
-  const [isView , setIsView] = useState(true);
-  const data = localStorage.getItem("jwt");
+ useEffect(() => {
+setUserData(isAuthenticated().user)
+ }, []);
 
-  //   const inputHandler =  (name) => (el) => {
-  // // setValues({...values,[name]:el.target.value})
 
-  // // console.log(values)
-  //   }
 
   const onSubmit = (el) => {
     el.preventDefault();
     let userData =  JSON.parse(data)
-    setValues({ ...values, error: "" , email:userData["user"]["email"], loading: true });
+    setValues({ ...values, error: "" , email:userData.email, loading: true });
 console.log(values)
     AddPermision({ subject, fromDate, toDate, description, email },isAuthenticated().user.email,isAuthenticated().token,isAuthenticated().user.role)
       .then((data) => {
@@ -46,33 +43,35 @@ console.log(values)
         console.log(err);
       });
   };
-//   const inputHandler = (name) => (el) => {
-//     console.log("$$$$$",isView)
+  const inputHandler = (name) => (el) => {
+
 
 //     let userData =  JSON.parse(data)
 // if(userData["user"]["email"] == null){
 //   return <Navigate to="/"  replace={true}/>
 // }
 // else{
-//     setValues({ ...values, [name]: el.target.value, email:userData["user"]["email"], error: "" });
-//     console.log(values);
-//     // console.log(data["token"]);
-//     console.log(data);
-// }
-//   };
+    setValues({ ...values, [name]: el.target.value, email:userData.email, error: "" });
+    console.log(values);
+    // console.log(data["token"]);
+
+
+  };
 function FormPer () {
   return (
     <>
      <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  " >
-          <div className=" h-[100vh] w-[100%] bg-[#020202a7] cursor-pointer  absolute" onClick={()=>setIsView(!isView)}>  </div>
+          <div className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute " onClick={()=>{props.closeForm(true)}} >  
+          
+          </div>
           <div className="flex gap-[130px] items-center  " >
           </div>
       <form
         action=""
         // className=" w-[450px] my-14 h-[145vh] bg-[white] rounded-[20px] px-[60px] py-[40px]"
-        className="md:w-[371px]  pt-6   w-[351px] h-[650px] bg-[white] shadow-md rounded-[35px] drop-shadow-sm px-[2rem]  flex flex-col gap-[15px] "
+        className="md:w-[371px]  pt-6   w-[351px] h-[650px] bg-[#1A1E23]  border-secoundblack drop-shadow-md border-[5px] shadow-md rounded-[35px] drop-shadow-sm shadow-md rounded-[35px] drop-shadow-sm px-[2rem]  flex flex-col gap-[15px] "
       >
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 items-center ">
           <div className="bg-[#E0FEE9] w-[35px] h-[35px] rounded-[30px]  flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -161,48 +160,48 @@ function FormPer () {
               </g>
             </svg>
           </div>
-          <h2 className="font-bold text-[1.2rem]">Permission</h2>
+          <h2 className="font-bold text-[1.2rem] text-white m-0">Permission</h2>
         </div>
         <p className="text-[#A6ABAF] font-[Avenirregular]">
           Add your permission request — Get the permission faster than the leave
           letter{" "}
         </p>
-        <hr className="text-[#D5D8D9]"></hr>
-        <p className="py-[1px] text-sm font-bold ">Subject</p>
+        <hr className="text-[#D5D8D9] m-0"></hr>
+        <p className="py-[1px] text-sm font-bold m-0 text-lightwg">Subject</p>
         <input
           type="text"
-          className="border-solid border-[1.5px] text-[#AEB8D9] border-[#AEB8D9] h-[40px] w-[300px] rounded-md p-3 focus:ring-1   font-[Avenirregular]    focus:outline-none focus:border-[#4C5EE5] focus:ring-1 focus:ring-[#4C5EE5] disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:ring-[#AEB8D9] focus-visible:ring-[#AEB8D9]  invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 "
+          className="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white"
           placeholder="Ex: Hackathon"
           onChange={inputHandler("subject")}
           value={subject}
         />
-        <p className="mt-1 text-sm peer-invalid:visible text-red-700">From</p>
+        <p className="mt-1 text-sm peer-invalid:visible text-red-700 text-lightwg m-0">From</p>
         <input
           type="date"
-          className="border-solid border-[1.5px]  h-[40px] w-[300px] text-[#AEB8D9]  rounded-md p-3 focus:ring-1  font-[Avenirregular]     focus:outline-none focus:border-[#4C5EE5] focus:ring-1 focus:ring-[#4C5EE5] disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:ring-[#AEB8D9] focus-visible:ring-[#AEB8D9]  invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 "
+          className=" border-[1.5px] p-3  h-[40px] w-[300px]  border-lightblack  bg-secoundblack   rounded-md   text-white "
           placeholder="Leave from"
           onChange={inputHandler("fromDate")}
           value={fromDate}
         />
-        <p className="mt-1 text-sm"> To</p>
+        <p className="mt-1 text-sm text-lightwg m-0"> To</p>
         <input
           type="date"
-          className="border-solid border-[1.5px]  h-[40px] border-[#AEB8D9]  text-[#AEB8D9]  w-[300px] rounded-md p-3 focus:ring-1   font-[Avenirregular]    focus:outline-none focus:border-[#4C5EE5] focus:ring-1 focus:ring-[#4C5EE5] disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none focus:ring-[#AEB8D9] focus-visible:ring-[#AEB8D9]  invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 "
+          className=" border-[1.5px] p-3  h-[40px] w-[300px]  border-lightblack  bg-secoundblack   rounded-md   text-white "
           placeholder=""
           onChange={inputHandler("toDate")}
           value={toDate}
         />
-        <p className="mt-1 text-sm"> Description</p>
+        <p className="mt-1 text-sm text-lightwg m-0"> Description</p>
         <textarea
           row="5"
           cols="900"
-          className=" border-[1.5px] border-[#AEB8D9] text-[#AEB8D9]   font-[Avenirregular] rounded-md p-3"
+          className="  border-[1.5px] p-3 border-lightblack  bg-secoundblack   rounded-md   text-white"
           onChange={inputHandler("description")}
           value={description}
         ></textarea>
         <button
           type="submit"
-          className=" px-5 py-1  my-5 rounded-[15px] bg-primary text-[white] "
+          className=" px-5 py-1  my-5 rounded-[15px] bg-primarycolor text-[white] "
           onClick={ ()=> { setIsView(!isView); onSubmit()}}
         >
           Submit
@@ -214,7 +213,7 @@ function FormPer () {
 }
 return(
  <>
- {isView?FormPer():""}
+{FormPer()}
 
  </>
 )

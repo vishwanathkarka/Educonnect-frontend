@@ -6,9 +6,10 @@ import { getData,postData ,isAuthenticated } from '@/util/apicalls';
  function PaymentAddForm(props) {
     const [userData,setUserData] = useState(null)
     const [paymentAdd,setPaymentAdd] = useState(null)
+    
     useEffect( () => {
         async function fetchdata (){
-   let data = await getData(`/getuserinfowithid/${props.sid}`)
+   let data = await getData(`/getuserinfowithid/${props.sid}`,isAuthenticated().token)
   setUserData(data)
   console.log(data)
 
@@ -18,19 +19,22 @@ import { getData,postData ,isAuthenticated } from '@/util/apicalls';
      }, []);
 
      const handleInput  = (user) => (el)=>{
-setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":porps.sid});
+setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":props.sid});
 console.log(paymentAdd)
 
      }
      const handleSubmit = async(el)=> {
 el.preventDefault();
-// const paymentsatus =  await postData("/addpayment",paymentAdd);
-console.log(paymentsatus)
+const isDone =  await postData("/addpayment",paymentAdd,isAuthenticated().token);
+// console.log(paymentsatus)
+if(isDone){
+    props.closeForm(true)
+}
      }
   return (
     <>
-      <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  " onClick={()=>{props.closeForm(true)}}>
-          <div className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute" >  </div>
+      <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  " >
+          <div className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute" onClick={()=>{props.closeForm(true)}} >  </div>
           <div className="flex gap-[130px] items-center  " >
           </div>
 <form

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NoResultFound from "../../util/no-content.png"
 import { useRouter } from "next/router";
+import PermssionForm from "@/components/permissionForm";
 import ResultNotFound from "@/util/resultNotFound";
 // import Header from "../core/Header";
 import PermssionCard from "@/util/permssionCard";
@@ -115,6 +116,7 @@ else{
   return (
     <>
       {/* {Header()} */}
+      <PermssionForm/>
       <div className="flex  gap-[80px] h-[90px] items-center justify-center ">
         <h2>List of Permssions </h2>
         <select
