@@ -286,7 +286,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
           </div>
 
 {/* desktop naviagtion menu */}
-<div className=" lg:block md:hidden sm:hidden" >
+<div className=" lg:block hidden" >
           <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
             <div className="  bg-secoundblack text-white  shadow-xl rounded-xl">
               <div className="h-[88px] flex  p-4 rounded-tl-md rounded-tr-md">
@@ -443,9 +443,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                 <li
                   className="font-[Avenirregular] rounded-b-xl  px-4 py-2 flex  items-center gap-2 hover:bg-[#6b63ff29] cursor-pointer "
                   onClick={() => {
-                    signout(() => {
-                      navigate("/"); // history.push("/");
-                    });
+                    signout();
                   }}
                 >
                   <svg
@@ -637,9 +635,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                 <li
                   className="font-[Avenirregular] rounded-b-xl  px-4 py-2 flex  items-center gap-2 hover:bg-[#6b63ff29] cursor-pointer "
                   onClick={() => {
-                    signout(() => {
-                      navigate("/"); // history.push("/");
-                    });
+                    signout();
                   }}
                 >
                   <svg

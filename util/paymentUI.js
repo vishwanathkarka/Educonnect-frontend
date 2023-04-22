@@ -23,7 +23,8 @@ function PaymentUI(props) {
 {props.email &&  <p className=' text-[#717377] font-bold flex-[1]'>{props.email}</p>}
 {props.paiddate &&   <p className=' text-[#717377] font-bold flex-[1]'>{props.paiddate}</p> }
 {props.lastday && <p className='flex-[1]'>{moment(props.lastday ).format("MMMM Do YYYY")}</p> }
-{ props.status && props.status == true && props.payid? <p
+{props.status && <div>
+{  props.status == true &&  props.payid? <p
           className=" w-[100px] text-[rgb(0,128,0)] flex justify-center  items-center gap-1  flex-[1]" 
           onClick={() => { ;setIsApp(1);}}
         >
@@ -33,7 +34,7 @@ function PaymentUI(props) {
 </svg>
 
           Paid
-        </p> : props.status == false && props.payid? 
+        </p> : props.status &&   props.status == false && props.payid? 
         <p className=' w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1  flex-[1]'>
             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewBox="0 0 27 21">
   <rect id="Rectangle_16" data-name="Rectangle 16" width="27" height="21" rx="8" fill="rgba(230,189,197,0.4)"/>
@@ -59,6 +60,7 @@ Pending
 </svg>
 </div>
 }
+</div>}
        
    </div>
    </Link>

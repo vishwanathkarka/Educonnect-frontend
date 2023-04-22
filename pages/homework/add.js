@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { postDataForm ,isAuthenticated } from "@/util/apicalls"
 import { useRouter } from "next/router";
+import Header from "@/components/header";
 var FormData = require("form-data");
 
  function Add() {
@@ -46,10 +47,8 @@ var FormData = require("form-data");
             router.query.department = splitData[0];
             router.query.section = splitData[2]
             router.push(router);
-          
             setHomeWorkInfo({...homeworkInfo,[name]: splitData[0], "section":splitData[2]})
             console.log("depp"+el.target.value)
-          
         }
         else if(name == "section"){
             router.query.section = el.target.value;
@@ -61,7 +60,7 @@ var FormData = require("form-data");
         }
         else{
 setHomeWorkInfo({...homeworkInfo,[name]:el.target.value, "department": router.query.department,
-"section": router.query.section})
+"section": router.query.section, "lectureId":user._id})
 bodyFormData.append(name, el.target.value);
         }
 console.log(homeworkInfo)
@@ -75,8 +74,11 @@ console.log(homeworkInfo)
     }
   return (
     <>
+<Header/>
+    <div className="h-[90vh] flex flex-col justify-center items-center ">
+      
       <form
-          className="w-[35rem]  h-[90vh] m-auto bg-white p-[1rem]"
+          className="w-[35rem] m-auto  h-[70vh] m-auto bg-secoundblack p-[1rem] border-[rgba(246,247,249,.05)]  border-[2px]  rounded-lg"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
@@ -137,7 +139,7 @@ console.log(homeworkInfo)
           />
           <input
             type="date"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-1"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="date"
             onChange={handleInput("submissionDate")}
             // value={lastName}
@@ -157,12 +159,13 @@ console.log(homeworkInfo)
    type="file" onChange={handleInput("lectureworkFile")}/>
   
   <button
-            className="block w-full bg-primary rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
+            className="block w-full bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
             type="submit"
           >
             Submit
           </button>
           </form>
+          </div>
     </>
   )
 }

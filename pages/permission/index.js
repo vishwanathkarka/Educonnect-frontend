@@ -17,7 +17,7 @@ export default function AdminAllPermission() {
   const [newRequest, setNewRequest] = useState(false);
   const [isView, setIsView] = useState(false);
   const [count, setCount] = useState(1);
-  const [allRequests, setAllRequests] = useState();
+  const [allRequests, setAllRequests] = useState(null);
   
   const [searchSort, setSearchSort] = useState({
     is_PermisssionGranted: 0,
@@ -57,7 +57,7 @@ router.query.page = parseInt(page)+1;
   useEffect(() => {
     async function data() {
       let roleDataFecth;
-      if (isAuthenticated().user.role == "lecture") {
+      if (isAuthenticated().user.role == "lecturer") {
         if (status == "success") {
           roleDataFecth = "isLectureApproved=1";
         } else if (status == "reject") {
@@ -83,7 +83,7 @@ router.query.page = parseInt(page)+1;
             roleDataFecth = "isLectureApproved=0&isParentApproved[lte]=2";
           }
           else if(status == "success"){
-            roleDataFecth = "isLectureApproved=1&isParentApproved=1 ";
+            roleDataFecth = "isLectureApproved=1&isParentApproved=1";
           }
           else if(status == "reject"){
             roleDataFecth = "isLectureApproved=2&isParentApproved=2&isParentApproved=1";
@@ -96,13 +96,15 @@ router.query.page = parseInt(page)+1;
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
         `/viewleaveuser/?${roleDataFecth}&page=${page}`
+        // `/viewleaveuser/?isLectureApproved=0&page=1`
       );
+      console.log("PPPEERRRRR"+roleDataFecth)
       console.log("****990" + JSON.stringify(leavesData));
       setAllRequests(leavesData.leaves);
       console.log("999000" + allRequests);
       // .then((data) => setAllRequests(data.leaves)
     }
-   page  && data();
+    data();
     // );
   }, [page,status,count]);
   console.log(allRequests);
@@ -156,6 +158,15 @@ else{
         allRequests &&  allRequests.length==0?
             (<ResultNotFound/> ):""
         }
+        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-lightwg text-center  md:px-[5rem]  items-center  my-2">
+        <p className=" w-[100%] md:w-[200px] ">Name</p>
+          
+        <p className=" w-[100%] md:w-[200px] ">Subject</p>
+          <p className=" w-[50%] md:w-[100px]">Days</p>
+          <p className="  w-[50%] md:w-[100px]">Status</p>
+           
+
+        </div>
       {allRequests &&
         allRequests.map((element) => (
           <PermssionCard
@@ -173,7 +184,7 @@ else{
             //   isApprovedParent={element.isParentApproved}
             //   isApprovedLecture = {element.isLectureApproved}
             isApproved={
-              isAuthenticated().user.role == "lecture"
+              isAuthenticated().user.role == "lecturer"
                 ? element.isLectureApproved
                 : isAuthenticated().user.role == "parent"
                 ? element.isParentApproved

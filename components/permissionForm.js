@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { AddPermision } from "../user/helper/permissioncalls";
 // import toast, { Toaster } from 'react-hot-toast';
 // import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "@/util/apicalls";
+import { isAuthenticated, postData } from "@/util/apicalls";
 
 export default function PermssionForm(props) {
   const [values, setValues] = useState({
@@ -20,28 +20,15 @@ const [userData,setUserData] = useState(null)
 setUserData(isAuthenticated().user)
  }, []);
 
-
-
-  const onSubmit = (el) => {
+  const onSubmitForm = (el) => {
     el.preventDefault();
     let userData =  JSON.parse(data)
     setValues({ ...values, error: "" , email:userData.email, loading: true });
 console.log(values)
-    AddPermision({ subject, fromDate, toDate, description, email },isAuthenticated().user.email,isAuthenticated().token,isAuthenticated().user.role)
-      .then((data) => {
-        setValues({
-          subject: "",
-          fromDate: "",
-          toDate: "",
-          description: "",
-          error: "",
-          loading: "",
-        });
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+const pushingData = async()=>{
+const data =  await  postData("/addleave",{ subject, fromDate, toDate, description, email })
+}   
+pushingData()
   };
   const inputHandler = (name) => (el) => {
 
@@ -54,8 +41,6 @@ console.log(values)
     setValues({ ...values, [name]: el.target.value, email:userData.email, error: "" });
     console.log(values);
     // console.log(data["token"]);
-
-
   };
 function FormPer () {
   return (
@@ -67,7 +52,8 @@ function FormPer () {
           <div className="flex gap-[130px] items-center  " >
           </div>
       <form
-        action=""
+        
+        onSubmit={ ()=> { setIsView(!isView); onSubmitForm()}}
         // className=" w-[450px] my-14 h-[145vh] bg-[white] rounded-[20px] px-[60px] py-[40px]"
         className="md:w-[371px]  pt-6   w-[351px] h-[650px] bg-[#1A1E23]  border-secoundblack drop-shadow-md border-[5px] shadow-md rounded-[35px] drop-shadow-sm shadow-md rounded-[35px] drop-shadow-sm px-[2rem]  flex flex-col gap-[15px] "
       >
@@ -173,7 +159,7 @@ function FormPer () {
           className="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white"
           placeholder="Ex: Hackathon"
           onChange={inputHandler("subject")}
-          value={subject}
+          // value={subject}
         />
         <p className="mt-1 text-sm peer-invalid:visible text-red-700 text-lightwg m-0">From</p>
         <input
@@ -181,7 +167,7 @@ function FormPer () {
           className=" border-[1.5px] p-3  h-[40px] w-[300px]  border-lightblack  bg-secoundblack   rounded-md   text-white "
           placeholder="Leave from"
           onChange={inputHandler("fromDate")}
-          value={fromDate}
+          // value={fromDate}
         />
         <p className="mt-1 text-sm text-lightwg m-0"> To</p>
         <input
@@ -189,7 +175,7 @@ function FormPer () {
           className=" border-[1.5px] p-3  h-[40px] w-[300px]  border-lightblack  bg-secoundblack   rounded-md   text-white "
           placeholder=""
           onChange={inputHandler("toDate")}
-          value={toDate}
+          // value={toDate}
         />
         <p className="mt-1 text-sm text-lightwg m-0"> Description</p>
         <textarea
@@ -197,12 +183,11 @@ function FormPer () {
           cols="900"
           className="  border-[1.5px] p-3 border-lightblack  bg-secoundblack   rounded-md   text-white"
           onChange={inputHandler("description")}
-          value={description}
+          // value={description}
         ></textarea>
         <button
           type="submit"
           className=" px-5 py-1  my-5 rounded-[15px] bg-primarycolor text-[white] "
-          onClick={ ()=> { setIsView(!isView); onSubmit()}}
         >
           Submit
         </button>

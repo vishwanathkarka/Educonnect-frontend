@@ -244,7 +244,7 @@ setPaymentFormView(!paymentFormView)
               userId = {clickUserId}
 add = " "
               key ={data._id}
-              id = {data._id}
+             
               link={userCradational == "lecturer"?`#`:`/payment/pay/${data._id}`}
             //   checked={true}
             //   attendnceData={attendance}

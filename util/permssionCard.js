@@ -7,10 +7,8 @@ import { isAuthenticated,updateData,deleteData } from "../util/apicalls";
 // import PermssionForm from "../components/permissionForm";
 // import {AcceptRequest,Userinfo} from "./helper/permissioncalls"
 export default function PermssionCard(props) {
-
   console.log("ROOLLLL"+isAuthenticated().user.role)
   let [isApp, setIsApp] = useState(props.isApproved);
-
   let[workAdmin,setWorkAdmin]= useState(false)
   let [Userinf,setUserinfo] = useState({})
   const [newRequest, setNewRequest] = useState(false);
@@ -44,12 +42,12 @@ const [values, setValues] = useState({
     toDate: props.to,
     description: props.description,
   });
-useEffect(() => {
-  if(isAuthenticated().user.role == "Admin"){
-    Userinfo(props.userid).then(res=> {setUserinfo(res)}).catch(err=> console.log(err))
-  }
+// useEffect(() => {
+//   if(isAuthenticated().user.role == "lecturer"){
+//     Userinfo(props.userid).then(res=> {setUserinfo(res)}).catch(err=> console.log(err))
+//   }
   
-    },[])
+//     },[])
   const { subject, fromDate, toDate, description, id, loading, email } = values;
   console.log(props.id);
 console.log("999",Userinf)
@@ -86,56 +84,14 @@ console.log("999",Userinf)
     if (num == 0) {
       return (
         <p className=" w-[100px] text-[#FFD43B] flex justify-center  items-center gap-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="27"
-            height="21"
-            viewBox="0 0 27 21"
-          >
-            <path
-              id="Path_27"
-              data-name="Path 27"
-              d="M10.029,0h6.943C22.51,0,27,4.074,27,9.1v2.8c0,5.026-4.49,9.1-10.029,9.1H10.029C4.49,21,0,16.926,0,11.9V9.1C0,4.074,4.49,0,10.029,0Z"
-              fill="#f4e6b2"
-            />
-            <g
-              id="Group_56"
-              data-name="Group 56"
-              transform="translate(6.403 2.484)"
-            >
-              <path
-                id="Path_81"
-                data-name="Path 81"
-                d="M0,0H14.192V16.032H0Z"
-                fill="none"
-              />
-              <ellipse
-                id="Ellipse_26"
-                data-name="Ellipse 26"
-                cx="4"
-                cy="5"
-                rx="4"
-                ry="5"
-                transform="translate(3 3)"
-                fill="none"
-                stroke="#ffd43b"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-              />
-              <path
-                id="Path_82"
-                data-name="Path 82"
-                d="M12,7V9.455l1.69,1.473"
-                transform="translate(-5.42 -1.126)"
-                fill="none"
-                stroke="#ffd43b"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-              />
-            </g>
-          </svg>
+   <svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewBox="0 0 27 21">
+  <g id="Group_51" data-name="Group 51">
+    <rect id="Rectangle_16" data-name="Rectangle 16" width="27" height="21" rx="8" fill="rgba(255,212,59,0.36)"/>
+  </g>
+  <path id="Icon_awesome-clock" data-name="Icon awesome-clock" d="M7.562.562c-3.866,0-7,2.21-7,4.938s3.133,4.937,7,4.937,7-2.21,7-4.937S11.428.562,7.562.562Zm1.611,6.97L6.684,6.257a.228.228,0,0,1-.138-.193V2.713c0-.131.152-.239.339-.239H8.239c.186,0,.339.108.339.239V5.454l1.792.92a.2.2,0,0,1,.073.334l-.8.772A.441.441,0,0,1,9.173,7.533Z" transform="translate(5.938 5)" fill="#ffd43b"/>
+</svg>
+
+
           Pending
         </p>
       );
@@ -618,146 +574,62 @@ else if(role == "parent"){
     return (
       <>
         
-        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-[#000000] text-center  md:px-[5rem] py-3 pb-[30px] items-center">
+        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-[#000000] text-center  md:px-[5rem]  items-center  my-2">
           {props.isAdmin ? (
             <div className="flex gap-5">
               {" "}
-          {isAuthenticated().user.role == "lecture" ?  <img
+          {isAuthenticated().user.role == "lecturer" ? <div> <img
                 src={(props.img !== undefined )?(props.img):"https://visualpharm.com/assets/387/Person-595b40b75ba036ed117da139.svg"}
                 alt=""
-                width="60px"
-                height="65px"
-                className="rounded-[10px]"
+                width={50}
+                height={70}
+                className="rounded-[1rem] border-lightwg border-[1px] drop-shadow-md "
                 srcset=""
-              />:""}
-              <div className="flex flex-col">
+              /> </div>:""}
+              <div className="flex flex-col gap-2">
                 {" "}
-                <h3>{(props.name !== undefined )?(props.name):"....."}</h3>{" "}
-                <p className="text-[#606F7B] font-[Avenirregular] "> {(props.htno !== undefined )?(props.htno):"....."}</p>{" "}
+                <p className="text-white text-lg m-0">{(props.name !== undefined )?(props.name):"....."}</p>{" "}
+                <p className="text-[#606F7B] font-[Avenirregular] m-0"> {(props.htno !== undefined )?(props.htno):"....."}</p>{" "}
               </div>{" "}
             </div>
           ) : (
             " "
           )}
-          <p className=" w-[100%] md:w-[200px]">{props.subject}</p>
+          <p className=" w-[100%] md:w-[200px] text-[#717377] text-center">{props.subject}</p>
           <p className="text-[#606F7B] w-[50%] md:w-[100px]">{props.tag}</p>
-          <p className=" text-primary w-[50%] md:w-[100px]">
+          <p className=" text-primarycolor w-[50%] md:w-[100px]">
             {DateDiff()} {DateDiff() == 1 ? "Day" : "Days"}
           </p>
           {/* {IsPermissionApproved(isApp)} */}
           {
 props.isApproved == 0 ?  ( <p className=" w-[100px] text-[#FFD43B] flex justify-center  items-center gap-1">
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="27"
-  height="21"
-  viewBox="0 0 27 21"
->
-  <path
-    id="Path_27"
-    data-name="Path 27"
-    d="M10.029,0h6.943C22.51,0,27,4.074,27,9.1v2.8c0,5.026-4.49,9.1-10.029,9.1H10.029C4.49,21,0,16.926,0,11.9V9.1C0,4.074,4.49,0,10.029,0Z"
-    fill="#f4e6b2"
-  />
-  <g
-    id="Group_56"
-    data-name="Group 56"
-    transform="translate(6.403 2.484)"
-  >
-    <path
-      id="Path_81"
-      data-name="Path 81"
-      d="M0,0H14.192V16.032H0Z"
-      fill="none"
-    />
-    <ellipse
-      id="Ellipse_26"
-      data-name="Ellipse 26"
-      cx="4"
-      cy="5"
-      rx="4"
-      ry="5"
-      transform="translate(3 3)"
-      fill="none"
-      stroke="#ffd43b"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="1.5"
-    />
-    <path
-      id="Path_82"
-      data-name="Path 82"
-      d="M12,7V9.455l1.69,1.473"
-      transform="translate(-5.42 -1.126)"
-      fill="none"
-      stroke="#ffd43b"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="1.5"
-    />
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewBox="0 0 27 21">
+  <g id="Group_51" data-name="Group 51">
+    <rect id="Rectangle_16" data-name="Rectangle 16" width="27" height="21" rx="8" fill="rgba(255,212,59,0.36)"/>
   </g>
+  <path id="Icon_awesome-clock" data-name="Icon awesome-clock" d="M7.562.562c-3.866,0-7,2.21-7,4.938s3.133,4.937,7,4.937,7-2.21,7-4.937S11.428.562,7.562.562Zm1.611,6.97L6.684,6.257a.228.228,0,0,1-.138-.193V2.713c0-.131.152-.239.339-.239H8.239c.186,0,.339.108.339.239V5.454l1.792.92a.2.2,0,0,1,.073.334l-.8.772A.441.441,0,0,1,9.173,7.533Z" transform="translate(5.938 5)" fill="#ffd43b"/>
 </svg>
+
 Pending
 </p>): props.isApproved == 1 ? (  <p
           className=" w-[100px] text-[rgb(0,128,0)] flex justify-center  items-center gap-1 " 
           onClick={() => { ;setIsApp(1);}}
           
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="27"
-            height="21"
-            viewBox="0 0 27 21"
-          >
-            <rect
-              id="Rectangle_16"
-              data-name="Rectangle 16"
-              width="27"
-              height="21"
-              rx="8"
-              fill="#85baad"
-            />
-            <path
-              id="Icon_feather-check"
-              data-name="Icon feather-check"
-              d="M17.806,9,9.689,16.5,6,13.091"
-              transform="translate(2.096 -2.25)"
-              fill="none"
-              stroke="#1a8e72"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3"
-            />
-          </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewBox="0 0 27 21">
+  <rect id="Rectangle_16" data-name="Rectangle 16" width="27" height="21" rx="8" fill="rgba(23,142,113,0.4)"/>
+  <path id="Icon_feather-check" data-name="Icon feather-check" d="M17.806,9,9.689,16.5,6,13.091" transform="translate(2.096 -2.25)" fill="none" stroke="#1a8e72" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+</svg>
           Approved
         </p>): (
                   <p
                   className=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1"
                   onClick={() => {setIsApp(2);}}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="27"
-                    height="21"
-                    viewBox="0 0 27 21"
-                    onClick={() => console.log(isApp)}
-                  >
-                    <rect
-                      id="Rectangle_30"
-                      data-name="Rectangle 30"
-                      width="27"
-                      height="21"
-                      rx="8"
-                      fill="#e6bdc5"
-                    />
-                    <path
-                      id="Path_28"
-                      data-name="Path 28"
-                      d="M9.506,97.712a1.092,1.092,0,0,0,0-1.481.949.949,0,0,0-1.4,0L4.861,99.676l-3.25-3.442a.949.949,0,0,0-1.4,0,1.092,1.092,0,0,0,0,1.481l3.25,3.442L.217,104.6a1.092,1.092,0,0,0,0,1.481.949.949,0,0,0,1.4,0l3.247-3.445,3.25,3.442a.949.949,0,0,0,1.4,0,1.092,1.092,0,0,0,0-1.481l-3.25-3.442Z"
-                      transform="translate(8.639 -90.657)"
-                      fill="#ea8b9e"
-                    />
-                  </svg>
+                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="21" viewBox="0 0 27 21">
+  <rect id="Rectangle_16" data-name="Rectangle 16" width="27" height="21" rx="8" fill="rgba(230,189,197,0.4)"/>
+  <path id="Path_28" data-name="Path 28" d="M11.09,97.725a.994.994,0,0,0,0-1.492,1.227,1.227,0,0,0-1.628,0L5.678,99.7,1.89,96.237a1.227,1.227,0,0,0-1.628,0,.994.994,0,0,0,0,1.492L4.05,101.2.265,104.667a.994.994,0,0,0,0,1.492,1.227,1.227,0,0,0,1.628,0l3.784-3.471,3.788,3.467a1.227,1.227,0,0,0,1.628,0,.994.994,0,0,0,0-1.492L7.305,101.2Z" transform="translate(7.822 -90.696)" fill="#ea8b9e"/>
+</svg>
                   Rejected
                 </p>
         )
@@ -800,25 +672,25 @@ Pending
           <div className={buttonActive ? "hidden" : "block"}>
             <div>
               <div className="flex gap-8">
-                <h3 className="pb-[20px] w-[70%]">
-                  Description:
+                <p className="pb-[20px] w-[70%] text-black ">
+                  {/* Description: */}
                   <span className="font-[Avenirregular] text-[#8795a1] pb-[30px]">
                     {props.description}
                   </span>
-                </h3>
+                </p>
                 {UserEditOption()}
               </div>
-              <h3 className="pb-[20px]">
-                Date:{" "}
+              <p className="pb-[20px]">
+                {/* Date:{" "} */}
                 <span className="font-[Avenirregular] text-[#8795a1]">
                   {moment(props.from).format("MMMM Do YYYY")} -{" "}
                   {moment(props.to).format("MMMM Do YYYY")}
                 </span>
-              </h3>
+              </p>
             </div>
           </div>
         </div>
-        <hr className="text-[#dae1e7]" />
+        <hr className="text-[rgba(246,247,249,.05)] h-[2px]" />
       </>
     );
   }
