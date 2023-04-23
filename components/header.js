@@ -259,7 +259,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   }
 
   return (
-    <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack">
+    <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
 
         <p className="text-white"> XYZ School</p>
@@ -287,7 +287,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 
 {/* desktop naviagtion menu */}
 <div className=" lg:block hidden" >
-          <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
+          <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm  z-10 ">
             <div className="  bg-secoundblack text-white  shadow-xl rounded-xl">
               <div className="h-[88px] flex  p-4 rounded-tl-md rounded-tr-md">
                 <Image
@@ -300,7 +300,9 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                 <div>
                   <h3 className="text-[#3d4852]">{userData.name}</h3>
                   <p className="font-[Avenirregular] text-primarycolor cursor-pointer">
+                    <Link className="text-inherit no-underline" href={"/profile"}>
                     View Profile
+                    </Link>
                   </p>
                 </div>
               </div>

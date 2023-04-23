@@ -78,7 +78,7 @@ router.query.page = parseInt(page)+1;
           roleDataFecth = "isParentApproved=0";
         }
       }
-      
+
       else if(isAuthenticated().user.role == "student"){
         if (status == "pending") {
             roleDataFecth = "isLectureApproved=0&isParentApproved=0";
@@ -99,7 +99,7 @@ router.query.page = parseInt(page)+1;
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-        `/viewleaveuser/?${roleDataFecth}&page=${page}`
+        `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`
         // `/viewleaveuser/?isLectureApproved=0&page=1`
       );
       console.log("PPPEERRRRR"+roleDataFecth)

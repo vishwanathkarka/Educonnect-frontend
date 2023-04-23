@@ -25,7 +25,9 @@ module.exports = {
       secoundblack:"#23272F",
       lightblack:"#374151",
       white:"#FFFFFF",
-      blacktext:"#8F9094"
+      blacktext:"#8F9094",
+      gradent1_1:"#9999DD",
+      gradent1_2:"#8FDEF2"
      },
   
   },
