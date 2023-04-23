@@ -19,6 +19,7 @@ module.exports = {
       primarycolor:"#6B62FF",
       darkblack:"#1A1E23]",
       lightwg:"#dcdcdc",
+      primarylight:"#6b62ff2e",
       // whitelight:"#23272F",
       whitelight:"#dcdcdc",
       secoundblack:"#23272F",

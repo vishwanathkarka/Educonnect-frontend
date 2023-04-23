@@ -11,6 +11,7 @@ import loadingimg from "../../util/Spinner-1s-200px.gif";
 import Image from "next/image";
 
 import { useState } from "react";
+import Header from "@/components/header";
 function Add() {
   const router = useRouter();
   let i = null;
@@ -39,9 +40,10 @@ function Add() {
   useEffect(() => {
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
-         {  "department":router.query.department,
+         {  "department": router.query.department ,
          "section":router.query.section},
       );
+
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
       console.log("stautsssss"+JSON.stringify(data));
       if (data.success == true) {
@@ -142,11 +144,12 @@ function Add() {
       }
   return (
     <>
+   <Header/>
       <div className=" flex items-center gap-3 px-3 ">
         <select
           name=""
           id=""
-          className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+          className=" py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white my-3"
           onChange={inputHandle("department")}
         >
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
@@ -165,7 +168,7 @@ function Add() {
             })}
         </select>
         <select
-          className="block rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+          className="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white my-3"
           onChange={inputHandle("section")}
         >
          
@@ -180,7 +183,7 @@ function Add() {
 })}
         </select>
         <button
-          className="bg-primary text-white py-2 px-3 h-[2.5rem] rounded"
+          className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded"
           onClick={attendanceSubmit}
         >
           submit

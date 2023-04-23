@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import { useEffect } from "react";
-import Attendaceui from "@/util/attendaceui";
+import ListStudent from "@/util/listStudent";
 import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
@@ -11,6 +11,7 @@ import loadingimg from "../../util/Spinner-1s-200px.gif";
 import Image from "next/image";
 
 import { useState } from "react";
+import Header from "@/components/header";
 function Add() {
   const router = useRouter();
   let i = null;
@@ -142,11 +143,12 @@ function Add() {
       }
   return (
     <>
-      <div className=" flex items-center gap-3 px-3 ">
+    <Header/>
+      <div className=" flex items-center gap-3 px-3 bg-black rounded-2xl mx-2 justify-center my-2 ">
         <select
           name=""
           id=""
-          className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+          className="py-1.5 pl-7 pr-20 border-[1.5px]   border-lightblack  bg-secoundblack   rounded-md   text-white"
           onChange={inputHandle("department")}
         >
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
@@ -165,7 +167,7 @@ function Add() {
             })}
         </select>
         <select
-          className="block rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+          className="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack my-3  bg-secoundblack   rounded-md   text-white"
           onChange={inputHandle("section")}
         >
          
@@ -178,12 +180,12 @@ function Add() {
               </option> )
 })}
         </select>
-        <button
+        {/* <button
           className="bg-primary text-white py-2 px-3 h-[2.5rem] rounded"
           onClick={attendanceSubmit}
         >
           submit
-        </button>
+        </button> */}
       </div>
       {!loading ? (
         <div className="h-[80vh] flex justify-center items-center">
@@ -192,13 +194,14 @@ function Add() {
       ) : (
         userDataForAttendace.map((data) => {
           return (
-            <Attendaceui
+            <ListStudent
               name={data.firstName}
               img={data.photo.secure_url}
               section="CSE"
-              date={new Date()}
+              // date={new Date()}
               department = {data.departments[0].department.department}
               htno={data.htno}
+              email = {data.email}
             //   id={data._id}
               key ={data._id}
               link={"/exam/addresult/"+data._id}

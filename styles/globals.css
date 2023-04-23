@@ -93,3 +93,6 @@
         box-shadow: inset 0px 0px 0px 30px #4bb71b;
     }
 }
+tr:nth-child(even){
+    background-color: #343a46b6;
+}

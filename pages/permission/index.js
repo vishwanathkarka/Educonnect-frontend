@@ -78,15 +78,19 @@ router.query.page = parseInt(page)+1;
           roleDataFecth = "isParentApproved=0";
         }
       }
+      
       else if(isAuthenticated().user.role == "student"){
         if (status == "pending") {
-            roleDataFecth = "isLectureApproved=0&isParentApproved[lte]=2";
+            roleDataFecth = "isLectureApproved=0&isParentApproved=0";
           }
           else if(status == "success"){
             roleDataFecth = "isLectureApproved=1&isParentApproved=1";
           }
           else if(status == "reject"){
             roleDataFecth = "isLectureApproved=2&isParentApproved=2&isParentApproved=1";
+          }
+          else{
+            roleDataFecth = "isLectureApproved=0&isParentApproved=0";
           }
       }
       console.log("@@@@@" + status);
@@ -106,7 +110,7 @@ router.query.page = parseInt(page)+1;
     }
     data();
     // );
-  }, [page,status,count]);
+  }, [page,status,count,isView]);
   console.log(allRequests);
   console.log(searchSort);
   function activeSelect (option){

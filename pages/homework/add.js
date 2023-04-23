@@ -78,19 +78,22 @@ console.log(homeworkInfo)
     <div className="h-[90vh] flex flex-col justify-center items-center ">
       
       <form
-          className="w-[35rem] m-auto  h-[70vh] m-auto bg-secoundblack p-[1rem] border-[rgba(246,247,249,.05)]  border-[2px]  rounded-lg"
+          className="w-[35rem] m-auto  h-[70vh] m-auto bg-secoundblack  p-[1rem] border-[rgba(246,247,249,.05)]  border-[2px]  rounded-lg"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
 
-<h2>Homework Add</h2>
+<h2 className="text-lightwg mb-3"> Homework Add</h2>
+<p className="text-lightwg m-1">Department</p>
 <div className=" flex items-center gap-7  ">
+
         <select
           name=""
           id=""
-          className="block  rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  mt-4"
+          className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
           onChange={handleInput("department")}
         >
+         
       {   router.query.department == undefined?  <option selected>department ...</option>:""}
          
           {user &&
@@ -107,7 +110,7 @@ console.log(homeworkInfo)
             })}
         </select>
         <select
-          className="block rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-4 "
+          className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6 "
           onChange={handleInput("section")}
         >
          
@@ -121,18 +124,19 @@ console.log(homeworkInfo)
 })}
         </select>
         </div>
+        <p className="text-lightwg m-1">Title name</p>
                <input 
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Subject"
             onChange={handleInput("title")}
             // value={firstName}
     
           />
-
+<p className="text-lightwg m-1">Description</p>
                 <input 
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Description"
             onChange={handleInput("description")}
             // value={firstName}
@@ -144,7 +148,7 @@ console.log(homeworkInfo)
             onChange={handleInput("submissionDate")}
             // value={lastName}
           />
-           <label for="" className="text-slate-500 mx-2 text-sm">
+           <label for="" className="text-lightwg mx-2 text-sm m-0">
             Note: Enter Last Date for submitting
           </label>
  {/* <input
