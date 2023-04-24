@@ -7,12 +7,12 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-import loadingimg from "../../util/Spinner-1s-200px.gif";
+import loadingimg from "../../../util/Spinner-1s-200px.gif";
 import Image from "next/image";
 
 import { useState } from "react";
 import Header from "@/components/header";
-function Add() {
+function Sittingplain() {
   const router = useRouter();
   let i = null;
   // console.log("600000" +  isAuthenticated().user.firstName);
@@ -21,6 +21,7 @@ function Add() {
   const [departmentSection, setDepartmentSection] = useState({
     "department":router.query.department,
     "section":router.query.section
+    
   });
 
   const [dep, setdep] = useState(0);
@@ -203,7 +204,7 @@ function Add() {
               email = {data.email}
             //   id={data._id}
               key ={data._id}
-              link={"/exam/addresult/"+data._id}
+              link={"/exam/sittingplain/"+data._id}
             //   checked={true}
             //   attendnceData={attendance}
             />
@@ -214,4 +215,4 @@ function Add() {
   );
 }
 
-export default Add;
+export default Sittingplain;

@@ -6,10 +6,12 @@ import { getData,postData ,isAuthenticated } from '@/util/apicalls';
  function PaymentAddForm(props) {
     const [userData,setUserData] = useState(null)
     const [paymentAdd,setPaymentAdd] = useState(null)
+    const [userinfo,setUserInfo] = useState(null)
     
     useEffect( () => {
         async function fetchdata (){
-   let data = await getData(`/getuserinfowithid/${props.sid}`,isAuthenticated().token)
+   let data = await getData(`/getuserinfowithid/${props.sid}`,isAuthenticated().token);
+   setUserInfo(isAuthenticated().user)
   setUserData(data)
   console.log(data)
 
@@ -19,14 +21,14 @@ import { getData,postData ,isAuthenticated } from '@/util/apicalls';
      }, []);
 
      const handleInput  = (user) => (el)=>{
-setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":props.sid});
+userinfo && setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":props.sid,});
 console.log(paymentAdd)
 
      }
      const handleSubmit = async(el)=> {
 el.preventDefault();
 const isDone =  await postData("/addpayment",paymentAdd,isAuthenticated().token);
-// console.log(paymentsatus)
+
 if(isDone){
     props.closeForm(true)
 }

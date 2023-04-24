@@ -111,8 +111,10 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
   async function attendanceSubmit() {
     let da = await postData("/bulkattendanceadd", attendace, isAuthenticated().token);
   }
+  //getting student id fromt the payment ui
 function clickUserId(data){
   setUserId(data)
+  console.log("DATTAA()))"+data)
   setPaymentFormView(!paymentFormView)
 }
   function attendance(data) {
@@ -162,6 +164,7 @@ setPaymentFormView(!paymentFormView)
     </div> */}
      
     {/* { <Add/>} */}
+    {/* opening the form for adding detals */}
  { paymentFormView&& <PaymentAddForm sid={userId} closeForm={closeForm} /> }
 
   <div className="bg-secoundblack rounded-md h-[100vh]  mx-8 my-9   ">
@@ -243,6 +246,7 @@ setPaymentFormView(!paymentFormView)
               email = {data.email}   
               userId = {clickUserId}
 add = " "
+id = {data._id}
               key ={data._id}
              
               link={userCradational == "lecturer"?`#`:`/payment/pay/${data._id}`}

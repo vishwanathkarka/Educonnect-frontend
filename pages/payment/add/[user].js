@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
      }, [router.query.user]);
 
      const handleInput  = (user) => (el)=>{
-setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":router.query.user});
+setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":router.query.user ,"lid":userData.user._id});
 console.log(paymentAdd)
 
      }
