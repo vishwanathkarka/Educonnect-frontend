@@ -28,7 +28,7 @@ export default function AdminAllPermission() {
  // next page moving function 
 function pageShifting(operation){
     if(operation == "Add"){
-router.query.page = parseInt(page)+1;
+router.query.page = parseInt(router.query.page)+1;
     router.push(router)
     }
 
@@ -206,7 +206,7 @@ else{
         </div>
       <div className="flex gap-[50px] m-[10px]  ">
         <div
-          className="border-[2px] border-[black] rounded-[50%] cursor-pointer"
+          className="border-[2px] border-[white] rounded-[50%] cursor-pointer"
           onClick={() => {pageShifting("Sub")}}
         >
           <svg
@@ -228,7 +228,7 @@ else{
           </svg>
         </div>
         <div
-          className="border-[2px] border-[black] rounded-[50%] cursor-pointer"
+          className="border-[2px] border-[white] rounded-[50%] cursor-pointer"
         //   onClick={() => setCount(count + 1)}
         onClick={() => {pageShifting("Add")}}
         >

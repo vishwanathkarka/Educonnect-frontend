@@ -8,6 +8,7 @@ import Header from '@/components/header';
     const [userData,setUserData] = useState(null)
     const [departments,setDepartments] = useState()
     const [marksDetail,setMarkDetail] = useState(null);
+    const [sittingDetail,setSittingDetail] = useState(null);
     console.log(router.query.user)
     useEffect( () => {
        async function fetchdata (){
@@ -30,8 +31,8 @@ import Header from '@/components/header';
           } 
 
           const handleInput = (name) =>(el)=>{
-setMarkDetail({...marksDetail, [name]:el.target.value});
-console.log(marksDetail);
+            setSittingDetail({...sittingDetail, [name]:el.target.value});
+
           }
 
     //       "outOfMarks":50,
@@ -40,7 +41,7 @@ console.log(marksDetail);
     // "userId":"63e12e165aae5db72f8f4afb"
     const handleSubmit = async (el) => {
             el.preventDefault();
-postData("/addSittingArrangement",{"userId":router.query.user,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
+             postData("/addSittingArrangement",{"userId":router.query.add,"roomno":sittingDetail.roomno,"noOfRow":sittingDetail.noOfRow,"noOfCol":sittingDetail.noOfCol,"examDate":sittingDetail.examDate,"row":sittingDetail.row,"col":sittingDetail.col,"examName":sittingDetail.examName},isAuthenticated().token)
           }
   return (
     <>
@@ -73,6 +74,15 @@ departments&& departments.map((data) => {
         { userData?<div className=''> <Image src ={userData.user.photo.secure_url} className='rounded-[50%] m-auto  border-lightwg border-[2px]' width={100} height={100}></Image> </div> :''}
        { userData&& <p className='text-center text-white mt-2'>{userData.user.firstName +" " + userData.user.lastName }</p> }
        { userData&& <p className='text-center text-white mt-2'>{userData.user.departments[0].department.department}</p> }
+       <input
+            type="text"
+            class=""
+            placeholder="Exam Name"
+            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
+            onChange={handleInput("examName")}
+            // value={lastName}
+          />
+
           <input 
             type="text"
             class="block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white"
@@ -97,14 +107,31 @@ departments&& departments.map((data) => {
             // value={lastName}
           />
  <input
-            type="Number"
+            type="date"
             class=""
             placeholder="No Of Col"
             className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
-            onChange={handleInput("noOfCol")}
+            onChange={handleInput("examDate")}
             // value={lastName}
           />
-          
+
+<input
+            type="Number"
+            class=""
+            placeholder="student sitting place in row"
+            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
+            onChange={handleInput("row")}
+            // value={lastName}
+          />
+
+<input
+            type="Number"
+            class=""
+            placeholder="student sitting place in col"
+            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
+            onChange={handleInput("col")}
+            // value={lastName}
+          />
   
   <button
             className="block w-full bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "

@@ -10,6 +10,7 @@ const  Dashboard = () => {
     const [failedCount,setFailedCount] = useState(null)
     const [permissionPendingCount,setPermissionPendingCount] = useState(null)
     const [getTimetable,setGetTimetable] = useState(null)
+    const [settingarragement,setSittingArragement] = useState(null)
     useEffect(() => { 
         const getDatauser = async() =>{
             console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().student_id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
@@ -26,7 +27,10 @@ console.log(getTimeTableList)
 setGetTimetable(getTimeTableList.getTimeTable)
 console.log(moment().day())
  console.log(getTimeTableList)
-
+ const sittingArrangement = await getData(`/findsittingarragement/${isAuthenticated().user._id}`,isAuthenticated().token)
+ console.log(sittingArrangement.arrangement
+    )
+ setSittingArragement(sittingArrangement.arrangement)
 console.log( getTimeTableList.getTimeTable.filter((el)=>{
     return moment().format('dddd').toLowerCase() == el.day && el.day == true
                   }))
@@ -58,6 +62,7 @@ else if(day == 5){
 }
 
 }
+// settingarragement && console.log("RESSS"+  settingarragement[0].noOfCol)
   return (
    <>
    <Header/>
@@ -101,7 +106,7 @@ else if(day == 5){
     </div>
     </Link>
 
-<Link href="/permission?status=pending" className='no-underline'>
+<Link href="/permission?status=pending&page=1" className='no-underline'>
     <div className='bg-secoundblack h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center' >
 <div>
 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-check" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -155,7 +160,27 @@ else if(day == 5){
     </thead>
 </table>
 
+<h5>Exam Sitting Slot</h5>
+<table className=' text-white w-[100vw]'>
+    <thead>
 
+    <tr>
+    <td>Exam Name </td>
+            <td>Room No </td>
+            <td>Exam Date</td>
+        </tr>
+       {settingarragement && settingarragement.map((el) =>{
+return(
+        <tr>
+             <td>{el.examName}</td>
+            <td>{el.roomno}</td>
+            <td>{moment(el.examDate).format("MMM Do YY") }</td>
+        </tr>
+)
+        })
+}
+    </thead>
+</table>
 </div>
    </>
   )
