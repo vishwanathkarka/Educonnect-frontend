@@ -42,6 +42,7 @@ function Sittingplain() {
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
+         isAuthenticated().token
       );
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
       console.log("stautsssss"+JSON.stringify(data));
@@ -53,13 +54,14 @@ function Sittingplain() {
       if (isAuthenticated()) {
         let departmentlist = await postData(
           "/listdepartmentspecific",
-          isAuthenticated().user.departments[0]
+          isAuthenticated().user.departments[0],
+          isAuthenticated().token
         );
         if (departmentlist.success == true) {
           setDepartmentListFetch(departmentlist.listOfDepartment);
         }
       }
-      let sectionlist = await getData("/listsection");
+      let sectionlist = await getData("/listsection",isAuthenticated().token);
       if (sectionlist.success == true) {
         setSectionListFetch(sectionlist.listOfSection);
       }
@@ -96,7 +98,7 @@ function Sittingplain() {
   };
 
   async function attendanceSubmit() {
-    let da = await postData("/bulkattendanceadd", attendace);
+    let da = await postData("/bulkattendanceadd", attendace,isAuthenticated().token);
   }
 
   function attendance(data) {

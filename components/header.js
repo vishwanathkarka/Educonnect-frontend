@@ -28,14 +28,13 @@ const [showMobileBar,setShowMobileBar] = useState(false)
           className=" bg-primary px-[6px] py-[3px]  rounded-[9px] cursor-pointer text-[white] font-semibold"
           href="/signup"
         >
-          {" "}
           signup
         </Link>
       </ul>
     );
   }
 
-  //if user is logged in
+  //if user is logged in photo view
   function HeaderLogin() {
     console.log(islogin);
     return (
@@ -261,11 +260,8 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   return (
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
-
         <p className="text-white"> XYZ School</p>
       </div>
-
-      
       {userData && (
         <div className="relative onHover p-5 ">
           <div className="flex  justify-center items-center gap-[12px] cursor-pointer " onClick={()=>setShowMobileBar(!showMobileBar)}>
@@ -500,16 +496,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 
 </div>
 <ul className="p-0 text-white">
-                {/* <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <Image
-                src="https://static5.lottiefiles.com/images/v3/dashboard-icons/dashboard.svg"
-                alt="My Dashboard"
-                className="inline "
-               
-                // onClick={()=> isAuthenticated().user.role == "Admin"?navigate("/admin/dashboard"):navigate("/user/dashboard")
-              />
-                  <p>My Dashboard </p>
-                </li> */}
+             
                 <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
                   <svg
                     id="Group_5"

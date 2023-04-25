@@ -11,7 +11,7 @@ export default function Homework() {
   //  setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
   const fetchdata = async () =>{
 
-const homeworkList = await getData(`/gethomework/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`)
+const homeworkList = await getData(`/gethomework/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`,isAuthenticated().token)
 setHomeWork(homeworkList.Homeworks)
 
   }

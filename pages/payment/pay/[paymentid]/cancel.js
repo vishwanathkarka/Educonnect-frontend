@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { getData } from '@/util/apicalls';
+import { getData, isAuthenticated } from '@/util/apicalls';
 import { useRouter } from "next/router";
 
 function Cancel() {
     const router = useRouter();
     useEffect(() => {
       async  function getstatus (){
-     let data = await  getData(`/checkstatus/${router.query.paymentid}`)
+     let data = await  getData(`/checkstatus/${router.query.paymentid}`,isAuthenticated().token)
      console.log(data)
      if(data.payment == false){
         router.push(`/payment/pay/${router.query.paymentid}/cancel`)

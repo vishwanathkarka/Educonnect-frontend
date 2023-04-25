@@ -11,7 +11,7 @@ import Header from '@/components/header';
     console.log(router.query.user)
     useEffect( () => {
        async function fetchdata (){
-  let data = await getData(`/getuserinfowithid/${router.query.user}`)
+  let data = await getData(`/getuserinfowithid/${router.query.user}`,isAuthenticated().token)
  setUserData(data)
  console.log(data)
  setDepartments(isAuthenticated().user.departments)
@@ -40,7 +40,7 @@ console.log(marksDetail);
     // "userId":"63e12e165aae5db72f8f4afb"
     const handleSubmit = async (el) => {
             el.preventDefault();
-postData("/addResult",{"subject":marksDetail.subject,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
+postData("/addSittingArrangement",{"userId":router.query.user,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
           }
   return (
     <>
@@ -76,27 +76,35 @@ departments&& departments.map((data) => {
           <input 
             type="text"
             class="block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white"
-            placeholder="Subject"
-            onChange={handleInput("subject")}
+            placeholder="Room Number"
+            onChange={handleInput("roomno")}
             // value={firstName}
     
           />
           <input
             type="Number"
             class="block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white"
-            placeholder="Student Marks"
-            onChange={handleInput("studentMarks")}
+            placeholder="No Of Row"
+            onChange={handleInput("noOfRow")}
             // value={lastName}
           />
  <input
             type="Number"
             class=""
-            placeholder="Out of Marks"
+            placeholder="No Of Col"
             className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
-            onChange={handleInput("outOfMarks")}
+            onChange={handleInput("noOfCol")}
             // value={lastName}
           />
-
+ <input
+            type="Number"
+            class=""
+            placeholder="No Of Col"
+            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
+            onChange={handleInput("noOfCol")}
+            // value={lastName}
+          />
+          
   
   <button
             className="block w-full bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "

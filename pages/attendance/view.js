@@ -8,7 +8,7 @@ import Attendaceui from '@/util/attendaceui';
 
     useEffect(() => {
        async function fetchData(){
-      let data = await getData(`/getindividualattendance/${isAuthenticated().user._id}`)
+      let data = await getData(`/getindividualattendance/${isAuthenticated().user._id}`,isAuthenticated().token)
       console.log(isAuthenticated().user._id)
       console.log(data)
       if(data.success == true){

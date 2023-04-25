@@ -12,21 +12,20 @@ const  Dashboard = () => {
     const [getTimetable,setGetTimetable] = useState(null)
     useEffect(() => { 
         const getDatauser = async() =>{
-          
             console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().student_id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
-      const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`)
+      const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
       setHomeWorkCount(count.count)
       const paymentPenddingCount = await getData(`${isAuthenticated().user.role== "student"?"/findpaymentpendingcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/findpaymentpendingcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/findpaymentadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
 setPaymentPending(paymentPenddingCount.paymentPendingCount)
-const permissionPendingCount = await getData(`/permissionpendingcount/${isAuthenticated().user._id}`)
+const permissionPendingCount = await getData(`/permissionpendingcount/${isAuthenticated().user._id}`,isAuthenticated().token)
 setPermissionPendingCount(permissionPendingCount.permissionCount)
-const failedSubjectsCount = await getData(`/getfailedCount/${isAuthenticated().user._id}`)
+const failedSubjectsCount = await getData(`/getfailedCount/${isAuthenticated().user._id}`,isAuthenticated().token)
 setFailedCount(failedSubjectsCount.failedCount)
-const getTimeTableList = await getData(`/gettimetable/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`)
+const getTimeTableList = await getData(`/gettimetable/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`,isAuthenticated().token)
 console.log(getTimeTableList)
 setGetTimetable(getTimeTableList.getTimeTable)
 console.log(moment().day())
-
+ console.log(getTimeTableList)
 
 console.log( getTimeTableList.getTimeTable.filter((el)=>{
     return moment().format('dddd').toLowerCase() == el.day && el.day == true
@@ -130,22 +129,29 @@ else if(day == 5){
     </div>
     </Link>
 </div>
+<h5 className='text-white text-center mt-4'>Todays Classes {moment().format('dddd').toLowerCase()}</h5>
 
-<table className='text-white w-[100vw] m-3'>
+<table className='text-white w-[100vw] my-8'>
 <thead>
-<tr> <td>Day</td> <td>Name</td> 
+<tr>  <td>Name</td> 
                     <td>Class</td> </tr>
 
-        {/* {
-     getTimetable && getTimetable.filter((el)=>{
-       console.log( el.moment().format('dddd').toLowerCase() == true )
+        {
+     getTimetable && getTimetable.map((el)=>{
+      if( el[moment().format('dddd').toLowerCase()] == true ){
+        return(
+            <tr>  <td>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
+            <td>{el.period}</td> </tr> 
+        )
+      }
+      console.log("***$$"+el)
                       })         
         }
     
     {
        console.log(getTimetable)
                           
-    } */}
+    }
     </thead>
 </table>
 

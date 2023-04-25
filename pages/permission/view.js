@@ -93,7 +93,7 @@ router.query.page = parseInt(page)+1;
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-        `/viewleaveuser/?${roleDataFecth}&page=${page}`
+        `/viewleaveuser/?${roleDataFecth}&page=${page}`,isAuthenticated().token
       );
       console.log("****990" + JSON.stringify(leavesData));
       setAllRequests(leavesData.leaves);

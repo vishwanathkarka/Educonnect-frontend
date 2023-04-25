@@ -14,6 +14,7 @@ export default function PermssionForm(props) {
     loading: false,
     email: null,
   });
+
 const [userData,setUserData] = useState(null)
   const { subject, fromDate, toDate, description, email } = values;
  useEffect(() => {
@@ -49,8 +50,7 @@ function FormPer () {
   return (
     <>
      <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  " >
-          <div className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute " onClick={()=>{props.closeForm(true)}} >  
-          
+          <div className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute " onClick={()=>{props.closeForm(true)}} >
           </div>
           <div className="flex gap-[130px] items-center  " >
           </div>

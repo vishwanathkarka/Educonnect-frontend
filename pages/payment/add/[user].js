@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
     const [paymentAdd,setPaymentAdd] = useState(null)
     useEffect( () => {
         async function fetchdata (){
-   let data = await getData(`/getuserinfowithid/6432baf3fb948862b8b528f6`)
+   let data = await getData(`/getuserinfowithid/6432baf3fb948862b8b528f6`,isAuthenticated().token)
   setUserData(data)
   console.log(data)
 
@@ -25,7 +25,7 @@ console.log(paymentAdd)
      }
      const handleSubmit = async(el)=> {
 el.preventDefault();
-const paymentsatus =  await postData("/addpayment",paymentAdd);
+const paymentsatus =  await postData("/addpayment",paymentAdd,isAuthenticated().token);
 console.log(paymentsatus)
      }
   return (

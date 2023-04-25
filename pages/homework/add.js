@@ -38,6 +38,13 @@ var FormData = require("form-data");
 
     //     }
     //     datafetch()
+
+    if(isAuthenticated().user.role != "lecturer"){
+      router.push("/")
+     }
+     if(!isAuthenticated()){
+      router.push("/login")
+     }
         setUser(isAuthenticated().user);
     }, []);
     let bodyFormData = new FormData();
@@ -69,7 +76,7 @@ console.log(homeworkInfo)
         el.preventDefault();
         bodyFormData.append("data", JSON.stringify(homeworkInfo));
         bodyFormData.append("lectureworkFile", img); 
-     const data =  await  postDataForm("/addhomeworklecture", bodyFormData)
+     const data =  await  postDataForm("/addhomeworklecture", bodyFormData,isAuthenticated().token)
      console.log(data)
     }
   return (

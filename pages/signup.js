@@ -1,7 +1,7 @@
 // import React,{useState,useEffect} from 'react'
 import { useEffect } from "react";
 import { useState } from "react";
-import { postDataForm, getData } from "../util/apicalls";
+import { postDataForm, getData, isAuthenticated } from "../util/apicalls";
 import { useRouter } from "next/router";
 import Header from "@/components/header";
 var FormData = require("form-data");
@@ -47,7 +47,7 @@ const Signup = () => {
     async function fetchDepartment() {
       // fetching the department from api
       if(role == "student"){
-      let departmentlistobj = await getData("/listdepartment");
+      let departmentlistobj = await getData("/listdepartment",isAuthenticated().token);
       let departmentlist = departmentlistobj;
       console.log(")))))))))" + departmentlist);
       if (departmentlist.success == true) {
@@ -60,7 +60,7 @@ const Signup = () => {
     async function fetchSection() {
       if(role == "student"){
       // fetching the department from api
-      let sectionlist = await getData("/listsection");
+      let sectionlist = await getData("/listsection",isAuthenticated().token);
       if (sectionlist.success == true) {
         setSectionListFetch(sectionlist.listOfSection);
       }
@@ -92,7 +92,7 @@ const Signup = () => {
     console.log(userData);
     bodyFormData.append("data", JSON.stringify(userData));
     bodyFormData.append("photo", img);
-    const data = await postDataForm("/signup", bodyFormData);
+    const data = await postDataForm("/signup", bodyFormData,isAuthenticated().token);
     bodyFormData.delete("[0]data");
     bodyFormData.delete("[0]photo");
     console.log(bodyFormData)

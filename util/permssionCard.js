@@ -573,7 +573,7 @@ else if(role == "parent"){
 {
                 setIsView(!isView);
                 deleteData(
-                  `/deleteleave/${props.id}`
+                  `/deleteleave/${props.id}`,isAuthenticated().token
                 )
               }
             }

@@ -4,11 +4,20 @@ import Image from 'next/image';
 import Header from '@/components/header';
 import { getData,postData ,isAuthenticated } from '@/util/apicalls';
  function PaymentAddForm(props) {
+    //this contains user info
     const [userData,setUserData] = useState(null)
+    //payment info entered in form
     const [paymentAdd,setPaymentAdd] = useState(null)
+    // cookie user data
     const [userinfo,setUserInfo] = useState(null)
     
     useEffect( () => {
+        if(isAuthenticated().user.role != "lecturer"){
+            router.push("/")
+           }
+           if(!isAuthenticated()){
+            router.push("/login")
+           }
         async function fetchdata (){
    let data = await getData(`/getuserinfowithid/${props.sid}`,isAuthenticated().token);
    setUserInfo(isAuthenticated().user)
@@ -20,11 +29,13 @@ import { getData,postData ,isAuthenticated } from '@/util/apicalls';
       fetchdata()
      }, []);
 
+// handling input
      const handleInput  = (user) => (el)=>{
 userinfo && setPaymentAdd({...paymentAdd,[user]:el.target.value,"sid":props.sid,});
 console.log(paymentAdd)
 
      }
+     // submitting data
      const handleSubmit = async(el)=> {
 el.preventDefault();
 const isDone =  await postData("/addpayment",paymentAdd,isAuthenticated().token);
@@ -32,6 +43,7 @@ const isDone =  await postData("/addpayment",paymentAdd,isAuthenticated().token)
 if(isDone){
     props.closeForm(true)
 }
+
      }
   return (
     <>

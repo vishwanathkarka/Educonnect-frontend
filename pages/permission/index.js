@@ -18,7 +18,7 @@ export default function AdminAllPermission() {
   const [isView, setIsView] = useState(false);
   const [count, setCount] = useState(1);
   const [allRequests, setAllRequests] = useState(null);
-  
+  const [userData,setUserData] = useState(null)
   const [searchSort, setSearchSort] = useState({
     is_PermisssionGranted: 0,
     search: null,
@@ -93,14 +93,16 @@ router.query.page = parseInt(page)+1;
             roleDataFecth = "isLectureApproved=0&isParentApproved=0";
           }
       }
+      setUserData(isAuthenticated)
       console.log("@@@@@" + status);
       let leavesData = await getData(
         //   isAuthenticated().user.email,
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-        `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`
+       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:null
         // `/viewleaveuser/?isLectureApproved=0&page=1`
+       , isAuthenticated().token
       );
       console.log("PPPEERRRRR"+roleDataFecth)
       console.log("****990" + JSON.stringify(leavesData));

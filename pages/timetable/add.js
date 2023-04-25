@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import { getData,postData } from "@/util/apicalls"; 
+import { getData,isAuthenticated,postData } from "@/util/apicalls"; 
  function Add() {
     const [departmentListFetch, setDepartmentListFetch] = useState();
     const [sectionListFetch, setSectionListFetch] = useState(null);
@@ -9,7 +9,7 @@ import { getData,postData } from "@/util/apicalls";
         async function fetchDepartment() {
           // fetching the department from api
     
-          let departmentlistobj = await getData("/listdepartment");
+          let departmentlistobj = await getData("/listdepartment",isAuthenticated().token);
           let departmentlist = departmentlistobj;
           console.log(")))))))))" + departmentlist);
           if (departmentlist.success == true) {
@@ -22,7 +22,7 @@ import { getData,postData } from "@/util/apicalls";
         async function fetchSection() {
        
           // fetching the department from api
-          let sectionlist = await getData("/listsection");
+          let sectionlist = await getData("/listsection",isAuthenticated().token);
           if (sectionlist.success == true) {
             setSectionListFetch(sectionlist.listOfSection);
             
@@ -41,7 +41,7 @@ console.log(el.target.value)
 
       const handleSubmit = (el) =>{
         el.preventDefault();
-const uploadingTimeTable =  postData("/addtimetable",{"department":department,"section":section,"period":period,day})
+const uploadingTimeTable =  postData("/addtimetable",{"department":department,"section":section,"period":period,day},isAuthenticated().token)
 console.log(uploadingTimeTable)
       }
 

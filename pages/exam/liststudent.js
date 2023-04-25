@@ -15,6 +15,7 @@ import Header from "@/components/header";
 function Add() {
   const router = useRouter();
   let i = null;
+ 
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
@@ -37,10 +38,18 @@ function Add() {
 
     
   useEffect(() => {
+
+    if(isAuthenticated().user.role != "lecturer"){
+      router.push("/")
+     }
+     if(!isAuthenticated()){
+      router.push("/login")
+     }
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
+         isAuthenticated().token
       );
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
       console.log("stautsssss"+JSON.stringify(data));
@@ -52,13 +61,13 @@ function Add() {
       if (isAuthenticated()) {
         let departmentlist = await postData(
           "/listdepartmentspecific",
-          isAuthenticated().user.departments[0]
+          isAuthenticated().user.departments[0],isAuthenticated().token
         );
         if (departmentlist.success == true) {
           setDepartmentListFetch(departmentlist.listOfDepartment);
         }
       }
-      let sectionlist = await getData("/listsection");
+      let sectionlist = await getData("/listsection",isAuthenticated().token);
       if (sectionlist.success == true) {
         setSectionListFetch(sectionlist.listOfSection);
       }
