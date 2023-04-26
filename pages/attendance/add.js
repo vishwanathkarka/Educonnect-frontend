@@ -38,6 +38,9 @@ function Add() {
 
     
   useEffect(() => {
+    if(!isAuthenticated()){
+      router.push("/login")
+     }
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
          {  "department": router.query.department ,

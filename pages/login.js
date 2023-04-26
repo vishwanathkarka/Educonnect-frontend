@@ -34,6 +34,7 @@ const onSubmitLogin = async el => {
   const result = await postData('/login',{"email":email,"password":password})
   console.log(result)
   if(result.status == true){
+    router.push("/dashboard")
   setToShowToast({...toShowToast,toastColor:"bg-success",msg:{title:"Logged successfully"},isShownToast:true})
 // Cookie.set('user',JSON.stringify(result),{ expires: 7 })
 authenticate(result);
@@ -75,7 +76,7 @@ return(
           />
            <p className='text-[#dcdcdc]'>Password</p>
  <input
-            type="text"
+            type="password"
             class="block w-full rounded-md border-lightblack border-[1px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
          
             placeholder="Enter your password"

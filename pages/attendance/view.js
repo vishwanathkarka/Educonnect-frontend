@@ -7,6 +7,9 @@ import Attendaceui from '@/util/attendaceui';
     const[attendances,setAttendances]= useState() 
 
     useEffect(() => {
+      if(!isAuthenticated()){
+        router.push("/login")
+       }
        async function fetchData(){
       let data = await getData(`/getindividualattendance/${isAuthenticated().user._id}`,isAuthenticated().token)
       console.log(isAuthenticated().user._id)

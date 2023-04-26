@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { getData, isAuthenticated } from '@/util/apicalls';
 import { useEffect,useState } from 'react';
 import moment from 'moment';
+import { useRouter } from "next/router";
 
 const  Dashboard = () => {
+    const router = useRouter();
     const [homeworkcount,setHomeWorkCount] = useState(null)
     const [paymentPending,setPaymentPending]= useState(null)
     const [failedCount,setFailedCount] = useState(null)
@@ -12,6 +14,7 @@ const  Dashboard = () => {
     const [getTimetable,setGetTimetable] = useState(null)
     const [settingarragement,setSittingArragement] = useState(null)
     useEffect(() => { 
+        
         const getDatauser = async() =>{
             console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().student_id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
       const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
@@ -22,20 +25,36 @@ const permissionPendingCount = await getData(`/permissionpendingcount/${isAuthen
 setPermissionPendingCount(permissionPendingCount.permissionCount)
 const failedSubjectsCount = await getData(`/getfailedCount/${isAuthenticated().user._id}`,isAuthenticated().token)
 setFailedCount(failedSubjectsCount.failedCount)
+if(isAuthenticated().user.role == "student" || isAuthenticated().user.role == "parent"){
 const getTimeTableList = await getData(`/gettimetable/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`,isAuthenticated().token)
 console.log(getTimeTableList)
 setGetTimetable(getTimeTableList.getTimeTable)
+}
+else if (isAuthenticated().user.role == "lecturer"){
+// /viewstittingarragmentadded
+const getTimeTableList = await getData(`/getlecturetable`,isAuthenticated().token)
+console.log(getTimeTableList)
+setGetTimetable(getTimeTableList.lectureTimeTable)
+}
 console.log(moment().day())
- console.log(getTimeTableList)
+//  console.log(getTimeTableList)
+if(isAuthenticated().user.role == "student" || isAuthenticated().user.role == "parent"){
  const sittingArrangement = await getData(`/findsittingarragement/${isAuthenticated().user._id}`,isAuthenticated().token)
  console.log(sittingArrangement.arrangement
     )
  setSittingArragement(sittingArrangement.arrangement)
-console.log( getTimeTableList.getTimeTable.filter((el)=>{
-    return moment().format('dddd').toLowerCase() == el.day && el.day == true
-                  }))
+}
+else if (isAuthenticated().user.role == "lecturer"){
+    const sittingArrangement = await getData("/viewstittingarragmentadded",isAuthenticated().token)
+    setSittingArragement(sittingArrangement.arrangement)
+}
+
+
         }
-        getDatauser()
+        if(!isAuthenticated()){
+            router.push("/login")
+           }
+           isAuthenticated() &&  getDatauser()
     }, []);
     console.log(moment().format('dddd').toLowerCase())
 const getDay = (day)=>{
@@ -136,16 +155,16 @@ else if(day == 5){
 </div>
 <h5 className='text-white text-center mt-4'>Todays Classes {moment().format('dddd').toLowerCase()}</h5>
 
-<table className='text-white w-[100vw] my-8'>
+<table className='text-white w-[100vw] my-8 '>
 <thead>
-<tr>  <td>Name</td> 
+<tr>  <td className='py-2 px-10'>Name</td> 
                     <td>Class</td> </tr>
 
         {
      getTimetable && getTimetable.map((el)=>{
       if( el[moment().format('dddd').toLowerCase()] == true ){
         return(
-            <tr>  <td>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
+            <tr className='py-4'>  <td className='py-2 px-10'>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
             <td>{el.period}</td> </tr> 
         )
       }

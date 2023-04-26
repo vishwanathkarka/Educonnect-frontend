@@ -55,6 +55,9 @@ router.query.page = parseInt(router.query.page)+1;
   const { is_PermisssionGranted, search, section } = searchSort;
 
   useEffect(() => {
+    if(!isAuthenticated()){
+      router.push("/login")
+     }
     async function data() {
       let roleDataFecth;
       if (isAuthenticated().user.role == "lecturer") {
@@ -110,7 +113,7 @@ router.query.page = parseInt(router.query.page)+1;
       console.log("999000" + allRequests);
       // .then((data) => setAllRequests(data.leaves)
     }
-    data();
+  isAuthenticated() &&  data();
     // );
   }, [page,status,count,isView]);
   console.log(allRequests);

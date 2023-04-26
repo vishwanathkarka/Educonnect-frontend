@@ -1,11 +1,17 @@
 import Header from '@/components/header';
 import { isAuthenticated } from '@/util/apicalls';
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 export default function Profile() {
+  const router = useRouter()
     const [user,setUser] = useState(null);
+   
     useEffect(() => {
+      if(!isAuthenticated()){
+        router.push("/login")
+       }
         setUser(isAuthenticated().user)
     }, []);
   return (

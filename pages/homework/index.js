@@ -1,12 +1,18 @@
 import { useEffect ,useState } from 'react';
 import HomeworkUi from '@/util/homeworkUi'
+import { useRouter } from 'next/router';
 import { isAuthenticated ,getData} from '@/util/apicalls';
 import Header from '@/components/header';
 export default function Homework() {
+  const router = useRouter()
   // const [sectionDepartment,setSectionDepartment] = useState(null)
   const [userData,setUserData] = useState(null)
   const [homework,setHomeWork] = useState();
   useEffect(() => {
+
+    if(!isAuthenticated()){
+      router.push("/login")
+     }
    setUserData(isAuthenticated().user)
   //  setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
   const fetchdata = async () =>{
@@ -15,7 +21,7 @@ const homeworkList = await getData(`/gethomework/${isAuthenticated().user.depart
 setHomeWork(homeworkList.Homeworks)
 
   }
-  fetchdata()
+isAuthenticated() &&  fetchdata()
  
 
  

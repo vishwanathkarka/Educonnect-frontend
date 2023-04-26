@@ -11,6 +11,13 @@ import Header from '@/components/header';
     const [sittingDetail,setSittingDetail] = useState(null);
     console.log(router.query.user)
     useEffect( () => {
+      if(isAuthenticated().user.role !== "lecturer"){
+        router.push("/login")
+       }
+       if(!isAuthenticated()){
+        router.push("/login")
+       }
+       
        async function fetchdata (){
   let data = await getData(`/getuserinfowithid/${router.query.user}`,isAuthenticated().token)
  setUserData(data)

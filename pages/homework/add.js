@@ -39,12 +39,15 @@ var FormData = require("form-data");
     //     }
     //     datafetch()
 
-    if(isAuthenticated().user.role != "lecturer"){
-      router.push("/")
-     }
+   
      if(!isAuthenticated()){
       router.push("/login")
      }
+     if(isAuthenticated()){
+      if(isAuthenticated().user.role != "lecturer"){
+      router.push("/")
+     }
+    }
         setUser(isAuthenticated().user);
     }, []);
     let bodyFormData = new FormData();

@@ -38,7 +38,15 @@ function Sittingplain() {
 
     
   useEffect(() => {
+  
+     if(!isAuthenticated()){
+      router.push("/login")
+     }
     async function fetchdata() {
+    
+      if(isAuthenticated().user.role !== "lecturer"){
+        router.push("/login")
+       }
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
@@ -67,7 +75,7 @@ function Sittingplain() {
       }
       console.log(departmentListFetch);
     }
-    fetchdata();
+    isAuthenticated()&&  fetchdata();
     setUser(isAuthenticated().user);
   }, [section,department]);
   const inputHandle = (name) => (el) => {
