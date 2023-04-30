@@ -19,6 +19,7 @@ console.log(pay)
   return (
    <>
    <div>
+    
    <div className="h-[80vh] flex justify-center items-center">
           <Image src={loadingimg} alt="" />
         </div>

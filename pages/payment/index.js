@@ -68,15 +68,16 @@ function Payment() {
       // }
       console.log(departmentListFetch);
     }
-    const userPaymentInfo = async() =>{
-  const userdata =    await getData(`/getpaymentlist/${isAuthenticated().user._id}`, isAuthenticated().token)
+    const userPaymentInfo = async(userid) =>{
+  const userdata =    await getData(`/getpaymentlist/${userid}`, isAuthenticated().token)
   if (userdata.success == true) {
     setUserDataForAttendace(userdata.paymentList);
     setLoading(true);
     console.log(userDataForAttendace);
   }
     }
-isAuthenticated().user.role == "student" &&  userPaymentInfo()
+isAuthenticated().user.role == "student" &&  userPaymentInfo(isAuthenticated().user._id)
+isAuthenticated().user.role == "parent" &&  userPaymentInfo(isAuthenticated().user.student_id._id)
     isAuthenticated().user.role == "lecturer" &&  fetchdata();
     setUser(isAuthenticated().user);
   }
@@ -108,9 +109,7 @@ isAuthenticated().user.role == "student" &&  userPaymentInfo()
     console.log(el.target.ind);
   };
 
-  async function attendanceSubmit() {
-    let da = await postData("/bulkattendanceadd", attendace, isAuthenticated().token);
-  }
+  
   //getting student id fromt the payment ui
 function clickUserId(data){
   setUserId(data)
@@ -207,7 +206,7 @@ setPaymentFormView(!paymentFormView)
         </select>
         <button
           className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded"
-          onClick={attendanceSubmit}
+        
         >
           Get
         </button>

@@ -6,12 +6,13 @@ export default function result() {
   const [studentResult ,setStudentResult] = useState(null)
   const [theme ,setTheme] = useState(false)
   useEffect(() => {
-    const studentResult = async() =>{
-const result =  await getData("/viewResult",isAuthenticated().token)
-setStudentResult(result.studetMarks  )
+    const studentResult = async(userid) =>{
+const result =  await getData(`/viewResult/${userid}`,isAuthenticated().token)
+setStudentResult(result.studetMarks)
 console.log(result)
     }
-    studentResult()
+   isAuthenticated().user.role == "student" && studentResult(isAuthenticated().user._id)
+   isAuthenticated().user.role == "parent" && studentResult(isAuthenticated().user.student_id._id)
   }, []);
   return (
     <>
@@ -27,6 +28,7 @@ console.log(result)
       </tr>
       {studentResult && studentResult.map((res)=>{
         return (
+      // eslint-disable-next-line react/jsx-key
       <tr className=' border-[#343a46b6] border-[0.8px] ' >
        <td className='p-3'>{res.subject}</td>
        <td className='p-3'>{res.studentMarks}</td>

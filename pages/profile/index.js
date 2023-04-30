@@ -44,11 +44,12 @@ export default function Profile() {
 <p className='text-[#717377] m-0 text-[0.9rem]'>PhoneNo</p>
 <p className='border-b-[#717377] border-b-[1px] pb-[2px] '> {user.phoneNo}</p>
 
-<p className='text-[#717377] m-0 text-[0.9rem]'>Department</p>
-<p className='border-b-[#717377] border-b-[1px] pb-[2px] '> {user.departments[0].department.department}</p>
+{ user.role == "student" && <><p className='text-[#717377] m-0 text-[0.9rem]'>Department</p>
+ <p className='border-b-[#717377] border-b-[1px] pb-[2px] '> {user.departments[0].department.department}</p>
 
 <p className='text-[#717377] m-0 text-[0.9rem]'>Section</p>
 <p className='border-b-[#717377] border-b-[1px] pb-[2px] '> {user.departments[0].section[0].section}</p>
+</>}
 
 
 </div>

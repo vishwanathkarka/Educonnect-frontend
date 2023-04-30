@@ -43,10 +43,10 @@ export const authenticate = (data) => {
     }
   };
 
-  export const signout = (next) => {
+  export const signout = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("user");
-      next();
+    
       return axios
         .get(`${process.base_url}}/signout`)
         .then(function () {

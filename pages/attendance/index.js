@@ -3,6 +3,7 @@ import { getData,isAuthenticated } from '@/util/apicalls';
 import moment from 'moment';
 import ResultNotFound from '@/util/resultNotFound';
 import Attendaceui from '@/util/attendaceui';
+import Header from '@/components/header';
  function View() {
     const[attendances,setAttendances]= useState() 
 
@@ -10,8 +11,8 @@ import Attendaceui from '@/util/attendaceui';
       if(!isAuthenticated()){
         router.push("/login")
        }
-       async function fetchData(){
-      let data = await getData(`/getindividualattendance/${isAuthenticated().user._id}`,isAuthenticated().token)
+       async function fetchData(userid){
+      let data = await getData(`/getindividualattendance/${userid}`,isAuthenticated().token)
       console.log(isAuthenticated().user._id)
       console.log(data)
       if(data.success == true){
@@ -19,11 +20,12 @@ import Attendaceui from '@/util/attendaceui';
     //   console.log(attendances.length)
       }
         }
-        fetchData()
+      isAuthenticated().user.role == "student" && fetchData(isAuthenticated().user._id)
+      isAuthenticated().user.role == "parent" && fetchData(isAuthenticated().user.student_id._id)
     }, []);
   return (
    <>
-
+<Header/>
    {
         attendances &&  attendances.length==0?
             (<ResultNotFound/> ):""

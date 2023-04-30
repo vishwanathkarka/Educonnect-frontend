@@ -75,6 +75,7 @@ console.log("999",Userinf)
 
   };
 
+  
   const IsPermissionApproved = (num) => {
     console.log("889900",num);
     if (num == 0) {
@@ -487,8 +488,9 @@ console.log("999",Userinf)
     //     }
     //      }
     let role =   isAuthenticated().user.role 
+    console.log("****"+role)
     function roleBasedUpdate(value){
-if(role == "lecture"){
+if(role == "lecturer"){
     return {"isLectureApproved":value}
 }
 else if(role == "parent"){
@@ -499,11 +501,11 @@ else if(role == "parent"){
     // for admin to accept or Reject permission
 
     if (props.isApproved == 0) {
-      if (role == "lecture" || role =="parent") {
+      if (role == "lecturer" || role =="parent") {
 
         return (
-          <div className="flex gap-8" > 
-            <p className=" w-[100px] text-[green] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(1))}}>
+          <div className="flex gap-4 flex-wrap" > 
+            <p className=" w-[100px] text-[green] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(1),isAuthenticated().token)}}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -533,7 +535,7 @@ else if(role == "parent"){
               Approve
             </p>
 
-            <p className=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(2))}}>
+            <p className=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1 cursor-pointer" onClick={() => {setIsView(!isView);updateData(`/updateleave/${props.id}`,roleBasedUpdate(2),isAuthenticated().token)}}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -811,7 +813,7 @@ Pending
         <div>
           <div className={buttonActive ? "hidden" : "block"}>
             <div>
-              <div className="flex gap-8">
+              <div className="flex gap-8 flex-wrap">
                 <p className="pb-[20px] w-[70%] text-black ">
                   {/* Description: */}
                   <span className="font-[Avenirregular] text-[#8795a1] pb-[30px]">

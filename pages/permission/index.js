@@ -103,13 +103,13 @@ router.query.page = parseInt(router.query.page)+1;
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:null
+       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:isAuthenticated().user.role== "parent"? `/viewleaveuser/${isAuthenticated().user.student_id._id}/?${roleDataFecth}&page=${page}`:null
         // `/viewleaveuser/?isLectureApproved=0&page=1`
        , isAuthenticated().token
       );
       console.log("PPPEERRRRR"+roleDataFecth)
       console.log("****990" + JSON.stringify(leavesData));
-      setAllRequests(leavesData.leaves);
+      setAllRequests(leavesData.permission);
       console.log("999000" + allRequests);
       // .then((data) => setAllRequests(data.leaves)
     }
@@ -132,6 +132,7 @@ else{
   return (
     <>
       {<Header/>}
+      {/* ------ top menu ----- */}
      {isView && <PermissionForm closeForm={closeForm}></PermissionForm>}
       <div className="flex  gap-[80px] h-[60px] mx-7 my-2 rounded-lg items-center justify-center  ">
         <h2 className="text-white">List of Permssions </h2>
@@ -156,7 +157,7 @@ else{
       </div>
 
      
-      <div className="h-[80vh] bg-secoundblack mx-4 py-3 px-3 rounded-lg">
+      <div className="min-h-[80vh]  bg-secoundblack mx-4 py-3 px-3 rounded-lg">
       <button
           className="bg-primarycolor ml-2 text-[white] px-2 py-1 rounded-md  block"
           onClick={() => setIsView(!isView)}
@@ -173,9 +174,11 @@ else{
         <p className=" w-[100%] md:w-[200px] ">Subject</p>
           <p className=" w-[50%] md:w-[100px]">Days</p>
           <p className="  w-[50%] md:w-[100px]">Status</p>
-           
+           {console.log("{{"+allRequests)}
 
         </div>
+
+         {/* ---  card of the permission  ---*/}
       {allRequests &&
         allRequests.map((element) => (
           <PermssionCard
@@ -199,6 +202,7 @@ else{
                 ? element.isParentApproved
                 : isAuthenticated().user.role == "student"?( element.isLectureApproved ==0 || element.isParentApproved ==0 )?0:(element.isLectureApproved == 1 && element.isParentApproved ==1)?1 :2:""
             }
+            
             userid={element.userId}
             key={element.userId}
             from={element.fromDate}
@@ -207,51 +211,31 @@ else{
           />
         ))}
         </div>
-      <div className="flex gap-[50px] m-[10px]  ">
+
+        {/* -------  pagenation  -------*/}
+      <div className="flex gap-[50px] m-[1rem]  ">
         <div
           className="border-[2px] border-[white] rounded-[50%] cursor-pointer"
           onClick={() => {pageShifting("Sub")}}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-arrow-left"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#000000"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <line x1="5" y1="12" x2="11" y2="18" />
-            <line x1="5" y1="12" x2="11" y2="6" />
-          </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <line x1="5" y1="12" x2="19" y2="12" />
+  <line x1="5" y1="12" x2="11" y2="18" />
+  <line x1="5" y1="12" x2="11" y2="6" />
+</svg>
         </div>
         <div
           className="border-[2px] border-[white] rounded-[50%] cursor-pointer"
         //   onClick={() => setCount(count + 1)}
         onClick={() => {pageShifting("Add")}}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-arrow-right"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#000000"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <line x1="13" y1="18" x2="19" y2="12" />
-            <line x1="13" y1="6" x2="19" y2="12" />
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <line x1="5" y1="12" x2="19" y2="12" />
+  <line x1="15" y1="16" x2="19" y2="12" />
+  <line x1="15" y1="8" x2="19" y2="12" />
+</svg>
         </div>
       </div>
     </>

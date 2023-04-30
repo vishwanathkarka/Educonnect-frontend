@@ -16,17 +16,22 @@ const  Dashboard = () => {
     useEffect(() => { 
         
         const getDatauser = async() =>{
-            console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().student_id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
-      const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
+            console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().user.student_id._id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
+      const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id._id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
       setHomeWorkCount(count.count)
-      const paymentPenddingCount = await getData(`${isAuthenticated().user.role== "student"?"/findpaymentpendingcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/findpaymentpendingcount/"+isAuthenticated().user.student_id:isAuthenticated().user.role == "lecturer"?"/findpaymentadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
+      const paymentPenddingCount = await getData(`${isAuthenticated().user.role== "student"?"/findpaymentpendingcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/findpaymentpendingcount/"+isAuthenticated().user.student_id._id:isAuthenticated().user.role == "lecturer"?"/findpaymentadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
 setPaymentPending(paymentPenddingCount.paymentPendingCount)
 const permissionPendingCount = await getData(`/permissionpendingcount/${isAuthenticated().user._id}`,isAuthenticated().token)
 setPermissionPendingCount(permissionPendingCount.permissionCount)
 const failedSubjectsCount = await getData(`/getfailedCount/${isAuthenticated().user._id}`,isAuthenticated().token)
 setFailedCount(failedSubjectsCount.failedCount)
-if(isAuthenticated().user.role == "student" || isAuthenticated().user.role == "parent"){
+if(isAuthenticated().user.role == "student" ){
 const getTimeTableList = await getData(`/gettimetable/${isAuthenticated().user.departments[0].department._id}/${isAuthenticated().user.departments[0].section[0]._id}`,isAuthenticated().token)
+console.log(getTimeTableList)
+setGetTimetable(getTimeTableList.getTimeTable)
+}
+else if(isAuthenticated().user.role == "parent"){
+    const getTimeTableList = await getData(`/gettimetable/${isAuthenticated().user.student_id.departments[0].department}/${isAuthenticated().user.student_id.departments[0].section[0]}`,isAuthenticated().token)
 console.log(getTimeTableList)
 setGetTimetable(getTimeTableList.getTimeTable)
 }
