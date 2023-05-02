@@ -93,6 +93,9 @@ const Signup = () => {
     bodyFormData.append("data", JSON.stringify(userData));
     bodyFormData.append("photo", img);
     const data = await postDataForm("/signup", bodyFormData,isAuthenticated().token);
+    if(data.success == ture){
+      router.push("/login")
+    }
     bodyFormData.delete("[0]data");
     bodyFormData.delete("[0]photo");
     console.log(bodyFormData)

@@ -260,7 +260,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   return (
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
-        <p className="text-white"> XYZ School</p>
+       <Link href="/" className="no-underline"> <p className="text-white font-extrabold"><span className="text-primarycolor"> XYZ</span> School</p></Link>
       </div>
       {userData && (
         <div className="relative onHover p-5 ">

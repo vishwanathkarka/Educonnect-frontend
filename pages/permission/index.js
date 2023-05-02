@@ -11,7 +11,7 @@ import PermssionCard from "@/util/permssionCard";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
 export default function AdminAllPermission() {
   const router = useRouter();
-  const { page, status } = router.query;
+ 1
   //   console.log("pageeee"+page +"8899000"+age)
 
   const [newRequest, setNewRequest] = useState(false);
@@ -202,7 +202,7 @@ else{
                 ? element.isParentApproved
                 : isAuthenticated().user.role == "student"?( element.isLectureApproved ==0 || element.isParentApproved ==0 )?0:(element.isLectureApproved == 1 && element.isParentApproved ==1)?1 :2:""
             }
-            
+
             userid={element.userId}
             key={element.userId}
             from={element.fromDate}
