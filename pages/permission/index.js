@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "@/components/header";
 import NoResultFound from "../../util/no-content.png"
@@ -9,7 +9,7 @@ import ResultNotFound from "@/util/resultNotFound";
 import PermssionCard from "@/util/permssionCard";
 // import { GetAllPermissions } from "./helper/permissioncalls";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
-export default function AdminAllPermission() {
+function AdminAllPermission() {
   const router = useRouter();
  1
   //   console.log("pageeee"+page +"8899000"+age)
@@ -241,3 +241,5 @@ else{
     </>
   );
 }
+
+export default  AdminAllPermission

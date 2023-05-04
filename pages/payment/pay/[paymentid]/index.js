@@ -15,7 +15,7 @@ router.push(pay.session.url)
 console.log(pay)
         }
         router.query.paymentid &&   payment()
-    }, [router.query.paymentid]);
+    }, [router,router.query.paymentid]);
   return (
    <>
    <div>

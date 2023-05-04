@@ -13,7 +13,7 @@ export default function Profile() {
         router.push("/login")
        }
         setUser(isAuthenticated().user)
-    }, []);
+    }, [router]);
   return (
     <>
     <Header/>
@@ -27,7 +27,7 @@ export default function Profile() {
   <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
 </svg>
             </div>
-        <Image src= {user.photo.secure_url} width={70} height={70} className='rounded-[50%] border-lightwg border-[2px]'/>
+        <Image src= {user.photo.secure_url} width={70} height={70} alt="person" className='rounded-[50%] border-lightwg border-[2px]'/>
         <div className='flex flex-col items-center items-center'>
         <h6>{user.firstName +" "+ user.lastName}</h6>
         <p className='text-[#717377] capitalize'>{user.role}</p>

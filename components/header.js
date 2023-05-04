@@ -265,7 +265,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
       {userData && (
         <div className="relative onHover p-5 ">
           <div className="flex  justify-center items-center gap-[12px] cursor-pointer " onClick={()=>setShowMobileBar(!showMobileBar)}>
-            <img className=" w-10 h-10 rounded-full bg-[green]  border-black boder-2 "  src={userData.photo.secure_url?userData.photo.secure_url:"https://undraw.co/favicon.ico"} /> 
+            <Image className=" w-10 h-10 rounded-full bg-[green]  border-black boder-2 " alt="person"  src={userData.photo.secure_url?userData.photo.secure_url:"https://undraw.co/favicon.ico"} /> 
             <svg
               width="11"
               height="6"

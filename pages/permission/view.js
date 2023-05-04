@@ -16,7 +16,7 @@ export default function AdminAllPermission() {
   const [newRequest, setNewRequest] = useState(false);
   const [isView, setIsView] = useState(true);
   const [count, setCount] = useState(1);
-  const [allRequests, setAllRequests] = useState();
+  const [allRequests, setAllRequests] = useState(null);
   
   const [searchSort, setSearchSort] = useState({
     is_PermisssionGranted: 0,
@@ -88,6 +88,7 @@ router.query.page = parseInt(page)+1;
           }
       }
       console.log("@@@@@" + status);
+      
       let leavesData = await getData(
         //   isAuthenticated().user.email,
         //   isAuthenticated().token,

@@ -49,7 +49,7 @@ var FormData = require("form-data");
      }
     }
         setUser(isAuthenticated().user);
-    }, []);
+    }, [router]);
     let bodyFormData = new FormData();
     const handleInput = (name) => (el)=>{
         if(name == "department"){

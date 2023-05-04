@@ -24,7 +24,7 @@ import Header from '@/components/header';
  console.log(isAuthenticated().user.departments)
         }
         router.query.user &&   fetchdata()
-    }, [router.query.user]);
+    }, [router,router.query.user]);
 
     function activeSelect (option ,status){
         if(status == option){

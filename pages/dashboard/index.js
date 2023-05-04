@@ -60,7 +60,7 @@ else if (isAuthenticated().user.role == "lecturer"){
             router.push("/login")
            }
            isAuthenticated() &&  getDatauser()
-    }, []);
+    }, [router]);
     console.log(moment().format('dddd').toLowerCase())
 const getDay = (day)=>{
 if(day == 0){

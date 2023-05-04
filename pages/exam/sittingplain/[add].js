@@ -17,7 +17,7 @@ import Header from '@/components/header';
        if(!isAuthenticated()){
         router.push("/login")
        }
-       
+
        async function fetchdata (){
   let data = await getData(`/getuserinfowithid/${router.query.user}`,isAuthenticated().token)
  setUserData(data)
@@ -26,7 +26,7 @@ import Header from '@/components/header';
  console.log(isAuthenticated().user.departments)
         }
         router.query.user &&   fetchdata()
-    }, [router.query.user]);
+    }, [router,router.query.user]);
 
     function activeSelect (option ,status){
         if(status == option){
@@ -78,21 +78,21 @@ departments&& departments.map((data) => {
             })}
             </select> */}
           {/* <h2 className="text-center ">Add Fee </h2> */}
-        { userData?<div className=''> <Image src ={userData.user.photo.secure_url} className='rounded-[50%] m-auto  border-lightwg border-[2px]' width={100} height={100}></Image> </div> :''}
+        { userData?<div className=''> <Image src ={userData.user.photo.secure_url} className='rounded-[50%] m-auto  border-lightwg border-[2px]' alt="person" width={100} height={100}></Image> </div> :''}
        { userData&& <p className='text-center text-white mt-2'>{userData.user.firstName +" " + userData.user.lastName }</p> }
        { userData&& <p className='text-center text-white mt-2'>{userData.user.departments[0].department.department}</p> }
        <input
             type="text"
             class=""
             placeholder="Exam Name"
-            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white'
+            className='block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack  bg-secoundblack   rounded-md   text-white'
             onChange={handleInput("examName")}
             // value={lastName}
           />
 
           <input 
             type="text"
-            class="block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack my-2  bg-secoundblack   rounded-md   text-white"
+            class="block w-full py-1.5 pl-7 pr-20 border-[1.5px] my-3  border-lightblack   bg-secoundblack   rounded-md   text-white"
             placeholder="Room Number"
             onChange={handleInput("roomno")}
             // value={firstName}

@@ -3,7 +3,7 @@ import HomeworkUi from '@/util/homeworkUi'
 import { useRouter } from 'next/router';
 import { isAuthenticated ,getData} from '@/util/apicalls';
 import Header from '@/components/header';
-export default function Homework() {
+ function Homework() {
   const router = useRouter()
   // const [sectionDepartment,setSectionDepartment] = useState(null)
   const [userData,setUserData] = useState(null)
@@ -73,3 +73,4 @@ homework && homework.map((el) => {
  </>
   )
 }
+export default Homework;
