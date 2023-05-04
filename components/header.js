@@ -460,7 +460,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
           </div>
           </div>
 {/* mobile navigtion menu */}
-       { showMobileBar &&  <div className="h-[100vh] lg:hidden   sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
+       { showMobileBar &&  <div className="h-[100vh] lg:hidden z-20   sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
             <div className=" ml-2 mt-2 border-lightblack border-2 inline-block rounded-md" onClick={()=>setShowMobileBar(!showMobileBar)}>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#374151" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
