@@ -48,7 +48,7 @@ export const authenticate = (data) => {
       localStorage.removeItem("user");
     
       return axios
-        .get(`${process.base_url}}/signout`)
+        .get(`${process.base_url}/signout`)
         .then(function () {
           // handle success
           console.log("signout");
@@ -61,7 +61,7 @@ export const authenticate = (data) => {
   };
 
 export const postDataForm = async (url, post,token) => {
-    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+    const res = await fetch(`${process.base_url}${url}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -81,7 +81,7 @@ export const postDataForm = async (url, post,token) => {
 }
 
 export const postDataJson = async (url, post, token) => {
-    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+    const res = await fetch(`${process.base_url}${url}`, {
         method: 'POST',
         headers: {
         
@@ -103,7 +103,7 @@ export const postDataJson = async (url, post, token) => {
 
 export const getData = async (url, token) => {
 
-        return await fetch(`http://localhost:4000/api/v1${url}`, {
+        return await fetch(`${process.base_url}${url}`, {
             method: "GET",
             headers: {
             'Authorization': token
@@ -116,7 +116,7 @@ export const getData = async (url, token) => {
         }
 
 export const updateData = async (url,post,token) =>{
-    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+    const res = await fetch(`${process.base_url}${url}`, {
         method: 'PUT',
         headers: {
             'Authorization': token,
@@ -136,7 +136,7 @@ export const updateData = async (url,post,token) =>{
 }
 
 export const deleteData = async (url,post,token) =>{
-    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+    const res = await fetch(`${process.base_url}${url}`, {
         method: 'DELETE',
         headers: {
             'Authorization': token,

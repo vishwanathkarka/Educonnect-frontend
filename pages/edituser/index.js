@@ -22,8 +22,11 @@ console.log(userData)
    console.log("9900"+departmentSelected);
    const onSubmitForm = async(el)=>{
 el.preventDefault(); 
- const data = await updateData(`/updateuserdata/${props.id}`,userData)
+ const data = await updateData(`/updateuserdata/${props.id}`,userData,isAuthenticated().token)
  console.log(data)
+ if(data.success == true){
+
+ }
    }
    function activeSelect (option ,status){
     if(status == option){
@@ -278,7 +281,7 @@ setViewForm(!viewForm);
 
       useEffect(() => {
         const userData = async ()=>{
-            const data = await getData(`/getusersforadmin/${router.query.department}/${router.query.section}/${router.query.role}`)
+            const data = await getData(`/getusersforadmin/${router.query.department}/${router.query.section}/${router.query.role}`,isAuthenticated().token)
             setUserInfo(data)
             
             }
@@ -369,7 +372,7 @@ el.preventDefualt
           </select>
           </div>
 <div className="flex">
-  { userInfo && userInfo.user.map(user => (<> <AdminCard key={user._id} photo ={user.photo.secure_url} name ={user.firstName}  closeForm = {formViewStatus}  />  {viewForm && (<FormPer  closeForm = {formViewStatus} name={user.firstName} email = {user.email} role = {user.role} parentEmail={user.parentEmail} htno = {user.htno} phoneNo={user.phoneNo} id = {user._id} departments = {user.departments}  departmentListFetch= { departmentListFetch}  sectionListFetch ={sectionListFetch} />)} </>))}
+  { userInfo && userInfo.user.map(user => (<> <AdminCard key={user._id} photo ={user.photo.secure_url} name ={user.firstName}  closeForm = {formViewStatus}  />  { viewForm && (<FormPer  closeForm = {formViewStatus} name={user.firstName} email = {user.email} role = {user.role} parentEmail={user.parentEmail} htno = {user.htno} phoneNo={user.phoneNo} id = {user._id} departments = {user.departments} viewForm  = {viewForm }  departmentListFetch= { departmentListFetch}  sectionListFetch ={sectionListFetch} />)} </>))}
   </div>
   </div> </>
   )
