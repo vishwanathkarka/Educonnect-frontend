@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import { getData, isAuthenticated,postDataForm} from "./apicalls";
-export default function homeworkUi(props) {
+export default function HomeworkUi(props) {
 
   const [userData,setUserData] = useState(null)
   const [userHomeWorkData,setUserHomeWorkData] = useState(null)

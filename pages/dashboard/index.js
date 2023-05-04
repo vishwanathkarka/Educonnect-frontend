@@ -169,8 +169,8 @@ else if(day == 5){
      getTimetable && getTimetable.map((el)=>{
       if( el[moment().format('dddd').toLowerCase()] == true ){
         return(
-            <tr className='py-4'>  <td className='py-2 px-10'>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
-            <td>{el.period}</td> </tr> 
+           <> <tr className='py-4'>  <td className='py-2 px-10'>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
+            <td>{el.period}</td> </tr>  </>
         )
       }
       console.log("***$$"+el)
@@ -195,11 +195,13 @@ else if(day == 5){
         </tr>
        {settingarragement && settingarragement.map((el) =>{
 return(
+<>
         <tr>
              <td>{el.examName}</td>
             <td>{el.roomno}</td>
             <td>{moment(el.examDate).format("MMM Do YY") }</td>
         </tr>
+        </>
 )
         })
 }

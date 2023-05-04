@@ -2,7 +2,7 @@ import Header from '@/components/header';
 import { getData, isAuthenticated } from '@/util/apicalls';
 import { useEffect, useState } from 'react';
 
-export default function result() {
+export default function Result() {
   const [studentResult ,setStudentResult] = useState(null)
   const [theme ,setTheme] = useState(false)
   useEffect(() => {
