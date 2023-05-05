@@ -57,201 +57,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
             </svg>
           </div>
 
-          {/* <div className=" show-hover onHover  rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm ">
-            <div className="  bg-[white]  shadow-xl rounded-xl">
-              <div className="h-[88px] flex bg-[white]  p-4 rounded-tl-md rounded-tr-md">
-                <Image
-                  src={userData.photo.secure_url?userData.user.photo.secure_url:"https://undraw.co/favicon.ico"}
-                  className="mr-3 w-12 h-12 rounded-full flex-no-shrink"
-                  width={200}
-                  height={200}
-                  alt=""
-                />
-                <div>
-                  <h3 className="text-[#3d4852]">{userData.name}</h3>
-                  <p className="font-[Avenirregular] text-primary cursor-pointer">
-                    View Profile
-                  </p>
-                </div>
-              </div>
 
-              <ul className="p-0">
-                <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <Image
-                    src="https://static5.lottiefiles.com/images/v3/dashboard-icons/dashboard.svg"
-                    alt="My Dashboard"
-                    className="inline "
-                  />
-                  <p>My Dashboard </p>{" "}
-                </li>
-                <li className="font-[Avenirregular]  px-4 py-2 flex  cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <svg
-                    id="Group_5"
-                    data-name="Group 5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      id="Path_13"
-                      data-name="Path 13"
-                      d="M0,0H24V24H0Z"
-                      fill="none"
-                    />
-                    <path
-                      id="Path_14"
-                      data-name="Path 14"
-                      d="M21,14l-3-3H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V14"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                    <path
-                      id="Path_15"
-                      data-name="Path 15"
-                      d="M14,15v2a1,1,0,0,1-1,1H6L3,21V11a1,1,0,0,1,1-1H6"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                  <p>Request Permission </p>{" "}
-                </li>
-                <li className="font-[Avenirregular]  px-4 py-2 flex  cursor-pointer  items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <svg
-                    id="Group_6"
-                    data-name="Group 6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      id="Path_16"
-                      data-name="Path 16"
-                      d="M0,0H24V24H0Z"
-                      fill="none"
-                    />
-                    <line
-                      id="Line_1"
-                      data-name="Line 1"
-                      y1="11"
-                      x2="11"
-                      transform="translate(10 3)"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                    <path
-                      id="Path_17"
-                      data-name="Path 17"
-                      d="M21,3,14.5,21a.55.55,0,0,1-1,0L10,14,3,10.5a.55.55,0,0,1,0-1L21,3"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                  <p>Add Complain </p>{" "}
-                </li>
-                <hr className="text-[#DAE1E7]" />
-                <li className="font-[Avenirregular]  px-4 py-2 flex   cursor-pointer items-center gap-2 hover:bg-[#6b63ff29] ">
-                  <svg
-                    id="Group_2"
-                    data-name="Group 2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      id="Path_5"
-                      data-name="Path 5"
-                      d="M0,0H24V24H0Z"
-                      fill="none"
-                    />
-                    <path
-                      id="Path_6"
-                      data-name="Path 6"
-                      d="M10.325,4.317a1.724,1.724,0,0,1,3.35,0,1.724,1.724,0,0,0,2.573,1.066,1.725,1.725,0,0,1,2.37,2.37,1.724,1.724,0,0,0,1.065,2.572,1.724,1.724,0,0,1,0,3.35,1.724,1.724,0,0,0-1.066,2.573,1.725,1.725,0,0,1-2.37,2.37,1.724,1.724,0,0,0-2.572,1.065,1.724,1.724,0,0,1-3.35,0,1.724,1.724,0,0,0-2.573-1.066,1.725,1.725,0,0,1-2.37-2.37,1.724,1.724,0,0,0-1.065-2.572,1.724,1.724,0,0,1,0-3.35A1.724,1.724,0,0,0,5.383,7.752a1.725,1.725,0,0,1,2.37-2.37,1.723,1.723,0,0,0,2.572-1.065Z"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                    <circle
-                      id="Ellipse_3"
-                      data-name="Ellipse 3"
-                      cx="3"
-                      cy="3"
-                      r="3"
-                      transform="translate(9 9)"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                  <p>Settings </p>{" "}
-                </li>
-                <li
-                  className="font-[Avenirregular] rounded-b-xl  px-4 py-2 flex  items-center gap-2 hover:bg-[#6b63ff29] cursor-pointer "
-                  
-                  onClick={() => {
-                    SetIsLogin(!islogin);
-                    isCheck();
-                  }}
-                >
-                  <svg
-                    id="Group_4"
-                    data-name="Group 4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      id="Path_10"
-                      data-name="Path 10"
-                      d="M0,0H24V24H0Z"
-                      fill="none"
-                    />
-                    <path
-                      id="Path_11"
-                      data-name="Path 11"
-                      d="M14,8V6a2,2,0,0,0-2-2H5A2,2,0,0,0,3,6V18a2,2,0,0,0,2,2h7a2,2,0,0,0,2-2V16"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                    <path
-                      id="Path_12"
-                      data-name="Path 12"
-                      d="M7,12H21L18,9m0,6,3-3"
-                      fill="none"
-                      stroke="#606f7b"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                  <p onClick={() => console.log(islogin)}>Logout</p>
-                </li>
-              </ul>
-            </div>
-          </div> */}
         </div>
       </>
     );
@@ -361,7 +167,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                   </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/attendance" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/attendance/add":"/attendance"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="inline-block icon icon-tabler icon-tabler-user-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <circle cx="9" cy="7" r="4" />
@@ -372,7 +178,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/payment" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/payment":"/payment"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
@@ -382,7 +188,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/exam/result" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/exam/liststudents":"/exam/result"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
@@ -397,7 +203,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/homework" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/homework/add":"/homework"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-writing" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M20 17v-12c0 -1.121 -.879 -2 -2 -2s-2 .879 -2 2v12l2 2l2 -2z" />

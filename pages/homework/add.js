@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { postDataForm ,isAuthenticated } from "@/util/apicalls"
 import { useRouter } from "next/router";
 import Header from "@/components/header";
+import Loading from "@/components/loading";
 var FormData = require("form-data");
 
  function Add() {
@@ -20,6 +21,7 @@ var FormData = require("form-data");
    const {department,section}  =  router.query
     const [img,setImg] = useState(null)
     const [user, setUser] = useState(null);
+    const [isloading,setloading]= useState(false)
     function activeSelect (option ,status){
         if(status == option){
             return true
@@ -77,9 +79,13 @@ console.log(homeworkInfo)
     }
     const handleSubmit = async (el) =>{
         el.preventDefault();
+        setloading(true);
         bodyFormData.append("data", JSON.stringify(homeworkInfo));
         bodyFormData.append("lectureworkFile", img); 
      const data =  await  postDataForm("/addhomeworklecture", bodyFormData,isAuthenticated().token)
+     if(data){
+      setloading(false)
+     }
      console.log(data)
     }
   return (
@@ -87,7 +93,7 @@ console.log(homeworkInfo)
 <Header/>
     <div className="h-[90vh] flex flex-col justify-center items-center ">
       
-      <form
+    { !isloading  &&<form
           className="w-[35rem] m-auto  h-[70vh] m-auto bg-secoundblack  p-[1rem] border-[rgba(246,247,249,.05)]  border-[2px]  rounded-lg"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
@@ -179,6 +185,10 @@ console.log(homeworkInfo)
             Submit
           </button>
           </form>
+ }
+ {
+  isloading && <Loading/>
+ }
           </div>
     </>
   )

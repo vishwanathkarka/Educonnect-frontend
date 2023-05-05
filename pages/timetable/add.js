@@ -1,5 +1,6 @@
 import { useEffect,useState } from "react";
 import { getData,isAuthenticated,postData } from "@/util/apicalls"; 
+import Header from "@/components/header";
  function Add() {
     const [departmentListFetch, setDepartmentListFetch] = useState();
     const [sectionListFetch, setSectionListFetch] = useState(null);
@@ -47,10 +48,10 @@ console.log(uploadingTimeTable)
 
   return (
  <>
-
-<div className=" flex  justify-center align-middle  bg-slate-50">
+<Header/>
+<div className=" flex  justify-center mt-6 align-middle  bg-slate-50">
         <form
-          className="w-[35rem]  h-[90vh] m-auto bg-white p-[1rem]"
+          className="w-[35rem] rounded h-[90vh] m-auto bg-secoundblack p-[1rem]"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
@@ -124,7 +125,7 @@ console.log(uploadingTimeTable)
           </select>
 
           <button
-            className="block w-full bg-primary rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
+            className="block w-full bg-primarycolor rounded-md border-0 py-1.5 pl-7 pr-20  my-4 bg-indigo-600 text-white "
             type="submit"
           >
           

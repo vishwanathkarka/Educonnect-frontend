@@ -7,14 +7,17 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-import loadingimg from "../../util/Spinner-1s-200px.gif";
+
 import Image from "next/image";
+
 
 import { useState } from "react";
 import Header from "@/components/header";
+import Loading from "@/components/loading";
 function Add() {
   const router = useRouter();
   let i = null;
+  
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
@@ -33,12 +36,12 @@ function Add() {
  
  const {department,section}= router.query
   console.log("deppp" + dep);
-  // console.log("Dark teemme" + props.isDark);
-  // console.log("DEEEEEPPPP"+JSON.stringify(isAuthenticated().user.firstName));
 
-    
   useEffect(() => {
     if(!isAuthenticated()){
+      router.push("/login")
+     }
+     if(isAuthenticated().user.role !== "lecturer"){
       router.push("/login")
      }
     async function fetchdata() {
@@ -194,9 +197,7 @@ function Add() {
         </button>
       </div>
       {!loading ? (
-        <div className="h-[80vh] flex justify-center items-center">
-          <Image src={loadingimg} alt="" />
-        </div>
+      <Loading/>
       ) : (
         userDataForAttendace.map((data) => {
           return (

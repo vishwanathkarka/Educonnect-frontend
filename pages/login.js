@@ -7,10 +7,12 @@ import Toast from "../util/toast"
 import {authenticate} from "../util/apicalls"
 import Cookie  from "js-cookie"
 import { useRouter } from 'next/router'
+import Loading from '@/components/loading';
 
 
 function Login (){
 const userInput = {email:"",password:""}
+const [isloading,setloading]= useState(false)
 let router= useRouter();
 const [loginData,setLoginData] = useState(userInput);
 const [toShowToast,setToShowToast] = useState({isShownToast:false,msg:{title:"",msg:""},toastColor:""})
@@ -29,6 +31,9 @@ const handlingTost =()=>{
 // submit form
 const onSubmitLogin = async el => {
   el.preventDefault();
+
+setloading(true);
+  
   console.log(loginData);
   console.log(email)
   const result = await postData('/login',{"email":email,"password":password})
@@ -57,7 +62,8 @@ return(
 <div className='h-[100vh] '>
 <Header/>
 
-<div className=" flex  h-[80vh] justify-center items-center ">
+{isloading && <Loading/>}
+{!isloading &&<div className=" flex  h-[80vh] justify-center items-center ">
 
         <form
           className="w-[33rem]  p-[2.5rem] rounded-lg bg-secoundblack  border-[#717377] border-[1px]"
@@ -89,12 +95,14 @@ return(
             type="submit"
             onClick={onSubmitLogin}
           >
+            
             {" "}
             Login now
           </button>
           <p className='text-[#717377]'>Not Registered yet? <Link href={"/signup"} className='text-white no-underline hover:text-white'> Register &rarr;</Link></p>
           </form>
           </div>
+}
           </div>
     </>
 )

@@ -1,6 +1,7 @@
 import Header from '@/components/header';
 import { getData, isAuthenticated } from '@/util/apicalls';
 import { useEffect, useState } from 'react';
+import NoResultFound from "../../util/no-content.png"
 
 export default function Result() {
   const [studentResult ,setStudentResult] = useState(null)
@@ -26,6 +27,8 @@ console.log(result)
        <td className='p-3' >Out of marks </td>
        <td className='p-3'>Percentage</td>
       </tr>
+
+    
       {studentResult && studentResult.map((res)=>{
         return (
       // eslint-disable-next-line react/jsx-key
@@ -36,7 +39,9 @@ console.log(result)
        <td className='p-3'>{ res.percentage}%</td>
       </tr>)
       })
+     
 }
+
     </thead>
     </table>
     </div>

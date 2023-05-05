@@ -6,7 +6,8 @@ import { getData, postData,isAuthenticated } from "@/util/apicalls";
 import Attendaceui from "@/util/attendaceui";
 import PaymentAddForm from "@/components/paymentAddForm";
 import PaymentUI from "@/util/paymentUI"
-import loadingimg from "../../util/Spinner-1s-200px.gif";
+import Loading from "@/components/loading";
+
 function Payment() {
   const router = useRouter();
   let i = null;
@@ -230,8 +231,8 @@ setPaymentFormView(!paymentFormView)
       </div>
 }
       {!loading ? (
-        <div className="h-[80vh] flex justify-center items-center">
-          <Image src={loadingimg} alt="" />
+        <div className="h-[80vh] flex justify-center  items-center">
+          <Loading/>
         </div>
       ) : (
         userDataForAttendace.map((data) => {

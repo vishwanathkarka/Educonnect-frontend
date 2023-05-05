@@ -5,12 +5,14 @@ import NoResultFound from "../../util/no-content.png"
 import { useRouter } from "next/router";
 import PermissionForm from "@/components/permissionForm";
 import ResultNotFound from "@/util/resultNotFound";
+import Loading from "@/components/loading";
 // import Header from "../core/Header";
 import PermssionCard from "@/util/permssionCard";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
 function AdminAllPermission() {
   const router = useRouter();
   const [newRequest, setNewRequest] = useState(false);
+  const [isloading,setloading]= useState(false)
   const [isView, setIsView] = useState(false);
   const [count, setCount] = useState(1);
   const [allRequests, setAllRequests] = useState(null);
@@ -51,10 +53,16 @@ router.query.page = parseInt(router.query.page)+1;
   const { is_PermisssionGranted, search, section } = searchSort;
 const {page,status} = router.query
   useEffect(() => {
+    
     if(!isAuthenticated()){
       router.push("/login")
      }
+     setloading(true)
     async function data(status) {
+      if(router.query.page == undefined){
+        router.query.page =  1
+        router.push(router)
+      }
       let roleDataFecth;
       if (isAuthenticated().user.role == "lecturer") {
         if (status == "success") {
@@ -103,6 +111,9 @@ const {page,status} = router.query
         // `/viewleaveuser/?isLectureApproved=0&page=1`
        , isAuthenticated().token
       );
+      if(leavesData){
+        setloading(false)
+      }
       console.log("PPPEERRRRR"+roleDataFecth)
       console.log("****990" + JSON.stringify(leavesData));
       setAllRequests(leavesData.permission);
@@ -111,7 +122,7 @@ const {page,status} = router.query
     }
   isAuthenticated() &&  data();
     // );
-  }, [router,allRequests,page,count,isView]);
+  }, [router,page,count,isView]);
   console.log(allRequests);
   console.log(searchSort);
   function activeSelect (option){
@@ -164,7 +175,7 @@ else{
         allRequests &&  allRequests.length==0?
             (<ResultNotFound/> ):""
         }
-        <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-lightwg text-center  md:px-[5rem]  items-center  my-2">
+      {allRequests &&  !allRequests.length==0 &&  <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-lightwg text-center  md:px-[5rem]  items-center  my-2">
         <p className=" w-[100%] md:w-[200px] ">Name</p>
           
         <p className=" w-[100%] md:w-[200px] ">Subject</p>
@@ -173,8 +184,10 @@ else{
            {console.log("{{"+allRequests)}
 
         </div>
+}
 
          {/* ---  card of the permission  ---*/}
+    { isloading && <Loading/> }
       {allRequests &&
         allRequests.map((element) => (
           <PermssionCard

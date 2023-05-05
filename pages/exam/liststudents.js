@@ -7,7 +7,7 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-import loadingimg from "../../util/Spinner-1s-200px.gif";
+import Loading from "@/components/loading";
 import Image from "next/image";
 
 import { useState } from "react";
@@ -19,6 +19,7 @@ function Add() {
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
+
   const [departmentSection, setDepartmentSection] = useState({
     "department":router.query.department,
     "section":router.query.section
@@ -196,9 +197,7 @@ function Add() {
         </button> */}
       </div>
       {!loading ? (
-        <div className="h-[80vh] flex justify-center items-center">
-          <Image src={loadingimg} alt="" />
-        </div>
+       <loading/>
       ) : (
         userDataForAttendace.map((data) => {
           return (

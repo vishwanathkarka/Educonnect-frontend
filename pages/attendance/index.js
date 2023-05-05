@@ -17,9 +17,9 @@ import Header from '@/components/header';
       console.log(data)
       if(data.success == true){
       setAttendances(data.att)
-    //   console.log(attendances.length)
       }
         }
+        
       isAuthenticated().user.role == "student" && fetchData(isAuthenticated().user._id)
       isAuthenticated().user.role == "parent" && fetchData(isAuthenticated().user.student_id._id)
     }, []);

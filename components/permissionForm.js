@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import toast, { Toaster } from 'react-hot-toast';
 // import { Navigate } from "react-router-dom";
 import { isAuthenticated, postData } from "@/util/apicalls";
+import Loading from "./loading";
 
 export default function PermssionForm(props) {
   const [values, setValues] = useState({
@@ -16,6 +17,7 @@ export default function PermssionForm(props) {
   });
 
 const [userData,setUserData] = useState(null)
+const [isloading,setloading]= useState(false)
   const { subject, fromDate, toDate, description, email } = values;
  useEffect(() => {
 setUserData(isAuthenticated().user)
@@ -24,12 +26,14 @@ setUserData(isAuthenticated().user)
   const onSubmitForm = (el) => {
     el.preventDefault();
     // let userData =  JSON.parse(data)
+    setloading(true);
     setValues({ ...values, error: "" , email:userData.email, loading: true });
 console.log(values)
 const pushingData = async()=>{
 const data =  await  postData("/addleave",{ subject, fromDate, toDate, description, email },isAuthenticated().token)
 if(data){
  props.closeForm(true)
+ setloading(false)
 }
 }   
 pushingData()
@@ -54,7 +58,7 @@ function FormPer () {
           </div>
           <div className="flex gap-[130px] items-center  " >
           </div>
-      <form
+     { !isloading &&  <form
         
         onSubmit={ onSubmitForm}
         // className=" w-[450px] my-14 h-[145vh] bg-[white] rounded-[20px] px-[60px] py-[40px]"
@@ -196,6 +200,10 @@ function FormPer () {
           Submit
         </button>
       </form>
+}
+{
+isloading &&  <Loading/>
+}
       </div>
     </>
   );

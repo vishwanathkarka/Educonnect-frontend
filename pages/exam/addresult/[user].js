@@ -2,12 +2,14 @@ import { useRouter } from 'next/router'
 import Image from 'next/image';
 import {getData,isAuthenticated,postData} from "../../../util/apicalls"
 import { useEffect, useState } from 'react';
+import Loading from '@/components/loading';
 import Header from '@/components/header';
  function User() {
     const router = useRouter()
     const [userData,setUserData] = useState(null)
     const [departments,setDepartments] = useState()
     const [marksDetail,setMarkDetail] = useState(null);
+    const [isloading,setloading]= useState(false)
     console.log(router.query.user)
     useEffect( () => {
        async function fetchdata (){
@@ -46,13 +48,17 @@ console.log(marksDetail);
     // "userId":"63e12e165aae5db72f8f4afb"
     const handleSubmit = async (el) => {
             el.preventDefault();
-postData("/addResult",{"subject":marksDetail.subject,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
-          }
+            setloading(true)
+const postresult = postData("/addResult",{"subject":marksDetail.subject,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
+     if(postresult.status == true){
+      setloading(false)
+     }   
+}
   return (
     <>
     <Header/>
     <div className='h-[90vh] flex justify-center items-center'> 
-     <form
+   { !isloading && <form
           className="w-[35rem]  h-[50vh] m-auto bg-secoundblack rounded-xl p-[1rem]"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
@@ -112,7 +118,10 @@ departments&& departments.map((data) => {
             {" "}
             Submit
           </button>
-          </form>
+          </form>}
+          {
+            isloading && <Loading/>
+          }
           </div>
     </>
 
