@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const postData = async (url, post,token) => {
-    const res = await fetch(`http://localhost:4000/api/v1${url}`, {
+    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -61,7 +61,7 @@ export const authenticate = (data) => {
   };
 
 export const postDataForm = async (url, post,token) => {
-    const res = await fetch(`${process.base_url}${url}`, {
+    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -81,7 +81,7 @@ export const postDataForm = async (url, post,token) => {
 }
 
 export const postDataJson = async (url, post, token) => {
-    const res = await fetch(`${process.base_url}${url}`, {
+    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'POST',
         headers: {
         
@@ -103,7 +103,7 @@ export const postDataJson = async (url, post, token) => {
 
 export const getData = async (url, token) => {
 
-        return await fetch(`${process.base_url}${url}`, {
+        return await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
             method: "GET",
             headers: {
             'Authorization': token
@@ -116,7 +116,7 @@ export const getData = async (url, token) => {
         }
 
 export const updateData = async (url,post,token) =>{
-    const res = await fetch(`${process.base_url}${url}`, {
+    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'PUT',
         headers: {
             'Authorization': token,
@@ -136,7 +136,7 @@ export const updateData = async (url,post,token) =>{
 }
 
 export const deleteData = async (url,post,token) =>{
-    const res = await fetch(`${process.base_url}${url}`, {
+    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'DELETE',
         headers: {
             'Authorization': token,

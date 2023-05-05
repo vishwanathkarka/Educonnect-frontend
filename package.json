@@ -1,6 +1,7 @@
 {
   "name": "college-managemnet-nextjs",
   "version": "0.1.0",
+  "private": true,
   "proxy": "http://127.0.0.1:4000",
   "scripts": {
     "dev": "next dev",
@@ -10,7 +11,6 @@
   },
   "dependencies": {
     "axios": "^1.3.4",
-    "bootstrap": "^5.2.3",
     "cookie": "^0.5.0",
     "dotenv": "^16.0.3",
     "eslint": "8.34.0",

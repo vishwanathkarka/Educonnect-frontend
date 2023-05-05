@@ -1,5 +1,4 @@
 import '@/styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react'
 import Header from '@/components/header'
 import { Fascinate_Inline } from 'next/font/google'

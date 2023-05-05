@@ -7,13 +7,9 @@ import PermissionForm from "@/components/permissionForm";
 import ResultNotFound from "@/util/resultNotFound";
 // import Header from "../core/Header";
 import PermssionCard from "@/util/permssionCard";
-// import { GetAllPermissions } from "./helper/permissioncalls";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
 function AdminAllPermission() {
   const router = useRouter();
- 1
-  //   console.log("pageeee"+page +"8899000"+age)
-
   const [newRequest, setNewRequest] = useState(false);
   const [isView, setIsView] = useState(false);
   const [count, setCount] = useState(1);
@@ -53,12 +49,12 @@ router.query.page = parseInt(router.query.page)+1;
   };
 
   const { is_PermisssionGranted, search, section } = searchSort;
-
+const {page,status} = router.query
   useEffect(() => {
     if(!isAuthenticated()){
       router.push("/login")
      }
-    async function data() {
+    async function data(status) {
       let roleDataFecth;
       if (isAuthenticated().user.role == "lecturer") {
         if (status == "success") {
@@ -115,7 +111,7 @@ router.query.page = parseInt(router.query.page)+1;
     }
   isAuthenticated() &&  data();
     // );
-  }, [page,status,count,isView]);
+  }, [router,allRequests,page,count,isView]);
   console.log(allRequests);
   console.log(searchSort);
   function activeSelect (option){
