@@ -135,7 +135,7 @@ export const updateData = async (url,post,token) =>{
     return data
 }
 
-export const deleteData = async (url,post,token) =>{
+export const deleteData = async (url,token) =>{
     const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
         method: 'DELETE',
         headers: {

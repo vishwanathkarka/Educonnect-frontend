@@ -60,18 +60,25 @@ console.log("999",Userinf)
     console.log(values);
   };
   
+  const closeForm = () =>{
+    setNewRequest(!newRequest);
+  }
   const onSubmitForm = (el) => {
+    el.preventDefault()
     console.log(
 
       values,
 
     );
-
-    updateData(
+   
+  const data =   updateData(
         `/updateleavestudent/${props.id}`,
-        values,
+        values,isAuthenticated().token
        
       )
+      if(data){
+        closeForm()
+      }
 
   };
 

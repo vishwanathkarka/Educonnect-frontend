@@ -17,6 +17,7 @@ function AdminAllPermission() {
   const [count, setCount] = useState(1);
   const [allRequests, setAllRequests] = useState(null);
   const [userData,setUserData] = useState(null)
+
   const [searchSort, setSearchSort] = useState({
     is_PermisssionGranted: 0,
     search: null,
@@ -52,54 +53,62 @@ router.query.page = parseInt(router.query.page)+1;
 
   const { is_PermisssionGranted, search, section } = searchSort;
 const {page,status} = router.query
+
+//status query tranfer
+const statusRequest = ()=>{
+  let roleDataFecth;
+  if (isAuthenticated().user.role == "lecturer") {
+    if (status == "success") {
+      return "isLectureApproved=1";
+    } else if (status == "reject") {
+      return "isLectureApproved=2";
+    } else if (status == "pending") {
+      return "isLectureApproved=0";
+    } else {
+      return  "isLectureApproved=0";
+    }
+  } else if (isAuthenticated().user.role == "parent") {
+    if (status == "success") {
+      return "isParentApproved=1";
+    } else if (status == "reject") {
+      return "isParentApproved=2";
+    } else if (status == "pending") {
+      return "isParentApproved=0";
+    } else {
+      return "isParentApproved=0";
+    }
+  }
+
+  else if(isAuthenticated().user.role == "student"){
+    if (status == "pending") {
+        return "isLectureApproved=0&isParentApproved=0";
+      }
+      else if(status == "success"){
+        return  "isLectureApproved=1&isParentApproved=1";
+      }
+      else if(status == "reject"){
+        return "isLectureApproved=2&isParentApproved=2&isParentApproved=1";
+      }
+      else{
+        return "isLectureApproved=0&isParentApproved=0";
+      }
+  }
+}
+
   useEffect(() => {
     
     if(!isAuthenticated()){
       router.push("/login")
      }
+     console.log("&&***"+status)
      setloading(true)
     async function data(status) {
       if(router.query.page == undefined){
         router.query.page =  1
         router.push(router)
       }
-      let roleDataFecth;
-      if (isAuthenticated().user.role == "lecturer") {
-        if (status == "success") {
-          roleDataFecth = "isLectureApproved=1";
-        } else if (status == "reject") {
-          roleDataFecth = "isLectureApproved=2";
-        } else if (status == "pending") {
-          roleDataFecth = "isLectureApproved=0";
-        } else {
-          roleDataFecth = "isLectureApproved=0";
-        }
-      } else if (isAuthenticated().user.role == "parent") {
-        if (status == "success") {
-          roleDataFecth = "isParentApproved=1";
-        } else if (status == "reject") {
-          roleDataFecth = "isParentApproved=2";
-        } else if (status == "pending") {
-          roleDataFecth = "isParentApproved=0";
-        } else {
-          roleDataFecth = "isParentApproved=0";
-        }
-      }
-
-      else if(isAuthenticated().user.role == "student"){
-        if (status == "pending") {
-            roleDataFecth = "isLectureApproved=0&isParentApproved=0";
-          }
-          else if(status == "success"){
-            roleDataFecth = "isLectureApproved=1&isParentApproved=1";
-          }
-          else if(status == "reject"){
-            roleDataFecth = "isLectureApproved=2&isParentApproved=2&isParentApproved=1";
-          }
-          else{
-            roleDataFecth = "isLectureApproved=0&isParentApproved=0";
-          }
-      }
+  
+    console.log("^^^^"+statusRequest())
       setUserData(isAuthenticated)
       console.log("@@@@@" + status);
       let leavesData = await getData(
@@ -107,14 +116,14 @@ const {page,status} = router.query
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${roleDataFecth}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:isAuthenticated().user.role== "parent"? `/viewleaveuser/${isAuthenticated().user.student_id._id}/?${roleDataFecth}&page=${page}`:null
+       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${statusRequest()}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:isAuthenticated().user.role== "parent"? `/viewleaveuser/${isAuthenticated().user.student_id._id}/?${roleDataFecth}&page=${page}`:null
         // `/viewleaveuser/?isLectureApproved=0&page=1`
        , isAuthenticated().token
       );
       if(leavesData){
         setloading(false)
       }
-      console.log("PPPEERRRRR"+roleDataFecth)
+     
       console.log("****990" + JSON.stringify(leavesData));
       setAllRequests(leavesData.permission);
       console.log("999000" + allRequests);
