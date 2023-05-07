@@ -7,7 +7,7 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-import loadingimg from "../../../util/Spinner-1s-200px.gif";
+import Loading from "@/components/loading";
 import Image from "next/image";
 
 import { useState } from "react";
@@ -46,6 +46,11 @@ function Sittingplain() {
     
       if(isAuthenticated().user.role !== "lecturer"){
         router.push("/login")
+       }
+       if(router.query.department == undefined && router.query.section == undefined){
+        router.query.department = isAuthenticated().user.departments[0].department._id
+        router.query.section = isAuthenticated().user.departments[0].section[0]._id
+        router.push(router)
        }
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
@@ -199,7 +204,7 @@ function Sittingplain() {
       </div>
       {!loading ? (
         <div className="h-[80vh] flex justify-center items-center">
-          <Image src={loadingimg} alt="" />
+          <Loading/>
         </div>
       ) : (
         userDataForAttendace.map((data) => {

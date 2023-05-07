@@ -45,11 +45,18 @@ var FormData = require("form-data");
      if(!isAuthenticated()){
       router.push("/login")
      }
+
      if(isAuthenticated()){
       if(isAuthenticated().user.role != "lecturer"){
       router.push("/")
      }
     }
+
+    if(router.query.department == undefined && router.query.section == undefined){
+      router.query.department = isAuthenticated().user.departments[0].department._id
+      router.query.section = isAuthenticated().user.departments[0].section[0]._id
+      router.push(router)
+     }
         setUser(isAuthenticated().user);
     }, [router]);
     let bodyFormData = new FormData();

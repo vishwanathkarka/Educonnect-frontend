@@ -4,7 +4,7 @@ import Header from "@/components/header";
  function Add() {
     const [departmentListFetch, setDepartmentListFetch] = useState();
     const [sectionListFetch, setSectionListFetch] = useState(null);
-    const [userEnteredData,setUserEnteredData] = useState({department:"",section:"",period:"",});
+    const [userEnteredData,setUserEnteredData] = useState({department:"",section:"",period:"",day:""});
     const {department,section,period,day} = userEnteredData;
     useEffect(() => {
         async function fetchDepartment() {
@@ -42,24 +42,26 @@ console.log(el.target.value)
 
       const handleSubmit = (el) =>{
         el.preventDefault();
-const uploadingTimeTable =  postData("/addtimetable",{"department":department,"section":section,"period":period,day},isAuthenticated().token)
+        const data = {"department":department,"section":section,"period":period};
+        data[day] = true;
+const uploadingTimeTable =  postData("/addtimetable",data,isAuthenticated().token)
 console.log(uploadingTimeTable)
       }
 
   return (
  <>
 <Header/>
-<div className=" flex  justify-center mt-6 align-middle  bg-slate-50">
+<div className=" flex  justify-center mt-6 h-[90vh] align-middle  bg-slate-50">
         <form
-          className="w-[35rem] rounded h-[90vh] m-auto bg-secoundblack p-[1rem]"
+          className="w-[35rem] rounded   m-auto bg-secoundblack p-[1rem]"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
 
-          <h2 className="text-center">Add Time Table</h2>
+          <h2 className="text-center text-white text-[1.5rem]">Add Time Table</h2>
           <input
             type="text"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Subject"
             onChange={handleInput("subjectName")}
             // value={firstName}
@@ -69,7 +71,7 @@ console.log(uploadingTimeTable)
 
           <input
             type="Number"
-            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  my-4"
+            class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Period No"
             onChange={handleInput("period")}
             // value={firstName}
@@ -77,7 +79,7 @@ console.log(uploadingTimeTable)
           />
 
 <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="day"
             onChange={handleInput("day")}
             // value={role}
@@ -93,7 +95,7 @@ console.log(uploadingTimeTable)
           </select>
          
           <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="Department"
             onChange={handleInput("department")}
             // value={departments} 
@@ -109,7 +111,7 @@ console.log(uploadingTimeTable)
               ))}
           </select>
           <select
-            className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+            className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="section" 
             onChange={handleInput("section")}
             // value={sections}

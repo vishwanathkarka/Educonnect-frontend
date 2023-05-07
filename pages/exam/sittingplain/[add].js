@@ -9,6 +9,7 @@ import Header from '@/components/header';
     const [departments,setDepartments] = useState()
     const [marksDetail,setMarkDetail] = useState(null);
     const [sittingDetail,setSittingDetail] = useState(null);
+    const [isloading,setIsLoading] = useState(false);
     console.log(router.query.user)
     useEffect( () => {
       if(isAuthenticated().user.role !== "lecturer"){
@@ -20,6 +21,7 @@ import Header from '@/components/header';
 
        async function fetchdata (){
   let data = await getData(`/getuserinfowithid/${router.query.user}`,isAuthenticated().token)
+  
  setUserData(data)
  console.log(data)
  setDepartments(isAuthenticated().user.departments)
@@ -48,7 +50,10 @@ import Header from '@/components/header';
     // "userId":"63e12e165aae5db72f8f4afb"
     const handleSubmit = async (el) => {
             el.preventDefault();
-             postData("/addSittingArrangement",{"userId":router.query.add,"roomno":sittingDetail.roomno,"noOfRow":sittingDetail.noOfRow,"noOfCol":sittingDetail.noOfCol,"examDate":sittingDetail.examDate,"row":sittingDetail.row,"col":sittingDetail.col,"examName":sittingDetail.examName},isAuthenticated().token)
+           const data =   postData("/addSittingArrangement",{"userId":router.query.add,"roomno":sittingDetail.roomno,"noOfRow":sittingDetail.noOfRow,"noOfCol":sittingDetail.noOfCol,"examDate":sittingDetail.examDate,"row":sittingDetail.row,"col":sittingDetail.col,"examName":sittingDetail.examName},isAuthenticated().token)
+             if(data){
+              router.push("/exam/sittingplain")
+            }
           }
   return (
     <>

@@ -19,6 +19,7 @@ function Add() {
   // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
+  
 
   const [departmentSection, setDepartmentSection] = useState({
     "department":router.query.department,
@@ -46,7 +47,13 @@ function Add() {
      if(!isAuthenticated()){
       router.push("/login")
      }
+     if(router.query.department == undefined && router.query.section == undefined){
+      router.query.department = isAuthenticated().user.departments[0].department._id
+      router.query.section = isAuthenticated().user.departments[0].section[0]._id
+      router.push(router)
+     }
     async function fetchdata() {
+setLoading(true)
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
@@ -64,6 +71,7 @@ function Add() {
           "/listdepartmentspecific",
           isAuthenticated().user.departments[0],isAuthenticated().token
         );
+        
         if (departmentlist.success == true) {
           setDepartmentListFetch(departmentlist.listOfDepartment);
         }
@@ -73,8 +81,10 @@ function Add() {
         setSectionListFetch(sectionlist.listOfSection);
       }
       console.log(departmentListFetch);
+     
     }
     fetchdata();
+    setLoading(false)
     setUser(isAuthenticated().user);
   }, [section,department]);
   const inputHandle = (name) => (el) => {
@@ -196,9 +206,11 @@ function Add() {
           submit
         </button> */}
       </div>
-      {!loading ? (
+      {loading &&
        <loading/>
-      ) : (
+      }
+      {
+        !loading &&  userDataForAttendace &&
         userDataForAttendace.map((data) => {
           return (
             <ListStudent
@@ -217,7 +229,7 @@ function Add() {
             />
           );
         })
-      )}
+      }
     </>
   );
 }

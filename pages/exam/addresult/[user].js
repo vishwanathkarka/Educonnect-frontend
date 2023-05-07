@@ -59,7 +59,7 @@ const postresult = postData("/addResult",{"subject":marksDetail.subject,"outOfMa
     <Header/>
     <div className='h-[90vh] flex justify-center items-center'> 
    { !isloading && <form
-          className="w-[35rem]  h-[50vh] m-auto bg-secoundblack rounded-xl p-[1rem]"
+          className="w-[35rem]  min-h-[50vh] m-auto bg-secoundblack rounded-xl p-[1rem]"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >

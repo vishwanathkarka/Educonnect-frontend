@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { postDataForm, getData, isAuthenticated } from "../util/apicalls";
 import { useRouter } from "next/router";
+import Loading from "@/components/loading";
 import Header from "@/components/header";
 var FormData = require("form-data");
 
 const Signup = () => {
   const router = useRouter();
+  const [isloading,setloading]= useState(false)
   // for sending imag
   const [img, setImg] = useState(null);
   // destructuring data
@@ -92,10 +94,12 @@ const Signup = () => {
     console.log(userData);
     bodyFormData.append("data", JSON.stringify(userData));
     bodyFormData.append("photo", img);
+    setloading(true)
     const data = await postDataForm("/signup", bodyFormData,isAuthenticated().token);
-    if(data.success == ture){
+    if(data.success == true){
       router.push("/login")
     }
+    setloading(false)
     bodyFormData.delete("[0]data");
     bodyFormData.delete("[0]photo");
     console.log(bodyFormData)
@@ -116,7 +120,7 @@ const Signup = () => {
     <>
     <Header/>
       <div className=" flex  justify-center align-middle  bg-slate-50 text-whitelight   ">
-        <form
+      { !isloading&&  <form
           className="w-[35rem]   my-9 mx-9 rounded-md  bg-secoundblack p-[1rem] border-[#717377] border-[1px] px-4 shadow-xl"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
@@ -263,6 +267,10 @@ const Signup = () => {
            Create account
           </button>
         </form>
+}
+{
+  isloading&& <Loading/>
+}
       </div>
     </>
   );

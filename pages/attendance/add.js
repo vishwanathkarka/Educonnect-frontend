@@ -44,6 +44,11 @@ function Add() {
      if(isAuthenticated().user.role !== "lecturer"){
       router.push("/login")
      }
+     if(router.query.department == undefined && router.query.section == undefined){
+      router.query.department = isAuthenticated().user.departments[0].department._id
+      router.query.section = isAuthenticated().user.departments[0].section[0]._id
+      router.push(router)
+     }
     async function fetchdata() {
       let data = await postData("/getalluserforattendance", 
          {  "department": router.query.department ,

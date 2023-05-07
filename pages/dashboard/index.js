@@ -14,7 +14,6 @@ const  Dashboard = () => {
     const [getTimetable,setGetTimetable] = useState(null)
     const [settingarragement,setSittingArragement] = useState(null)
     useEffect(() => { 
-        
         const getDatauser = async() =>{
             console.log(isAuthenticated().role == "student"? isAuthenticated().user._id:isAuthenticated().role== "parent"?isAuthenticated().user.student_id._id:isAuthenticated().role == "lecturer"?"/lecturer/"+isAuthenticated().user._id:"")
       const count = await getData(`${isAuthenticated().user.role== "student"?"/homeworkcompledcount/"+ isAuthenticated().user._id:isAuthenticated().user.role== "parent"?"/homeworkcompledcount/"+isAuthenticated().user.student_id._id:isAuthenticated().user.role == "lecturer"?"/homeworkadded/lecturer/"+isAuthenticated().user._id:isAuthenticated().user._id}`,isAuthenticated().token)
@@ -95,7 +94,7 @@ else if(day == 5){
 <p></p>
 </div> */}
 
-<div className='flex gap-5  flex-wrap '>
+<div className='flex gap-5  flex-wrap items-center justify-center '>
 <Link href="/payment" className='no-underline'>
     <div className='bg-[#FFD43B] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center' >
      
@@ -164,15 +163,23 @@ else if(day == 5){
 <thead>
 <tr>  <td className='py-2 px-10'>Name</td> 
                     <td>Class</td> </tr>
-
+                    <td>Monday</td>
+<td>Tuesday</td>
+<td>Wednesday</td>
+<td>Thursday</td>
+<td>Friday</td>
+<td>Saturday</td>
         {
      getTimetable && getTimetable.map((el)=>{
-      if( el[moment().format('dddd').toLowerCase()] == true ){
+
         return(
-           <> <tr className='py-4'>  <td className='py-2 px-10'>{el.lectureId.firstName+" "+el.lectureId.lastName}</td> 
-            <td>{el.period}</td> </tr>  </>
+           <> <tr className='py-4'>   
+            <td>{el.period}</td>
+            <td>{el.monday}</td>
+            <td>{el.tuesday}</td>
+             </tr>  </>
         )
-      }
+      
       console.log("***$$"+el)
                       })         
         }
@@ -184,8 +191,7 @@ else if(day == 5){
     </thead>
 </table>
 
-<h5>Exam Sitting Slot</h5>
-<table className=' text-white w-[100vw]'>
+{settingarragement &&  <table className=' text-white w-[100vw]'>
     <thead>
 
     <tr>
@@ -206,7 +212,7 @@ return(
         })
 }
     </thead>
-</table>
+</table> }
 </div>
    </>
   )

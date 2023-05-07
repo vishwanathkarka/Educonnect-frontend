@@ -38,6 +38,12 @@ function Payment() {
       router.push("/login")
     }
     else{
+
+      if(router.query.department == undefined && router.query.section == undefined){
+        router.query.department = isAuthenticated().user.departments[0].department._id
+        router.query.section = isAuthenticated().user.departments[0].section[0]._id
+        router.push(router)
+       }
  setUserCradational(isAuthenticated().user.role);
    console.log("ROOLLLL"+isAuthenticated().user.role)
     async function fetchdata() {

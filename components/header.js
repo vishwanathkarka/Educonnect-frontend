@@ -91,7 +91,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 <div className=" lg:block hidden" >
           <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm  z-10 ">
             <div className="  bg-secoundblack text-white  shadow-xl rounded-xl">
-              <div className="h-[88px] flex  p-4 rounded-tl-md rounded-tr-md">
+              <div className="h-[88px] flex  items-center p-4 rounded-tl-md rounded-tr-md">
                 <Image
               src={userData.photo.secure_url?userData.photo.secure_url:"https://undraw.co/favicon.ico"}
               className="mr-3 w-12 h-12 rounded-full flex-no-shrink"
@@ -214,7 +214,93 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 </Link>
                 </li>
             
-                <hr className="text-[#DAE1E7]" />
+                {userData&& userData.role == "lecturer"&& <> <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
+                <Link href="/timetable/add" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg
+                    id="Group_5"
+                    data-name="Group 5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      id="Path_13"
+                      data-name="Path 13"
+                      d="M0,0H24V24H0Z"
+                      fill="none"
+                    />
+                    <path
+                      id="Path_14"
+                      data-name="Path 14"
+                      d="M21,14l-3-3H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V14"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      id="Path_15"
+                      data-name="Path 15"
+                      d="M14,15v2a1,1,0,0,1-1,1H6L3,21V11a1,1,0,0,1,1-1H6"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  
+                    <p className="m-0">TimeTable </p>
+                  
+                  </Link>
+                </li>
+
+                <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
+                <Link href="/exam/sittingplain" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg
+                    id="Group_5"
+                    data-name="Group 5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      id="Path_13"
+                      data-name="Path 13"
+                      d="M0,0H24V24H0Z"
+                      fill="none"
+                    />
+                    <path
+                      id="Path_14"
+                      data-name="Path 14"
+                      d="M21,14l-3-3H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V14"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      id="Path_15"
+                      data-name="Path 15"
+                      d="M14,15v2a1,1,0,0,1-1,1H6L3,21V11a1,1,0,0,1,1-1H6"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  
+                    <p className="m-0">Add Sitting plain </p>
+                  
+                  </Link>
+                </li>
+                </>}
+                <hr className="text-lightwg" />
   
                 <li
                   className="font-[Avenirregular] h-[3rem]  rounded-b-xl  px-4 py-2 flex  items-center gap-2 hover:bg-[#6b63ff29] cursor-pointer "
@@ -379,6 +465,97 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 <p className="m-0">HomeWork</p>
 </Link>
                 </li>
+
+
+              {userData&& userData.role == "lecturer"&& <> <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
+                <Link href="/timetable/add" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg
+                    id="Group_5"
+                    data-name="Group 5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      id="Path_13"
+                      data-name="Path 13"
+                      d="M0,0H24V24H0Z"
+                      fill="none"
+                    />
+                    <path
+                      id="Path_14"
+                      data-name="Path 14"
+                      d="M21,14l-3-3H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V14"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      id="Path_15"
+                      data-name="Path 15"
+                      d="M14,15v2a1,1,0,0,1-1,1H6L3,21V11a1,1,0,0,1,1-1H6"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  
+                    <p className="m-0">TimeTable </p>
+                  
+                  </Link>
+                </li>
+
+                <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
+                <Link href="/exam/sittingplain" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg
+                    id="Group_5"
+                    data-name="Group 5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      id="Path_13"
+                      data-name="Path 13"
+                      d="M0,0H24V24H0Z"
+                      fill="none"
+                    />
+                    <path
+                      id="Path_14"
+                      data-name="Path 14"
+                      d="M21,14l-3-3H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V14"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      id="Path_15"
+                      data-name="Path 15"
+                      d="M14,15v2a1,1,0,0,1-1,1H6L3,21V11a1,1,0,0,1,1-1H6"
+                      fill="none"
+                      stroke="#606f7b"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  
+                    <p className="m-0">Add Sitting plain </p>
+                  
+                  </Link>
+                </li>
+                </>
+                
+
+}
             
                 <hr className="text-[#DAE1E7]" />
   
@@ -441,7 +618,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
             login
           </Link>
           <Link
-            className=" bg-primarycolor hover:text-lightblack px-[6px] py-[3px] no-underline rounded-[9px] cursor-pointer text-[white] font-semibold"
+            className=" bg-primarycolor  px-[6px] py-[3px] no-underline rounded-[9px] cursor-pointer hover:text-[white] text-[white] font-semibold"
             href="/signup"
           >
             signup
