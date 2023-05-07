@@ -116,7 +116,7 @@ const statusRequest = ()=>{
         //   isAuthenticated().token,
         //   isAuthenticated().user.role,
         //   `/viewleaveuser/?${isAuthenticated().user.role == "lecture"?`isLectureApproved=${status=="success"?"1":status=="reject"?"2":"0"}`:`isParentApproved=${status=="success"?"1":status=="reject"?"2":"0"}}`}isLectureApproved=1&page=${page}`
-       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${statusRequest()}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${roleDataFecth}&page=${page}`:isAuthenticated().user.role== "parent"? `/viewleaveuser/${isAuthenticated().user.student_id._id}/?${roleDataFecth}&page=${page}`:null
+       isAuthenticated().user.role== "student"? `/viewleaveuser/${isAuthenticated().user._id}/?${statusRequest()}&page=${page}`:isAuthenticated().user.role == "lecturer" ? `/viewleavelecture?${statusRequest()}&page=${page}`:isAuthenticated().user.role== "parent"? `/viewleaveuser/${isAuthenticated().user.student_id._id}/?${statusRequest()}&page=${page}`:null
         // `/viewleaveuser/?isLectureApproved=0&page=1`
        , isAuthenticated().token
       );
