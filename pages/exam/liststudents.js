@@ -53,7 +53,7 @@ function Add() {
       router.push(router)
      }
     async function fetchdata() {
-setLoading(true)
+
       let data = await postData("/getalluserforattendance", 
          {  "department":router.query.department,
          "section":router.query.section},
@@ -63,7 +63,7 @@ setLoading(true)
       console.log("stautsssss"+JSON.stringify(data));
       if (data.success == true) {
         setUserDataForAttendace(data.user);
-        setLoading(true);
+      
         console.log(userDataForAttendace);
       }
       if (isAuthenticated()) {
@@ -71,7 +71,7 @@ setLoading(true)
           "/listdepartmentspecific",
           isAuthenticated().user.departments[0],isAuthenticated().token
         );
-        
+
         if (departmentlist.success == true) {
           setDepartmentListFetch(departmentlist.listOfDepartment);
         }
@@ -86,7 +86,7 @@ setLoading(true)
     fetchdata();
     setLoading(false)
     setUser(isAuthenticated().user);
-  }, [section,department]);
+  }, [router,section,department]);
   const inputHandle = (name) => (el) => {
     const { section, department } = router.query;
     if (name == "department") {

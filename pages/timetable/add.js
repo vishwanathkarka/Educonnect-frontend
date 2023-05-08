@@ -1,7 +1,9 @@
 import { useEffect,useState } from "react";
 import { getData,isAuthenticated,postData } from "@/util/apicalls"; 
 import Header from "@/components/header";
+import { useRouter } from "next/router";
  function Add() {
+  const router = useRouter()
     const [departmentListFetch, setDepartmentListFetch] = useState();
     const [sectionListFetch, setSectionListFetch] = useState(null);
     const [userEnteredData,setUserEnteredData] = useState({department:"",section:"",period:"",day:""});
@@ -9,7 +11,16 @@ import Header from "@/components/header";
     useEffect(() => {
         async function fetchDepartment() {
           // fetching the department from api
-    
+          if(!isAuthenticated()){
+            router.push("/login")
+           }
+      
+           if(isAuthenticated()){
+            if(isAuthenticated().user.role != "lecturer"){
+            router.push("/")
+           }
+          }
+
           let departmentlistobj = await getData("/listdepartment",isAuthenticated().token);
           let departmentlist = departmentlistobj;
           console.log(")))))))))" + departmentlist);
