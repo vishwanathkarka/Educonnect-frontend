@@ -10,7 +10,7 @@ export default function HomeworkUi(props) {
   useEffect(() => {
   setUserData(isAuthenticated().user)
 const userDataHomeWork= async()=>{
- const userHomeWork = await getData(`/gethomeworkstudent/${isAuthenticated().user._id}/${props.id}`,isAuthenticated().token)
+ const userHomeWork = await getData(`/gethomeworkstudent/${isAuthenticated().user._id}/${homeworkID}`,isAuthenticated().token)
   setUserHomeWorkData(userHomeWork)
 
 // console.log(userhomework)
@@ -24,7 +24,7 @@ userDataHomeWork()
   console.log(el.target.value)
   let bodyFormData = new FormData();
   bodyFormData.append("homeworkFile",el.target.files[0])
-  bodyFormData.append("data",JSON.stringify({"userId":userData._id,"submittedDate":new Date()}))
+  bodyFormData.append("data",JSON.stringify({"homeworkid":props.homeworkID,"submittedDate":new Date()}))
   let data = await postDataForm(`/addhomeworkbylectureid/${props.id}`,bodyFormData,userData.token)
   if(data.success == true){
     setUserHomeWorkData({...userHomeWorkData,homeworkres:true})

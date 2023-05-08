@@ -64,7 +64,7 @@ setHomeWork(homeworkList.Homeworks)
 
 homework && homework.map((el) => {
  return(
-<HomeworkUi title ={el.title} link ="#" id = {el._id} key={el._id} img={el.lectureId.photo.secure_url} uploaded = {el.timeStamp} lemail = {el.lectureId.email} lname = {el.lectureId.firstName+" "+ el.lectureId.lastName } lastupload = {el.submissionDate } status={el.isSubmittedWork}  /> )
+<HomeworkUi title ={el.title} link ="#" id = {el._id} key={el._id} img={el.lectureId.photo.secure_url} uploaded = {el.timeStamp} lemail = {el.lectureId.email} lname = {el.lectureId.firstName+" "+ el.lectureId.lastName } lastupload = {el.submissionDate } status={el.isSubmittedWork} homeworkID={el._id}  /> )
 
 })
 }
