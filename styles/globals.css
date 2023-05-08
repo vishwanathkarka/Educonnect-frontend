@@ -54,6 +54,21 @@
     right: 5px;
    margin: 0 auto;
 }
+.failedmark{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: red;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px red;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    position:relative;
+    top: 5px;
+    right: 5px;
+   margin: 0 auto;
+}
 .checkmark__circle {
     stroke-dasharray: 166;
     stroke-dashoffset: 166;
