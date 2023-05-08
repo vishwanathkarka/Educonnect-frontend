@@ -17,10 +17,10 @@ import Header from '@/components/header';
  setUserData(data)
  console.log(data)
  if(isAuthenticated().user.role !== "lecturer"){
-  router.push("/login")
+  router.push("/login");
  }
  if(!isAuthenticated()){
-  router.push("/login")
+  router.push("/login");
  }
  setDepartments(isAuthenticated().user.departments)
  console.log(isAuthenticated().user.departments)
@@ -49,9 +49,11 @@ console.log(marksDetail);
     const handleSubmit = async (el) => {
             el.preventDefault();
             setloading(true)
-const postresult = postData("/addResult",{"subject":marksDetail.subject,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
-     if(postresult.status == true){
+const postresult = await postData("/addResult",{"subject":marksDetail.subject,"outOfMarks":marksDetail.outOfMarks,"studentMarks":marksDetail.studentMarks,"userId":router.query.user,"lectureId":isAuthenticated().user._id},isAuthenticated().token)
+console.log("&****))"+JSON.stringify(postresult))    
+if(postresult.success == true){
       setloading(false)
+      router.push("/exam/liststudents")
      }   
 }
   return (

@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
   const router = useRouter()
     const [departmentListFetch, setDepartmentListFetch] = useState();
     const [sectionListFetch, setSectionListFetch] = useState(null);
-    const [userEnteredData,setUserEnteredData] = useState({department:"",section:"",period:"",day:""});
-    const {department,section,period,day} = userEnteredData;
+    const [userEnteredData,setUserEnteredData] = useState({department:"",section:"",period:"",day:"",subjectName:""});
+  
+    const {department,section,period,day,subjectName} = userEnteredData;
     useEffect(() => {
         async function fetchDepartment() {
           // fetching the department from api
@@ -37,7 +38,7 @@ import { useRouter } from "next/router";
           let sectionlist = await getData("/listsection",isAuthenticated().token);
           if (sectionlist.success == true) {
             setSectionListFetch(sectionlist.listOfSection);
-            
+           
           }
         
         }
@@ -51,12 +52,15 @@ console.log(userEnteredData)
 console.log(el.target.value)
       }
 
-      const handleSubmit = (el) =>{
+      const handleSubmit = async(el) =>{
         el.preventDefault();
         const data = {"department":department,"section":section,"period":period};
         data[day] = true;
-const uploadingTimeTable =  postData("/addtimetable",data,isAuthenticated().token)
+const uploadingTimeTable = await postData("/addtimetable",data,isAuthenticated().token)
 console.log(uploadingTimeTable)
+if(uploadingTimeTable.success  == true){
+ router.push("/timetable/add")
+}
       }
 
   return (
@@ -75,8 +79,7 @@ console.log(uploadingTimeTable)
             class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Subject"
             onChange={handleInput("subjectName")}
-            // value={firstName}
-
+            value={subjectName}
           />
 
 
@@ -85,7 +88,7 @@ console.log(uploadingTimeTable)
             class="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             placeholder="Period No"
             onChange={handleInput("period")}
-            // value={firstName}
+            value={period}
 
           />
 
@@ -93,7 +96,7 @@ console.log(uploadingTimeTable)
             className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="day"
             onChange={handleInput("day")}
-            // value={role}
+            value={day}
           >
             <option selected>Day</option>
             <option value="monday">Monday</option>
@@ -109,7 +112,7 @@ console.log(uploadingTimeTable)
             className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="Department"
             onChange={handleInput("department")}
-            // value={departments} 
+            value={department} 
             // disabled= {role == "parent"?true:false}
           >
             <option selected>Choose Department ...</option>
@@ -125,7 +128,7 @@ console.log(uploadingTimeTable)
             className="block w-full rounded-md border-lightblack border-[2px]  py-1.5 pl-7 pr-20  text-white text-lightblack-900 ring-1 ring-inset ring-lightblack-300 placeholder:text-gray-400 focus:ring-2 bg-secoundblack focus:ring-inset focus:ring-lightblack-600 border-lightblack sm:text-sm sm:leading-6  mb-6"
             id="section" 
             onChange={handleInput("section")}
-            // value={sections}
+            value={section}
           >
             <option selected>Choose Section ...</option>
 
