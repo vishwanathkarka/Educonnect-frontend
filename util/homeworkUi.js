@@ -10,7 +10,7 @@ export default function HomeworkUi(props) {
   useEffect(() => {
   setUserData(isAuthenticated().user)
 const userDataHomeWork= async()=>{
- const userHomeWork = await getData(`/gethomeworkstudent/${isAuthenticated().user._id}/${homeworkID}`,isAuthenticated().token)
+ const userHomeWork = await getData(`/gethomeworkstudent/${isAuthenticated().user._id}/${props.homeworkID}`,isAuthenticated().token)
   setUserHomeWorkData(userHomeWork)
 
 // console.log(userhomework)

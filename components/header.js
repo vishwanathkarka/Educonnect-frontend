@@ -66,7 +66,10 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   return (
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
-       <Link href="/" className="no-underline"> <p className="text-white font-extrabold"><span className="text-primarycolor"> XYZ</span> School</p></Link>
+       <Link href="/" className="no-underline"> <Image src="/util/Educonnect-logo.png"
+      width={100}
+      height={100}
+      alt="Picture of the author" /></Link>
       </div>
       {userData && (
         <div className="relative onHover p-5 ">

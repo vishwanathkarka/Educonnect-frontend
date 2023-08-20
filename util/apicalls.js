@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import { BASEURL } from '@next/env'
 
 
 export const postData = async (url, post,token) => {
-    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+    const res = await fetch(`${BASEURL}${url}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -61,7 +61,7 @@ export const authenticate = (data) => {
   };
 
 export const postDataForm = async (url, post,token) => {
-    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+    const res = await fetch(`${BASEURL}${url}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
@@ -81,7 +81,7 @@ export const postDataForm = async (url, post,token) => {
 }
 
 export const postDataJson = async (url, post, token) => {
-    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+    const res = await fetch(`${BASEURL}${url}`, {
         method: 'POST',
         headers: {
         
@@ -103,7 +103,7 @@ export const postDataJson = async (url, post, token) => {
 
 export const getData = async (url, token) => {
 
-        return await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+        return await fetch(`${BASEURL}${url}`, {
             method: "GET",
             headers: {
             'Authorization': token
@@ -116,7 +116,7 @@ export const getData = async (url, token) => {
         }
 
 export const updateData = async (url,post,token) =>{
-    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+    const res = await fetch(`${BASEURL}${url}`, {
         method: 'PUT',
         headers: {
             'Authorization': token,
@@ -136,7 +136,7 @@ export const updateData = async (url,post,token) =>{
 }
 
 export const deleteData = async (url,token) =>{
-    const res = await fetch(`https://schoolmanagement.up.railway.app/api/v1${url}`, {
+    const res = await fetch(`${BASEURL}${url}`, {
         method: 'DELETE',
         headers: {
             'Authorization': token,
