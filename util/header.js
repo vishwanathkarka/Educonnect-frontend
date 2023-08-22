@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { signout, isAuthenticated } from "../util/apicalls";
+import { signout, isAuthenticated } from "./apicalls";
 
 function Header() {
   const [islogin, SetIsLogin] = useState(
@@ -9,20 +9,23 @@ function Header() {
   );
   const [userData, setUserData] = useState(false);
 const [showMobileBar,setShowMobileBar] = useState(false)
+
+
   useEffect(() => {
     setUserData(isAuthenticated().user);
-
   }, []);
+
   //This function check whether user is logged or not
   function isCheck() {
     return islogin ? HeaderLogin() : HeaderNotLogin();
   }
+
+
   //if user is not login
   function HeaderNotLogin() {
     return (
       <ul className="flex  ml-auto items-center gap-9  bg-black">
         <Link className="text-primary cursor-pointer" href="/login">
-          {/* <Image src ="https://5.imimg.com/data5/RX/NO/MY-24297425/eacademics-school-28complete-school-management-software-with-mobile-app-29-500x500.png" width={200} height={200}/> */}
         </Link>
         <Link
           className=" bg-primary px-[6px] py-[3px]  rounded-[9px] cursor-pointer text-[white] font-semibold"
@@ -34,14 +37,14 @@ const [showMobileBar,setShowMobileBar] = useState(false)
     );
   }
 
+
   //if user is logged in photo view
   function HeaderLogin() {
-    console.log(islogin);
     return (
       <>
         <div className="relative onHover p-5 bg-black  border-b-[rgba(246,247,249,.05)] border-[1px]">
           <div className="flex  justify-center items-center gap-[12px] cursor-pointer">
-            {display}
+            {/* {display} */}
             <svg
               width="11"
               height="6"
@@ -56,8 +59,6 @@ const [showMobileBar,setShowMobileBar] = useState(false)
               ></path>
             </svg>
           </div>
-
-
         </div>
       </>
     );
@@ -66,10 +67,16 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   return (
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
-       <Link href="/" className="no-underline"> <Image src="/util/Educonnect-logo.png"
-      width={100}
-      height={100}
-      alt="Picture of the author" /></Link>
+       <Link href="/" className="no-underline"> 
+       <svg xmlns="http://www.w3.org/2000/svg" width="175.5" height="36" viewBox="0 0 175.5 36">
+  <text id="duconnect" transform="translate(23.5 28)" fill="#fff" font-size="30" font-family="Rubik"><tspan x="0" y="0">duconnect</tspan></text>
+  <line id="Line_1" data-name="Line 1" x2="20.937" transform="translate(0 4.5)" fill="none" stroke="#28abe2" stroke-width="4"/>
+  <line id="Line_5" data-name="Line 5" x2="20.937" transform="translate(0 28.077)" fill="none" stroke="#2e3192" stroke-width="4"/>
+  <line id="Line_3" data-name="Line 3" x2="20.937" transform="translate(0 16.276)" fill="none" stroke="#0171bb" stroke-width="4"/>
+  <line id="Line_2" data-name="Line 2" y2="10.5" transform="translate(2 3)" fill="none" stroke="#28abe2" stroke-width="4"/>
+  <line id="Line_4" data-name="Line 4" y2="10.5" transform="translate(2 14.577)" fill="none" stroke="#0171bb" stroke-width="4"/>
+</svg>
+       </Link>
       </div>
       {userData && (
         <div className="relative onHover p-5 ">
@@ -90,7 +97,8 @@ const [showMobileBar,setShowMobileBar] = useState(false)
             </svg>
           </div>
 
-{/* desktop naviagtion menu */}
+
+{/* --------------             desktop naviagtion menu              --------------------*/}
 <div className=" lg:block hidden" >
           <div className=" show-hover onHover block  md:hidden sm:hidden rounded-md h-[30px]   right-[2px]  absolute m-2 w-full md:w-64 md:bg-white md:rounded-xl md:shadow-sm  z-10 ">
             <div className="  bg-secoundblack text-white  shadow-xl rounded-xl">
@@ -354,7 +362,9 @@ const [showMobileBar,setShowMobileBar] = useState(false)
             </div>
           </div>
           </div>
-{/* mobile navigtion menu */}
+
+
+{/*    ---------------         mobile navigtion menu         ------------------        */}
        { showMobileBar &&  <div className="h-[100vh] lg:hidden z-20   sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
             <div className=" ml-2 mt-2 border-lightblack border-2 inline-block rounded-md" onClick={()=>setShowMobileBar(!showMobileBar)}>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#374151" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -612,6 +622,9 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 }
         </div>
       )}
+
+      
+    {/* ---------------      not login     ---------------- */}
       {!userData && (
         <ul className="flex  ml-auto items-center gap-9">
           <Link

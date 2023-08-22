@@ -2,62 +2,61 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import { useEffect } from "react";
-import Attendaceui from "@/util/attendaceui";
-import moment from "moment";
-// import {postData,getData,isAuthenticated }  from "../../util/apicalls"
+import Attendaceui from "@/util/Ui/attendaceui";
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-
 import Image from "next/image";
-
-
 import { useState } from "react";
-import Header from "@/components/header";
-import Loading from "@/components/loading";
+import Header from "@/util/header";
+import Loading from "@/util/loading";
+
+// adding the attendance
 function Add() {
   const router = useRouter();
   let i = null;
-  
-  // console.log("600000" +  isAuthenticated().user.firstName);
   const [userDataForAttendace, setUserDataForAttendace] = useState();
   const [attendace, setAttendace] = useState({ data: [] });
   const [departmentSection, setDepartmentSection] = useState({
-    "department":router.query.department,
-    "section":router.query.section
-    
+    department: router.query.department,
+    section: router.query.section,
   });
-
   const [dep, setdep] = useState(0);
-  // const {depIndex} = dep;
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [departmentListFetch, setDepartmentListFetch] = useState();
-  const [sectionListFetch, setSectionListFetch] = useState(null);
- 
- const {department,section}= router.query
+  // const [sectionListFetch, setSectionListFetch] = useState(null);
+  const { department, section } = router.query;
   console.log("deppp" + dep);
 
   useEffect(() => {
-    if(!isAuthenticated()){
-      router.push("/login")
-     }
-     if(isAuthenticated().user.role !== "lecturer"){
-      router.push("/login")
-     }
-     if(router.query.department == undefined && router.query.section == undefined){
-      router.query.department = isAuthenticated().user.departments[0].department._id
-      router.query.section = isAuthenticated().user.departments[0].section[0]._id
-      router.push(router)
-     }
+
+    if (!isAuthenticated()) {
+      router.push("/login");
+    }
+
+    if (isAuthenticated().user.role !== "lecturer") {
+      router.push("/login");
+    }
+
+    if (
+      router.query.department == undefined &&
+      router.query.section == undefined
+    ) {
+      router.query.department =
+        isAuthenticated().user.departments[0].department._id;
+      router.query.section =
+        isAuthenticated().user.departments[0].section[0]._id;
+      router.push(router);
+    }
     async function fetchdata() {
-      let data = await postData("/getalluserforattendance", 
-         {  "department": router.query.department ,
-         "section":router.query.section},
-         isAuthenticated().token
+      let data = await postData(
+        "/getalluserforattendance",
+        { department: router.query.department, section: router.query.section },
+        isAuthenticated().token
       );
 
       console.log("departmentSectiion" + JSON.stringify(departmentSection));
-      console.log("stautsssss"+JSON.stringify(data));
+      console.log("stautsssss" + JSON.stringify(data));
       if (data.success == true) {
         setUserDataForAttendace(data.user);
         setLoading(true);
@@ -66,37 +65,47 @@ function Add() {
       if (isAuthenticated()) {
         let departmentlist = await postData(
           "/listdepartmentspecific",
-          isAuthenticated().user.departments[0],isAuthenticated().token
+          isAuthenticated().user.departments[0],
+          isAuthenticated().token
         );
         if (departmentlist.success == true) {
           setDepartmentListFetch(departmentlist.listOfDepartment);
         }
       }
-      let sectionlist = await getData("/listsection",isAuthenticated().token);
-      if (sectionlist.success == true) {
-        setSectionListFetch(sectionlist.listOfSection);
-      }
+      let sectionlist = await getData("/listsection", isAuthenticated().token);
+      // if (sectionlist.success == true) {
+      //   setSectionListFetch(sectionlist.listOfSection);
+      // }
       console.log(departmentListFetch);
     }
     fetchdata();
     setUser(isAuthenticated().user);
-  }, [section,department]);
+  }, [section, department]);
+
+
+
   const inputHandle = (name) => (el) => {
     const { section, department } = router.query;
     if (name == "department") {
       let splittedVal = el.target.value.split(",");
       setdep(splittedVal[1]);
 
-      setDepartmentSection({ ...departmentSection, [name]: splittedVal[0], "section":splittedVal[2] });
+      setDepartmentSection({
+        ...departmentSection,
+        [name]: splittedVal[0],
+        section: splittedVal[2],
+      });
       router.query.department = splittedVal[0];
       router.query.section = splittedVal[2];
       router.push(router);
       // console.log(el.target.value[1])
     } else {
-      
-      let splittedSectionData = el.target.value.split(",")
-      setDepartmentSection({ ...departmentSection, [name]: splittedSectionData[0]});
-      console.log("depepartmentvaluee"+ el.target.value)
+      let splittedSectionData = el.target.value.split(",");
+      setDepartmentSection({
+        ...departmentSection,
+        [name]: splittedSectionData[0],
+      });
+      console.log("depepartmentvaluee" + el.target.value);
       router.query.section = splittedSectionData[0];
 
       router.push(router);
@@ -109,11 +118,15 @@ function Add() {
   };
 
   async function attendanceSubmit() {
-    let da = await postData("/bulkattendanceadd", attendace,isAuthenticated().token);
+    let da = await postData(
+      "/bulkattendanceadd",
+      attendace,
+      isAuthenticated().token
+    );
   }
 
   function attendance(data) {
-    console.log("DDDTTAAAAA"+JSON.stringify(data));
+    console.log("DDDTTAAAAA" + JSON.stringify(data));
     if (attendace.data.length == 0) {
       attendace.data.push(data);
       console.log("kkk");
@@ -146,17 +159,16 @@ function Add() {
   //     })
   // }
 
-  function activeSelect (option ,status){
-    if(status == option){
-        return true
+  function activeSelect(option, status) {
+    if (status == option) {
+      return true;
+    } else {
+      return false;
     }
-    else{
-        return false
-    }
-      }
+  }
   return (
     <>
-   <Header/>
+      <Header />
       <div className=" flex items-center gap-3 px-3 ">
         <select
           name=""
@@ -164,15 +176,24 @@ function Add() {
           className=" py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white my-3"
           onChange={inputHandle("department")}
         >
-      {   router.query.department == undefined?  <option selected>department ...</option>:""}
-          {}
+          {router.query.department == undefined ? (
+            <option selected>department ...</option>
+          ) : (
+            ""
+          )}
+        
           {user &&
             user.departments.map((data) => {
               return (
                 <option
-                  value={`${data.department._id},${i++},${data.section[0]._id},${data.section[0].section},${data.department.department}`}
-                  key={data.department._id} 
-                  selected={activeSelect(data.department._id,router.query.department)}
+                  value={`${data.department._id},${i++},${
+                    data.section[0]._id
+                  },${data.section[0].section},${data.department.department}`}
+                  key={data.department._id}
+                  selected={activeSelect(
+                    data.department._id,
+                    router.query.department
+                  )}
                 >
                   {data.department.department}
                 </option>
@@ -183,16 +204,18 @@ function Add() {
           className="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white my-3"
           onChange={inputHandle("section")}
         >
-         
           {user &&
             user.departments[dep].section.map((data) => {
-          return(    <option value={`${data._id},${data.section}`}
-          selected={activeSelect(data._id,router.query.section)}
-               key={data.section._id} >
-                {data.section}
-                
-              </option> )
-})}
+              return (
+                <option
+                  value={`${data._id},${data.section}`}
+                  selected={activeSelect(data._id, router.query.section)}
+                  key={data.section._id}
+                >
+                  {data.section}
+                </option>
+              );
+            })}
         </select>
         <button
           className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded"
@@ -202,7 +225,7 @@ function Add() {
         </button>
       </div>
       {!loading ? (
-      <Loading/>
+        <Loading />
       ) : (
         userDataForAttendace.map((data) => {
           return (
@@ -213,11 +236,11 @@ function Add() {
               date={new Date()}
               htno={data.htno}
               id={data._id}
-              key ={data._id}
+              key={data._id}
               link="#"
               checked={true}
               attendnceData={attendance}
-              isAddAttendance = {true}
+              isAddAttendance={true}
             />
           );
         })

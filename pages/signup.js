@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { postDataForm, getData, isAuthenticated } from "../util/apicalls";
 import { useRouter } from "next/router";
-import Loading from "@/components/loading";
-import Header from "@/components/header";
+import Loading from "@/util/loading";
+import Header from "@/util/header";
 var FormData = require("form-data");
 
 const Signup = () => {
