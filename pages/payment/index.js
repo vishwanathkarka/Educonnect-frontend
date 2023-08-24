@@ -6,7 +6,7 @@ import { getData, postData, isAuthenticated } from "@/util/apicalls";
 import Attendaceui from "@/util/Ui/attendaceui";
 import PaymentAddForm from "@/util/Form/paymentAddForm";
 import PaymentUI from "@/util/Ui/paymentUI";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 
 function Payment() {
   const router = useRouter();

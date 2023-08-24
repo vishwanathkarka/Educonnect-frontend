@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Loading from "./loading";
+import Loading from "./loadingPage";
 import { isAuthenticated, updateData } from "@/util/apicalls";
 
 function UserDataEdit(props) {

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState } from "react";
 import Header from "@/util/header";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 
 // adding the attendance
 function Add() {

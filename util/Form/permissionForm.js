@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // import toast, { Toaster } from 'react-hot-toast';
 // import { Navigate } from "react-router-dom";
 import { isAuthenticated, postData } from "@/util/apicalls";
-import Loading from "../loading";
+import Loading from "../loadingPage";
 
 export default function PermssionForm(props) {
   const [values, setValues] = useState({

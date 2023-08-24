@@ -4,6 +4,7 @@ import { getData, isAuthenticated } from "@/util/apicalls";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useRouter } from "next/router";
+import Loading from "@/util/loading";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -142,54 +143,28 @@ const Dashboard = () => {
 </div> */}
 
         <div className="flex gap-5  flex-wrap items-center justify-center ">
-          <Link href="/payment" className="no-underline">
-            <div className="bg-[#FFD43B] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
+          <Link href="/payment" className="no-underline min-w-[3rem]">
+            <div className=" bg-secoundblack  h-[30vh] w-[20vw] shadow-[#06060669] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-credit-card"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <rect x="3" y="5" width="18" height="14" rx="3" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                  <line x1="7" y1="15" x2="7.01" y2="15" />
-                  <line x1="11" y1="15" x2="13" y2="15" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffec00" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+  <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+</svg>
               </div>
               <h1 className="text-white">{paymentPending}</h1>
               <p className="text-white">Pending Payment</p>
             </div>
           </Link>
           <Link href="/homework" className="no-underline">
-            <div className="bg-[#1A8E72] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col items-center justify-center">
+            <div className=" bg-secoundblack shadow-[#06060669] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col items-center justify-center">
               <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-book"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                  <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-                  <line x1="3" y1="6" x2="3" y2="19" />
-                  <line x1="12" y1="6" x2="12" y2="19" />
-                  <line x1="21" y1="6" x2="21" y2="19" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+  <path d="M13 8l2 0" />
+  <path d="M13 12l2 0" />
+</svg>
               </div>
               <h1 className="text-white">{homeworkcount}+</h1>
               <p className="text-lightwg">Homework Submitted</p>
@@ -200,49 +175,29 @@ const Dashboard = () => {
             href="/permission?status=pending&page=1"
             className="no-underline"
           >
-            <div className="bg-secoundblack h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
+            <div className="shadow-[#06060669] bg-secoundblack h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-user-check"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                  <path d="M16 11l2 2l4 -4" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-walk" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M13 4m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  <path d="M7 21l3 -4" />
+  <path d="M16 21l-2 -4l-3 -3l1 -6" />
+  <path d="M6 12l2 -3l4 -1l3 3l3 1" />
+</svg>
               </div>
               <h1 className="text-white">{permissionPendingCount}</h1>
               <p className="text-lightwg">Permission Pending</p>
             </div>
           </Link>
           <Link className="no-underline" href="/exam/result">
-            <div className="bg-[#EA8B9E] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
+            <div className= " bg-secoundblack  shadow-[#06060669] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-x"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-hexagon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff4500" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" />
+  <path d="M12 8v4" />
+  <path d="M12 16h.01" />
+</svg>
               </div>
               <h1 className="text-white">{failedCount}</h1>
               <p className="text-white">Failed Subject count</p>
@@ -252,10 +207,11 @@ const Dashboard = () => {
         <h5 className="text-white text-center mt-4">
           Todays Classes {moment().format("dddd").toLowerCase()}
         </h5>
-         
-        {getTimetable && <table className="text-white w-[90vw] m-auto ">
+        {!getTimetable &&  <Loading/>
+}
+        {getTimetable && <table className="text-white w-[90vw] m-auto shadow-[#06060669] shadow-md    rounded-sm  ">
           <thead>
-            <tr className="py-2 px-6">
+            <tr className="py-2 px-6 ">
               {" "}
               <td className="">Name</td>
               <td>SubjectName</td>
@@ -512,9 +468,10 @@ const Dashboard = () => {
           </thead>
         </table>
       }
-
+{!settingarragement &&  <Loading/>
+}
         {settingarragement && (
-          <table className=" text-white w-[100vw]">
+          <table className=" text-white w-[95vw] mt-5">
             <thead>
               <tr>
                 <td>Exam Name </td>

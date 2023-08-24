@@ -7,7 +7,7 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 import Image from "next/image";
 
 import { useState } from "react";

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { postDataForm, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
 import Header from "@/util/header";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 var FormData = require("form-data");
 
 function Add() {

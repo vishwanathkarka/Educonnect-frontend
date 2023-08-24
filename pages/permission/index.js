@@ -5,7 +5,7 @@ import NoResultFound from "../../util/no-content.png";
 import { useRouter } from "next/router";
 import PermissionForm from "@/util/Form/permissionForm";
 import ResultNotFound from "@/util/resultNotFound";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 // import Header from "../core/Header";
 import PermssionCard from "@/util/permssionCard";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";

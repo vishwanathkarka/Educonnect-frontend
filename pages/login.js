@@ -27,7 +27,23 @@ function Login() {
   const handleInput = (name) => (el) => {
     setLoginData({ ...loginData, [name]: el.target.value });
   };
+const guestParentLogin = async(el) => {
+  el.preventDefault()
+ await setLoginData({email:"vishwanathparent@gmail.com",password:"vishwanathparent@gmail.com"})
+//  await onSubmitLogin(el)
+}
 
+const guestStudentLogin = async(el) => {
+  el.preventDefault()
+ await setLoginData({...loginData,email:"vishwanath@gmail.com",password:"vishwanath@gmail.com"})
+//  onSubmitLogin(el)
+}
+
+const guestAdminLogin = async (el) => {
+  el.preventDefault()
+ await setLoginData({...loginData,email:"admin@gmail.com",password:"admin@gmail.com"})
+//  onSubmitLogin(el)
+}
   // handling the toast view
   const handlingTost = () => {
     setToShowToast({ ...toShowToast, isShownToast: false });
@@ -104,6 +120,7 @@ function Login() {
                 {" "}
                 Login now
               </button>
+            
               <p className="text-[#717377]">
                 Not Registered yet?{" "}
                 <Link
@@ -114,6 +131,18 @@ function Login() {
                   Register &rarr;
                 </Link>
               </p>
+              <div className="flex flex-wrap gap-[1rem] justify-center">
+              <button onClick={guestParentLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white] flex"> 
+        
+               Guest Parent Login</button>
+              <button onClick={guestStudentLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white]"> 
+      
+Guest Student Login</button>
+
+<button onClick={guestAdminLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white]"> 
+      
+Guest Admin Login</button>
+              </div>
             </form>
           </div>
         )}

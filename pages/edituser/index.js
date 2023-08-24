@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import UserDataEdit from "@/util/userDataEdit";
 import Header from "@/util/header";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 
 function AdminCard(props) {
   return (

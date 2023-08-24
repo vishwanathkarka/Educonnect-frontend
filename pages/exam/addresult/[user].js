@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { getData, isAuthenticated, postData } from "../../../util/apicalls";
 import { useEffect, useState } from "react";
-import Loading from "@/util/loading";
+import Loading from "@/util/loadingPage";
 import Header from "@/util/header";
 function User() {
   const router = useRouter();
