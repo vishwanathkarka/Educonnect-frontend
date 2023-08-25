@@ -58,13 +58,12 @@ function Payment() {
           },
           isAuthenticated().token
         );
-        console.log("departmentSectiion" + JSON.stringify(departmentSection));
-        console.log("stautsssss" + JSON.stringify(data));
+       
 
         if (data.success == true) {
           setUserDataForAttendace(data.user);
           setLoading(true);
-          console.log(userDataForAttendace);
+        
         }
         // if (isAuthenticated()) {
         //   let departmentlist = await postData(
@@ -79,7 +78,7 @@ function Payment() {
         // if (sectionlist.success == true) {
         //   setSectionListFetch(sectionlist.listOfSection);
         // }
-        console.log(departmentListFetch);
+      
       }
       const userPaymentInfo = async (userid) => {
         const userdata = await getData(
@@ -89,7 +88,7 @@ function Payment() {
         if (userdata.success == true) {
           setUserDataForAttendace(userdata.paymentList);
           setLoading(true);
-          console.log(userDataForAttendace);
+        
         }
       };
       isAuthenticated().user.role == "student" &&
@@ -121,37 +120,33 @@ function Payment() {
         ...departmentSection,
         [name]: splittedSectionData[0],
       });
-      console.log("depepartmentvaluee" + el.target.value);
+    
       router.query.section = splittedSectionData[0];
 
       router.push(router);
     }
-    console.log("999" + dep);
-    console.log("Valuueee" + el.target.index);
-    console.log(departmentSection);
-    console.log(dep);
-    console.log(el.target.ind);
+ 
   };
 
   //getting student id fromt the payment ui
   function clickUserId(data) {
     setUserId(data);
-    console.log("DATTAA()))" + data);
+
     setPaymentFormView(!paymentFormView);
   }
   function attendance(data) {
     console.log("DDDTTAAAAA" + JSON.stringify(data));
     if (attendace.data.length == 0) {
       attendace.data.push(data);
-      console.log("kkk");
+
     } else {
       let iscontain = false;
       let updatedData = attendace.data.map((item) => {
-        console.log("%%%%%" + item);
+ 
         if (item.userId == data.userId) {
           item.isPresent = data.isPresent;
           // setAttendace([...attendace,"attendace":item.attendace])
-          console.log("hhh");
+
           iscontain = true;
         }
       });
@@ -161,7 +156,7 @@ function Payment() {
       }
     }
 
-    console.log(attendace);
+
   }
   const closeForm = (status) => {
     if (status == true) {
@@ -176,7 +171,6 @@ function Payment() {
     }
   }
 
-  console.log("role" + userCradational);
   return (
     <>
       <Header />

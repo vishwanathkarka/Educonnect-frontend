@@ -38,6 +38,11 @@ const guestStudentLogin = async(el) => {
  await setLoginData({...loginData,email:"vishwanath@gmail.com",password:"vishwanath@gmail.com"})
 //  onSubmitLogin(el)
 }
+const guestLecturerLogin = async(el) => {
+  el.preventDefault()
+ await setLoginData({...loginData,email:"Devon@gmail.com",password:"Devon@gmail.com"})
+//  onSubmitLogin(el)
+}
 
 const guestAdminLogin = async (el) => {
   el.preventDefault()
@@ -138,6 +143,11 @@ const guestAdminLogin = async (el) => {
               <button onClick={guestStudentLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white]"> 
       
 Guest Student Login</button>
+
+<button onClick={guestLecturerLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white]"> 
+      
+Guest lecturer Login</button>
+
 
 <button onClick={guestAdminLogin} className="bg-[#71737790] mt-3 px-4 py-2.5  rounded-md border-0 text-[white]"> 
       

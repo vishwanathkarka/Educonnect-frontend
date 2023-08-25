@@ -178,7 +178,7 @@ function AdminAllPermission() {
         </button> */}
       </div>
 
-      <div className="min-h-[80vh]  bg-secoundblack mx-4 py-3 px-3 rounded-lg">
+      <div className="min-h-[60vh]  bg-secoundblack mx-4 py-3 px-3 rounded-lg">
         <button
           className="bg-primarycolor ml-2 text-[white] px-2 py-1 rounded-md  block"
           onClick={() => setIsView(!isView)}
@@ -199,6 +199,7 @@ function AdminAllPermission() {
 
         {/* ---  card of the permission  ---*/}
         {isloading && <Loading />}
+        <div className=" min-h-[60vh] ">
         {allRequests &&
           allRequests.map((element) => (
             <PermssionCard
@@ -236,11 +237,12 @@ function AdminAllPermission() {
               id={element._id}
               to={element.toDate}
             />
-          ))}
-      </div>
-
-      {/* -------  pagenation  -------*/}
-      <div className="flex gap-[50px] m-[1rem]  ">
+          ))
+          
+          }
+          </div>
+  {/* -------  pagenation  -------*/}
+  <div className="flex gap-[50px] m-[1rem]  ">
         <div
           className="border-[2px] border-[white] rounded-[50%] cursor-pointer"
           onClick={() => {
@@ -291,6 +293,10 @@ function AdminAllPermission() {
           </svg>
         </div>
       </div>
+          
+      </div>
+
+    
     </>
   );
 }

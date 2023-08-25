@@ -143,8 +143,8 @@ const Dashboard = () => {
 </div> */}
 
         <div className="flex gap-5  flex-wrap items-center justify-center ">
-          <Link href="/payment" className="no-underline min-w-[3rem]">
-            <div className=" bg-secoundblack  h-[30vh] w-[20vw] shadow-[#06060669] shadow-md rounded-xl flex flex-col justify-center items-center">
+          <Link href="/payment" className="no-underline min-w-[10rem]">
+            <div className=" bg-secoundblack  h-[30vh] min-w-[20vw] shadow-[#06060669] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffec00" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -157,7 +157,7 @@ const Dashboard = () => {
             </div>
           </Link>
           <Link href="/homework" className="no-underline">
-            <div className=" bg-secoundblack shadow-[#06060669] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col items-center justify-center">
+            <div className=" bg-secoundblack shadow-[#06060669] h-[30vh]  min-w-[20vw] shadow-md rounded-xl flex flex-col items-center justify-center">
               <div className="">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009988" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -175,7 +175,7 @@ const Dashboard = () => {
             href="/permission?status=pending&page=1"
             className="no-underline"
           >
-            <div className="shadow-[#06060669] bg-secoundblack h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
+            <div className="shadow-[#06060669] bg-secoundblack h-[30vh]  min-w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-walk" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -190,7 +190,7 @@ const Dashboard = () => {
             </div>
           </Link>
           <Link className="no-underline" href="/exam/result">
-            <div className= " bg-secoundblack  shadow-[#06060669] h-[30vh] w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
+            <div className= " bg-secoundblack  shadow-[#06060669] h-[30vh]  min-w-[20vw] shadow-md rounded-xl flex flex-col justify-center items-center">
               <div>
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-hexagon" width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff4500" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -204,38 +204,37 @@ const Dashboard = () => {
             </div>
           </Link>
         </div>
+        <div className="p-2 bg-secoundblack m-3 rounded-md">
         <h5 className="text-white text-center mt-4">
           Todays Classes {moment().format("dddd").toLowerCase()}
         </h5>
         {!getTimetable &&  <Loading/>
 }
-        {getTimetable && <table className="text-white w-[90vw] m-auto shadow-[#06060669] shadow-md    rounded-sm  ">
+        {getTimetable &&  <div className="overflow-x-auto "> <table className="text-white w-[90vw] m-auto shadow-[#06060669] shadow-md   text-center  rounded-sm  ">
           <thead>
             <tr className="py-2 px-6 ">
               {" "}
               <td className="">Name</td>
               <td>SubjectName</td>
               <td>Class</td>
-              <td>Monday</td>
-              <td>Tuesday</td>
-              <td>Wednesday</td>
-              <td>Thursday</td>
-              <td>Friday</td>
-              <td>Saturday</td>
+             
             </tr>
             {
               getTimetable.map((el) => {
                 return (
                   <>
-                    {" "}
-                    <tr className="py-4">
+                  
+                    
+                    
+                      { (el.monday && "monday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
                       <td>
                         {el.lectureId.firstName + " " + el.lectureId.lastName}
                       </td>
-                      <td></td>
+                    
                       <td>{el.period}</td>
                       <td>
-                        {el.monday ? (
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-circle-check"
@@ -252,65 +251,22 @@ const Dashboard = () => {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ff4500"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
-                          </svg>
-                        )}
-                      </td>
-                      <td>
-                        {el.tuesday ? (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-check"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#00b341"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ff4500"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
-                          </svg>
-                        )}
-                      </td>
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+                   
 
+                   
+                      { (el.tuesday && "tuesday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
                       <td>
-                        {el.wednesday ? (
+                        {el.lectureId.firstName + " " + el.lectureId.lastName}
+                      </td>
+                     
+                      <td>{el.period}</td>
+                      <td>
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-circle-check"
@@ -327,27 +283,21 @@ const Dashboard = () => {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ff4500"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
-                          </svg>
-                        )}
-                      </td>
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+               
+                   
+                      { (el.wednesday && "wednesday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
                       <td>
-                        {el.thursday ? (
+                        {el.lectureId.firstName + " " + el.lectureId.lastName}
+                      </td>
+                    
+                      <td>{el.period}</td>
+                      <td>
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-circle-check"
@@ -364,27 +314,21 @@ const Dashboard = () => {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ff4500"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
-                          </svg>
-                        )}
-                      </td>
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+                    
+                   
+                      { (el.thursday && "thursday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
                       <td>
-                        {el.friday ? (
+                        {el.lectureId.firstName + " " + el.lectureId.lastName}
+                      </td>
+                     
+                      <td>{el.period}</td>
+                      <td>
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-circle-check"
@@ -401,27 +345,21 @@ const Dashboard = () => {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ff4500"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
-                          </svg>
-                        )}
-                      </td>
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+                
+                 
+                      { (el.friday && "friday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
                       <td>
-                        {el.saturday ? (
+                        {el.lectureId.firstName + " " + el.lectureId.lastName}
+                      </td>
+                   
+                      <td>{el.period}</td>
+                      <td>
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-circle-check"
@@ -438,43 +376,61 @@ const Dashboard = () => {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        ) : (
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+                   
+                 
+                      { (el.saturday && "saturday" == moment().format("dddd").toLowerCase()) ?(
+                         <tr className="py-4">
+                      <td>
+                        {el.lectureId.firstName + " " + el.lectureId.lastName}
+                      </td>
+                      <td>{el.period}</td>
+                      <td>
+                        {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-circle-x"
+                            class="icon icon-tabler icon-tabler-circle-check"
                             width="20"
                             height="20"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            stroke="#ff4500"
+                            stroke="#00b341"
                             fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                           >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <circle cx="12" cy="12" r="9" />
-                            <path d="M10 10l4 4m0 -4l-4 4" />
+                            <path d="M9 12l2 2l4 -4" />
                           </svg>
-                        )}
-                      </td>
-                    </tr>{" "}
+                        }
+                      </td> 
+                      </tr>):""
+                    }
+                   
                   </>
                 );
 
               
               })}
 
-            {console.log(getTimetable)}
+            
           </thead>
         </table>
+        </div>
       }
+      </div>
+      <div className="p-2 bg-secoundblack m-3 rounded-md">
 {!settingarragement &&  <Loading/>
 }
         {settingarragement && (
           <table className=" text-white w-[95vw] mt-5">
             <thead>
               <tr>
-                <td>Exam Name </td>
+                <td>Exam Name</td>
                 <td>Room No </td>
                 <td>Exam Date</td>
               </tr>
@@ -493,6 +449,7 @@ const Dashboard = () => {
             </thead>
           </table>
         )}
+      </div>
       </div>
     </>
   );

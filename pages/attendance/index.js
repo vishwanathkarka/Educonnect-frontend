@@ -32,6 +32,7 @@ function View() {
   return (
     <>
       <Header />
+      <div className="min-h-[90vh]">
       {attendances && attendances.length == 0 ? <ResultNotFound /> : ""}
       {attendances &&
         attendances.map((attendance) => {
@@ -46,6 +47,8 @@ function View() {
             />
           );
         })}
+
+</div>
     </>
   );
 }
