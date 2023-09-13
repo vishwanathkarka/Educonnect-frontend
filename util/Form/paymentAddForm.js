@@ -28,8 +28,7 @@ function PaymentAddForm(props) {
       );
       setUserInfo(isAuthenticated().user);
       setUserData(data);
-      console.log(data);
-      console.log(isAuthenticated().user.departments);
+   
     }
 
     fetchdata();
@@ -40,7 +39,7 @@ function PaymentAddForm(props) {
     // userinfo has the content
     userinfo &&
       setPaymentAdd({ ...paymentAdd, [user]: el.target.value, sid: props.sid });
-    console.log(paymentAdd);
+  
   };
 
   // submitting data

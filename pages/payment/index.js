@@ -31,7 +31,7 @@ function Payment() {
   const [sectionListFetch, setSectionListFetch] = useState(null);
 
   const { department, section } = router.query;
-  console.log("deppp" + dep);
+  // console.log("deppp" + dep);
 
   useEffect(() => {
     if (!isAuthenticated().user) {
@@ -48,7 +48,7 @@ function Payment() {
         router.push(router);
       }
       setUserCradational(isAuthenticated().user.role);
-      console.log("ROOLLLL" + isAuthenticated().user.role);
+      
       async function fetchdata() {
         let data = await postData(
           "/getalluserforattendance",
@@ -135,7 +135,7 @@ function Payment() {
     setPaymentFormView(!paymentFormView);
   }
   function attendance(data) {
-    console.log("DDDTTAAAAA" + JSON.stringify(data));
+   
     if (attendace.data.length == 0) {
       attendace.data.push(data);
 
