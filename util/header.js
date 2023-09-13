@@ -133,6 +133,10 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                   <p className="m-0">My Dashboard </p>
                   </Link>
                 </li>
+
+                {
+                 userData.role && (userData.role != "Admin")?(
+                  <>
                 <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
                 <Link href="/permission" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                   <svg
@@ -170,22 +174,23 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                       stroke-width="1.5"
                     />
                   </svg>
-                  {userData.role == "user" ? (
+                  { userData.role == "user" ? (
                     <p className="m-0">Request Permission </p>
                   ) : (
                     <p className="m-0">All Permissions </p>
                   )}
                   </Link>
                 </li>
+
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href={userData.role == "lecturer"?"/attendance/add":"/attendance"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={(userData.role == "lecturer")?"/attendance/add":"/attendance"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="inline-block icon icon-tabler icon-tabler-user-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <circle cx="9" cy="7" r="4" />
   <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
   <path d="M16 11l2 2l4 -4" />
 </svg>
-<p className="m-0">Attendance</p>
+<p className="m-0">{(userData.role == "lecturer")?"Add Attendance":"Attendance"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
@@ -195,7 +200,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
   <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
 </svg>
-<p className="m-0">Payment</p>
+<p className="m-0"> {userData.role == "lecturer"? "Add Payment": "Payment"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
@@ -210,7 +215,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   <path d="M8 11h4" />
   <path d="M8 15h3" />
 </svg>
-<p className="m-0">Result</p>
+<p className="m-0">{userData.role == "lecturer"? "Add Result": "Result"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
@@ -221,9 +226,26 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   <path d="M16 7h4" />
   <path d="M18 19h-13a2 2 0 1 1 0 -4h4a2 2 0 1 0 0 -4h-3" />
 </svg>
-<p className="m-0">HomeWork</p>
+<p className="m-0">{userData.role == "lecturer"? "Add HomeWork":"HomeWork"}</p>
 </Link>
                 </li>
+                </>):<>
+                  <li>
+                  <Link href="/edituser" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606f7b" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+  <path d="M16 19h6" />
+  <path d="M19 16v6" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+</svg>
+
+<p className="m-0">Edit user role</p>
+</Link>
+
+                  </li>
+                  </>
+}
             
                 {userData&& userData.role == "lecturer"&& <> <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
                 <Link href="/timetable/add" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
@@ -263,7 +285,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                     />
                   </svg>
                   
-                    <p className="m-0">TimeTable </p>
+                    <p className="m-0">{userData.role == "lecturer"? "Add Timetable": "Timetable"}</p>
                   
                   </Link>
                 </li>
@@ -365,7 +387,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 
 
 {/*    ---------------         mobile navigtion menu         ------------------        */}
-       { showMobileBar &&  <div className="h-[100vh] lg:hidden z-20   sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
+       { showMobileBar  && userData.role &&  <div className="h-[100vh] lg:hidden z-20   sm:block bg-secoundblack w-[80vw] absolute top-10 right-0" onClick={()=> setShowMobileBar(!showMobileBar)}>
             <div className=" ml-2 mt-2 border-lightblack border-2 inline-block rounded-md" onClick={()=>setShowMobileBar(!showMobileBar)}>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#374151" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -387,6 +409,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                   <p className="m-0">My Dashboard </p>
                   </Link>
                 </li>
+{(userData.role  != "Admin")?(<>
                 <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
                 <Link href="/permission" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                   <svg
@@ -432,14 +455,14 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                   </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/attendance" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={(userData.role == "lecturer")?"/attendance/add":"/attendance"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="inline-block icon icon-tabler icon-tabler-user-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <circle cx="9" cy="7" r="4" />
   <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
   <path d="M16 11l2 2l4 -4" />
 </svg>
-<p className="m-0">Attendance</p>
+<p className="m-0"> {userData.role == "lecturer"?" Add Attendance":"Attendance"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
@@ -449,11 +472,11 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
   <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
 </svg>
-<p className="m-0">Payment</p>
+<p className="m-0">{userData.role == "lecturer"?" Add Payment":"Payment"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/exam/result" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/exam/liststudents":"/exam/result"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
@@ -464,20 +487,37 @@ const [showMobileBar,setShowMobileBar] = useState(false)
   <path d="M8 11h4" />
   <path d="M8 15h3" />
 </svg>
-<p className="m-0">Result</p>
+<p className="m-0">{userData.role == "lecturer"?"Add Result":"Result"}</p>
 </Link>
                 </li>
                 <li className="font-[Avenirregular]   hover:bg-[#6b63ff29] ">
-                <Link href="/homework" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                <Link href={userData.role == "lecturer"?"/homework/add":"/homework"} className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-writing" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606F7B" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M20 17v-12c0 -1.121 -.879 -2 -2 -2s-2 .879 -2 2v12l2 2l2 -2z" />
   <path d="M16 7h4" />
   <path d="M18 19h-13a2 2 0 1 1 0 -4h4a2 2 0 1 0 0 -4h-3" />
 </svg>
-<p className="m-0">HomeWork</p>
+<p className="m-0">{userData.role == "lecturer"?" Add Homework":"HomeWork"}</p>
 </Link>
                 </li>
+                </>
+                  ):<>
+                  <li>
+                  <Link href="/edituser" className="text-inherit  h-[3rem]  no-underline text-white   px-4 py-2 flex   cursor-pointer items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#606f7b" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+  <path d="M16 19h6" />
+  <path d="M19 16v6" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+</svg>
+
+<p className="m-0">Edit user role</p>
+</Link>
+
+                  </li>
+                  </>}
 
 
               {userData&& userData.role == "lecturer"&& <> <li className="font-[Avenirregular]  hover:bg-[#6b63ff29] ">
@@ -518,7 +558,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
                     />
                   </svg>
                   
-                    <p className="m-0">TimeTable </p>
+                    <p className="m-0">{userData.role == "lecturer"?" Add Timetable":"Timetable"} </p>
                   
                   </Link>
                 </li>
@@ -570,6 +610,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
 
 }
             
+
                 <hr className="text-[#DAE1E7]" />
   
                 <li

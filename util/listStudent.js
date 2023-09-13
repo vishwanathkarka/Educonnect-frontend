@@ -14,7 +14,7 @@ function ListStudent(props) {
         className="no-underline text-inherit decoration-inherit rounded"
         style={{ color: "inherit", textDecoration: "inherit" }}
       >
-        <div className="px-[5rem] py-2 flex justify-around items-center rounded-lg flex-w  bg-primarylight my-3.5  shadow-xl mx-2 text-[#717377]">
+        <div className="px-[5rem] py-2 flex justify-around items-center rounded-lg flex-w   bg-secoundblack my-3.5  shadow-xl mx-2 text-[#717377]">
           {/* <input type="checkbox" name="topping" value="Regular" id="regular" className='w-[1.2rem] h-[1.2rem]' /> */}
           {props.img ? (
             <div className="">

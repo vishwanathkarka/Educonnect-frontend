@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Loading from "./loadingPage";
 import { isAuthenticated, updateData } from "@/util/apicalls";
+import Sections from "@/util/Sections"
 
 function UserDataEdit(props) {
   if (!isAuthenticated()) {
@@ -119,7 +120,6 @@ function UserDataEdit(props) {
               onChange={inputHandler("parentEmail")}
               value={parentEmail}
             />
-
             <p className="mt-1 text-sm text-lightwg m-0">Phone No</p>
             <input
               type="text"
@@ -146,7 +146,6 @@ function UserDataEdit(props) {
                   <>
                     <ul className="flex flex-wrap">
                       <li className="text-white m-0 flex gap-3 items-center">
-                        {" "}
                         <p>{dep.department.department}</p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -191,10 +190,9 @@ function UserDataEdit(props) {
                         <ul>
                           {dep.section.map((sec, indx) => (
                             <>
-                              {" "}
                               <li className="flex gap-3">
-                                <p>{sec.section}</p>
-                                <svg
+                                <p> {sec.section}
+                                  <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   className="icon icon-tabler icon-tabler-pencil cursor-pointer"
                                   width="20"
@@ -222,8 +220,7 @@ function UserDataEdit(props) {
                                     y2="10.5"
                                   />
                                 </svg>
-
-                                <svg
+                                  <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   className="icon icon-tabler icon-tabler-trash cursor-pointer"
                                   width="20"
@@ -249,27 +246,13 @@ function UserDataEdit(props) {
                                   <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                   <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                 </svg>
+                                 </p>
+                               
+
+                               
                               </li>
                               {viewSec && (
-                                <select
-                                  className="block w-full rounded-md border-0 bg-secoundblack text-white py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
-                                  id="section"
-                                  // onChange={departments[index].section.splice(indx,1,{section:})}
-                                >
-                                  {props.sectionListFetch.map((data) => (
-                                    <option
-                                      value={data._id}
-                                      //  selected = {activeSelect(data._id,departmentSelected)}
-                                      selected={
-                                        data._id == sec._id ? true : false
-                                      }
-                                      key={data._id}
-                                    >
-                                      {console.log(data._id)}
-                                      {data.section}
-                                    </option>
-                                  ))}
-                                </select>
+                              <Sections  />
                               )}
                             </>
                           ))}
@@ -299,18 +282,19 @@ function UserDataEdit(props) {
                     {viewDep && (
                       <select
                         className="block w-full rounded-md border-0 bg-secoundblack text-white py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
-                        id="section"
+                        id="section" onChange={(el)=>{setUserData()}}
                       >
                         {props.departmentListFetch.map((data) => (
                           <option
                             value={data._id}
                             //  selected = {activeSelect(data._id,departmentSelected)}
-                            selected={
-                              data._id == dep.department._id ? true : false
-                            }
+                            onChange={()=>console.log(data.department)}
+                            // selected={
+                            //   data._id == dep.department._id ? true : false
+                            // }
                             key={data._id}
                           >
-                            {console.log(data._id)}
+                            
                             {data.department}
                           </option>
                         ))}
