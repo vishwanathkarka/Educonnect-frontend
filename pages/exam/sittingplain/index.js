@@ -28,16 +28,15 @@ function Sittingplain() {
   const [sectionListFetch, setSectionListFetch] = useState(null);
   const { department, section } = router.query;
   console.log("deppp" + dep);
-  
 
   useEffect(() => {
     // redirecting to the login page if not login
     if (!isAuthenticated()) {
       router.push("/login");
     }
-    
+
     async function fetchdata() {
-      // redirecting to the login page if not lecturer 
+      // redirecting to the login page if not lecturer
       if (isAuthenticated().user.role !== "lecturer") {
         router.push("/login");
       }
@@ -49,13 +48,12 @@ function Sittingplain() {
         // default department selected
         router.query.department =
           isAuthenticated().user.departments[0].department._id;
-           // default section selected
+        // default section selected
         router.query.section =
           isAuthenticated().user.departments[0].section[0]._id;
-          // pushed to the url
+        // pushed to the url
         router.push(router);
       }
-
 
       // getting the user list from the query url
       let data = await postData(
@@ -96,7 +94,7 @@ function Sittingplain() {
     setUser(isAuthenticated().user);
   }, [section, department]);
 
-// handling the input & change in the attendance 
+  // handling the input & change in the attendance
   const attendanceInputHandling = (name) => (el) => {
     const { section, department } = router.query;
     if (name == "department") {
@@ -117,7 +115,7 @@ function Sittingplain() {
         ...departmentSection,
         [name]: splittedSectionData[0],
       });
-   
+
       router.query.section = splittedSectionData[0];
 
       router.push(router);
@@ -159,9 +157,7 @@ function Sittingplain() {
   //     }
   //   }
 
-
   // }
-
 
   function activeSelect(option, status) {
     if (status == option) {
@@ -221,7 +217,6 @@ function Sittingplain() {
               );
             })}
         </select>
-       
       </div>
       {!loading ? (
         <div className="h-[80vh] flex justify-center items-center">

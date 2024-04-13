@@ -29,7 +29,6 @@ function Add() {
   console.log("deppp" + dep);
 
   useEffect(() => {
-
     if (!isAuthenticated()) {
       router.push("/login");
     }
@@ -81,8 +80,6 @@ function Add() {
     fetchdata();
     setUser(isAuthenticated().user);
   }, [section, department]);
-
-
 
   const inputHandle = (name) => (el) => {
     const { section, department } = router.query;
@@ -181,7 +178,7 @@ function Add() {
           ) : (
             ""
           )}
-        
+
           {user &&
             user.departments.map((data) => {
               return (

@@ -23,7 +23,7 @@ function View() {
         setAttendances(data.att);
       }
     }
-    
+
     isAuthenticated().user.role == "student" &&
       fetchData(isAuthenticated().user._id);
     isAuthenticated().user.role == "parent" &&
@@ -33,22 +33,21 @@ function View() {
     <>
       <Header />
       <div className="min-h-[90vh]">
-      {attendances && attendances.length == 0 ? <ResultNotFound /> : ""}
-      {attendances &&
-        attendances.map((attendance) => {
-          return (
-            <Attendaceui
-              htno={moment(attendance.timeStamp).format("MMM Do YY")}
-              key={attendance._id}
-              link="#"
-              isPresent={attendance.isPresent}
-              isAttendaceview={true}
-              name={attendance.lectureId.firstName}
-            />
-          );
-        })}
-
-</div>
+        {attendances && attendances.length == 0 ? <ResultNotFound /> : ""}
+        {attendances &&
+          attendances.map((attendance) => {
+            return (
+              <Attendaceui
+                htno={moment(attendance.timeStamp).format("MMM Do YY")}
+                key={attendance._id}
+                link="#"
+                isPresent={attendance.isPresent}
+                isAttendaceview={true}
+                name={attendance.lectureId.firstName}
+              />
+            );
+          })}
+      </div>
     </>
   );
 }

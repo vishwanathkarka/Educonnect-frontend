@@ -33,51 +33,25 @@ function Homework() {
         isAuthenticated().user.student_id.departments[0].section[0]
       );
   }, []);
-  console.log(homework);
 
   return (
     <>
       <Header />
-      <div>
-        <div className="  min-h-[80vh]  bg-secoundblack mx-4 py-3 px-3 rounded-lg my-5">
-          <table className="w-[95vw] hidden lg:table ">
-            <thead>
-              {userData &&
-                (userData.role == "student" || userData.role == "parent") && (
-                  <tr className="text-lightwg  font-medium border-b-[rgba(246,247,249,.05)]  border-b-[1px] h-[4.5rem]">
-                    <td className="">File</td>
-                    <td className="">Title</td>
-                    <td className="">Date uploaded</td>
-                    <td className="">Last upload</td>
-                    <td className="">Uploaded by</td>
-                    <td className="">Status</td>
-                  </tr>
-                )}
-              {userData &&
-                (userData.role == "student" || userData.role == "parent") &&
-                homework &&
-                homework.map((el) => {
-                  return (
-                    <HomeworkUi
-                      title={el.title}
-                      link="#"
-                      id={el._id}
-                      key={el._id}
-                      img={el.lectureId.photo.secure_url}
-                      uploaded={el.timeStamp}
-                      lemail={el.lectureId.email}
-                      lname={
-                        el.lectureId.firstName + " " + el.lectureId.lastName
-                      }
-                      lastupload={el.submissionDate}
-                      status={el.isSubmittedWork}
-                    />
-                  );
-                })}
-            </thead>
-          </table>
+      <div className="min-h-[100vh]">
+        {/* <div className="  min-h-[80vh] w-[90vw]  bg-secoundblack mx-4 py-3 px-3 rounded-lg my-5"> */}
+ <table className="w-[90vw] m-auto text-center mt-5">
+ <tbody>
+<tr>
+  <th>Upload</th>
+  <th>Topic</th>
+  <th>Uploaded Date</th>
+  <th>Submission Date</th>
+  <th>Assigned By</th>
+  <th>Status</th>
+</tr>
 
-          <div className=" lg:hidden">
+
+      
             {userData &&
               (userData.role == "student" || userData.role == "parent") &&
               homework &&
@@ -98,8 +72,9 @@ function Homework() {
                   />
                 );
               })}
-          </div>
-        </div>
+         </tbody>
+        </table>
+        {/* </div> */}
       </div>
     </>
   );
