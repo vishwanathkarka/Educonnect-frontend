@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import { AddPermision } from "../user/helper/permissioncalls";
-// import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 // import { Navigate } from "react-router-dom";
+
 import { isAuthenticated, postData } from "@/util/apicalls";
 import Loading from "../loadingPage";
 
@@ -36,6 +37,11 @@ export default function PermssionForm(props) {
         isAuthenticated().token
       );
       if (data) {
+        toast.success('Successfully created!',{  style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }});
         props.closeForm(true);
         setloading(false);
       }
@@ -59,6 +65,7 @@ export default function PermssionForm(props) {
     return (
       <>
         <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  ">
+          <Toaster  />
           <div
             className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute "
             onClick={() => {

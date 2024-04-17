@@ -45,14 +45,16 @@ export default function HomeworkUi(props) {
   };
   return (
     <>
-      {/* desktop view */}
-      <tr className="text-[#606F7B] hidden lg:table-row  border-b-[rgba(246,247,249,.05)]  border-b-[1px] h-[3.5rem] " >
-        {/* <Link href={props.link } className='no-underline ' onClick={()=>props.userId(props.id)} > */}
 
-        {userHomeWorkData &&
-          userHomeWorkData.homeworkres == null &&
-          userHomeWorkData.isSubmittedWork == false && (
-            <td>
+      {/* desktop view */}
+      <tr className="text-[#606F7B]   lg:table-row  border-b-[rgba(246,247,249,.05)] w-auto border-b-[1px] h-[3.5rem] " >
+        {/* <Link href={props.link } className='no-underline  block w-[100%]'  > */}
+{console.log(props.status)}
+        {
+          props.status == false ? (
+
+
+            <td className=" text-center">
               <input
                 type="file"
                 name="file"
@@ -85,7 +87,16 @@ export default function HomeworkUi(props) {
                 </svg>
               </label>
             </td>
-          )}
+          ): <td><Link href={props.link} >
+            <p>{props.link}</p>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-symlink" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 21v-4a3 3 0 0 1 3 -3h5" />
+  <path d="M9 17l3 -3l-3 -3" />
+  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+  <path d="M5 11v-6a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-9.5" />
+</svg>
+            </Link></td>}
         {userHomeWorkData &&
           userHomeWorkData.success == true &&
           userHomeWorkData.homeworkres != null && <td></td>}
@@ -94,39 +105,40 @@ export default function HomeworkUi(props) {
         <td>{moment(props.uploaded).format("MMMM Do YYYY")}</td>
         <td>{moment(props.lastupload).format("MMMM Do YYYY")}</td>
 
-        <td>
+        <td className="">
           
-          <tr className="">
-            {" "}
-            <td className="px-2">
-              {" "}
+          <tr className="w-[100%]  m-auto text-center block md:inline-table  md:m-0  ">
+           
+            <td className="px-2 ">
+              
               <Image
                 src={props.img}
                 height={40}
                 width={40}
                 alt="user"
-                className="rounded-[6rem]"
+                className="rounded-[6rem] block text-center m-auto md:m-0"
               />
             </td>
-            <tr>
+            <tr className="block ">
               {" "}
               <td className="text-white font-normal p-0 m-0 text-[0.9rem]">
                 {props.lname}
               </td>
             </tr>
-            <tr>
+            <tr className="block">
               {" "}
               <td className="text-[0.9rem]">{props.lemail}</td>
             </tr>
           </tr>
         </td>
-        <td>
+        <td className=" ">
           {userHomeWorkData && userHomeWorkData.homeworkres != null ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="27"
               height="21"
               viewBox="0 0 27 21"
+              className="text-center m-auto md:m-0"
             >
               <rect
                 id="Rectangle_16"
@@ -175,6 +187,7 @@ export default function HomeworkUi(props) {
             </svg>
           )}
         </td>
+        {/* </Link> */}
       </tr>
       {/* ------  desktop view  ------ */}
 

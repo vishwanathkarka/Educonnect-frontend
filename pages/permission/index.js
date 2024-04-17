@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import PermissionForm from "@/util/Form/permissionForm";
 import ResultNotFound from "@/util/resultNotFound";
 import Loading from "@/util/loadingPage";
+import toast, { Toaster } from 'react-hot-toast';
 // import Header from "../core/Header";
 import PermssionCard from "@/util/permssionCard";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
@@ -122,6 +123,7 @@ function AdminAllPermission() {
         isAuthenticated().token
       );
       if (leavesData) {
+       
         setloading(false);
       }
 
@@ -150,6 +152,8 @@ function AdminAllPermission() {
       {<Header />}
       {/* ------ top menu ----- */}
       {isView && <PermissionForm closeForm={closeForm}></PermissionForm>}
+
+<Toaster/>
       <div className="flex  gap-[80px] h-[60px] mx-7 my-2 rounded-lg items-center justify-center  ">
         <h2 className="text-white">List of Permssions </h2>
 
@@ -179,18 +183,20 @@ function AdminAllPermission() {
       </div>
 
       <div className="min-h-[60vh]  bg-secoundblack mx-4 py-3 px-3 rounded-lg">
-        <button
+        {isAuthenticated() &&  isAuthenticated().user.role == "student" &&  ( <button
           className="bg-primarycolor ml-2 text-[white] px-2 py-1 rounded-md  block"
           onClick={() => setIsView(!isView)}
         >
           + New
-        </button>
+        </button> 
+        )
+}
         {allRequests && allRequests.length == 0 ? <ResultNotFound /> : ""}
         {allRequests && !allRequests.length == 0 && (
           <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-lightwg text-center  md:px-[5rem]  items-center  my-2">
-            <p className=" w-[100%] md:w-[200px] ">Name</p>
+        { isAuthenticated().user.role == "lecturer" && (   <p className=" w-[100%] md:w-[200px] ">Name</p> ) }
 
-            <p className=" w-[100%] md:w-[200px] ">Subject</p>
+            <p className=" w-[100%] md:w-[200px] text-center   ">Subject</p>
             <p className=" w-[50%] md:w-[100px]">Days</p>
             <p className="  w-[50%] md:w-[100px]">Status</p>
             {console.log("{{" + allRequests)}
@@ -206,6 +212,7 @@ function AdminAllPermission() {
               isAdmin={true}
               subject={element.subject}
               tag={element.tag}
+              id = {element._id}
               img={element.userId.photo.secure_url}
               name={element.userId.firstName + " " + element.userId.lastName}
               htno={
@@ -234,7 +241,7 @@ function AdminAllPermission() {
               userid={element.userId}
               key={element.userId}
               from={element.fromDate}
-              id={element._id}
+             
               to={element.toDate}
             />
           ))

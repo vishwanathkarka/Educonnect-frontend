@@ -13,6 +13,7 @@ function Homework() {
     if (!isAuthenticated()) {
       router.push("/login");
     }
+    
     setUserData(isAuthenticated().user);
     //  setSectionDepartment({"department":isAuthenticated().user.departments[0].department._id,"section":isAuthenticated().user.departments[0].section[0]._id})
     const fetchdata = async (department, section) => {
@@ -37,11 +38,11 @@ function Homework() {
   return (
     <>
       <Header />
-      <div className="min-h-[100vh]">
+      <div className="min-h-[100vh] overflow-x-auto  ">
         {/* <div className="  min-h-[80vh] w-[90vw]  bg-secoundblack mx-4 py-3 px-3 rounded-lg my-5"> */}
- <table className="w-[90vw] m-auto text-center mt-5">
+ <table className="w-[100vw]  md:w-[90vw] m-auto text-center mt-5 overflow-x-auto">
  <tbody>
-<tr>
+<tr className="text-white">
   <th>Upload</th>
   <th>Topic</th>
   <th>Uploaded Date</th>
@@ -49,17 +50,16 @@ function Homework() {
   <th>Assigned By</th>
   <th>Status</th>
 </tr>
-
-
-      
             {userData &&
               (userData.role == "student" || userData.role == "parent") &&
-              homework &&
+              homework  &&  
               homework.map((el) => {
+               console.log(el)
                 return (
                   <HomeworkUi
                     title={el.title}
-                    link="#"
+                    link={"#"} 
+                    // homeworkFile.secure_url
                     id={el._id}
                     key={el._id}
                     img={el.lectureId.photo.secure_url}

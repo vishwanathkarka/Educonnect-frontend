@@ -140,3 +140,24 @@ tr:nth-child(even){
     }
   }
   
+
+@media screen and (max-width: 480px) {
+  tbody tr th {
+       display: none;
+   }
+
+   td, th {
+    text-align: center;
+    margin: auto;
+       display: block;
+   }
+
+   td[data-th]:before  {
+    text-align: center;
+       content: attr(data-th);
+       margin-right: 10px;
+       font-weight: bold;
+   }
+}
+
+

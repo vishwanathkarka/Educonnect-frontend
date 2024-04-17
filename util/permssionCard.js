@@ -745,12 +745,12 @@ export default function PermssionCard(props) {
     return (
       <>
         <div className="flex flex-wrap md:flex-row justify-center md:justify-between text-[#000000] text-center  md:px-[5rem]  items-center  my-2">
-          {props.isAdmin ? (
+          {isAuthenticated().user.role == "lecturer" ? (
             <div className="flex gap-5">
               {" "}
-              {isAuthenticated().user.role == "lecturer" ? (
+             
                 <div>
-                  {" "}
+                  
                   <img
                     src={
                       props.img !== undefined
@@ -764,9 +764,8 @@ export default function PermssionCard(props) {
                     srcset=""
                   />{" "}
                 </div>
-              ) : (
-                ""
-              )}
+             
+             
               <div className="flex flex-col gap-2">
                 {" "}
                 <p className="text-white text-lg m-0">
@@ -781,14 +780,16 @@ export default function PermssionCard(props) {
           ) : (
             " "
           )}
-          <p className=" w-[100%] md:w-[200px] text-[#717377] text-center">
+          <p className=" w-[100%] md:w-[200px] text-[#717377]  text-center">
             {props.subject}
           </p>
-          <p className="text-[#606F7B] w-[50%] md:w-[100px]">{props.tag}</p>
+          {/* <p className="text-[#606F7B] w-[50%] md:w-[100px]">{props.tag}</p> */}
           <p className=" text-primarycolor w-[50%] md:w-[100px]">
             {DateDiff()} {DateDiff() == 1 ? "Day" : "Days"}
           </p>
+          
           {/* {IsPermissionApproved(isApp)} */}
+          <div className="flex gap-2">
           {props.isApproved == 0 ? (
             <p className=" w-[100px] text-[#FFD43B] flex justify-center  items-center gap-1">
               <svg
@@ -917,6 +918,7 @@ export default function PermssionCard(props) {
               )}
             </svg>
           </p>
+          </div>
         </div>
         <div>
           <div className={buttonActive ? "hidden" : "block"}>
