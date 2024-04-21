@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "@/util/header";
+import toast, { Toaster } from "react-hot-toast";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
 function PaymentAddForm(props) {
   //this contains user info
@@ -45,6 +46,15 @@ function PaymentAddForm(props) {
   // submitting data
   const handlePaymentSubmit = async (el) => {
     el.preventDefault();
+    let waiting =  toast.loading('Waiting...',{
+    
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
+    
     const isDone = await postData(
       "/addpayment",
       paymentAdd,
@@ -52,12 +62,27 @@ function PaymentAddForm(props) {
     );
 
     if (isDone) {
-      props.closeForm(true);
+     
+      toast.dismiss(waiting);
+      toast.success("Amount Added ",{
+   
+       style: {
+         borderRadius: '10px',
+         background: '#333',
+         color: '#fff',
+       }});
+       setTimeout(() => {
+        props.closeForm(true)
+      }, "600");
+      //  setTimeout(props.closeForm(true), 10000);
+       
     }
+
   };
   return (
     <>
       <div className=" h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col  ">
+      <Toaster position="top-center" />
         <div
           className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute"
           onClick={() => {
@@ -87,7 +112,7 @@ function PaymentAddForm(props) {
             type="text"
             class="py-1.5 pl-7 pr-20 border-[1.5px]  border-lightblack  bg-secoundblack   rounded-md   text-white"
             placeholder="Ex: Yearly payment fee"
-            onChange={handleInput("firstName")}
+            onChange={handleInput("title")}
             // value={title}
           />
           <p className="text-lightwg m-0">Enter the Amount </p>

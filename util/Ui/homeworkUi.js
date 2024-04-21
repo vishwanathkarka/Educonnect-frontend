@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
 import { getData, isAuthenticated, postDataForm } from "../apicalls";
 export default function HomeworkUi(props) {
   const [userData, setUserData] = useState(null);
+  const [status,setStatus] = useState(props.status);
   const [userHomeWorkData, setUserHomeWorkData] = useState(null);
   useEffect(() => {
     setUserData(isAuthenticated().user);
@@ -14,10 +15,10 @@ export default function HomeworkUi(props) {
         isAuthenticated().token
       );
       setUserHomeWorkData(userHomeWork);
-
+     
       // console.log(userhomework)
     };
-
+    
     // console.log(userHomeWork)
     userDataHomeWork();
   }, []);
@@ -38,6 +39,9 @@ export default function HomeworkUi(props) {
       bodyFormData,
       isAuthenticated().token
     );
+    if(data.success == true){
+      setStatus(!status)
+    }
     if (data.success == true) {
       setUserHomeWorkData({ ...userHomeWorkData, homeworkres: true });
     }
@@ -51,9 +55,7 @@ export default function HomeworkUi(props) {
         {/* <Link href={props.link } className='no-underline  block w-[100%]'  > */}
 {console.log(props.status)}
         {
-          props.status == false ? (
-
-
+          status == false && (
             <td className=" text-center">
               <input
                 type="file"
@@ -87,8 +89,11 @@ export default function HomeworkUi(props) {
                 </svg>
               </label>
             </td>
-          ): <td><Link href={props.link} >
-            <p>{props.link}</p>
+          )
+        }
+        {
+          status == true && ( <td><Link href={props.link} >
+          
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-symlink" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M4 21v-4a3 3 0 0 1 3 -3h5" />
@@ -96,15 +101,13 @@ export default function HomeworkUi(props) {
   <path d="M14 3v4a1 1 0 0 0 1 1h4" />
   <path d="M5 11v-6a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-9.5" />
 </svg>
-            </Link></td>}
+            </Link></td>)}
         {userHomeWorkData &&
           userHomeWorkData.success == true &&
-          userHomeWorkData.homeworkres != null && <td></td>}
+          userHomeWorkData.homeworkres != null}
         <td>{props.title}</td>
-
         <td>{moment(props.uploaded).format("MMMM Do YYYY")}</td>
         <td>{moment(props.lastupload).format("MMMM Do YYYY")}</td>
-
         <td className="">
           
           <tr className="w-[100%]  m-auto text-center block md:inline-table  md:m-0  ">
@@ -120,19 +123,18 @@ export default function HomeworkUi(props) {
               />
             </td>
             <tr className="block ">
-              {" "}
-              <td className="text-white font-normal p-0 m-0 text-[0.9rem]">
+
+            <td className="text-white  font-normal p-0 m-0 text-[0.9rem] ">
                 {props.lname}
               </td>
             </tr>
             <tr className="block">
-              {" "}
               <td className="text-[0.9rem]">{props.lemail}</td>
             </tr>
           </tr>
         </td>
         <td className=" ">
-          {userHomeWorkData && userHomeWorkData.homeworkres != null ? (
+          {status ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="27"

@@ -3,7 +3,9 @@ import { postDataForm, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
 import Header from "@/util/header";
 import Loading from "@/util/loadingPage";
+import toast, { Toaster } from "react-hot-toast";
 var FormData = require("form-data");
+
 
 function Add() {
   let i = null;
@@ -11,6 +13,7 @@ function Add() {
   const [homeworkInfo, setHomeWorkInfo] = useState({
     department: router.query.department,
     section: router.query.section,
+    title:"",description:"",submissionDate:"",lectureworkFile:""
   });
   const [dep, setdep] = useState(0);
   //     const [departmentSection,setDepartmentSection] = useState({
@@ -96,7 +99,12 @@ function Add() {
   };
   const handleSubmit = async (el) => {
     el.preventDefault();
-    setloading(true);
+    // setloading(true);
+    let waiting =  toast.loading('Waiting...',{  style: {
+      borderRadius: '10px',
+      background: '#333',
+      color: '#fff',
+    }});
     bodyFormData.append("data", JSON.stringify(homeworkInfo));
     bodyFormData.append("lectureworkFile", img);
     const data = await postDataForm(
@@ -104,15 +112,28 @@ function Add() {
       bodyFormData,
       isAuthenticated().token
     );
+    setHomeWorkInfo({section:"",department:"",title:"",description:"",submissionDate:"",lectureworkFile:""})
     if (data) {
-      setloading(false);
+       toast.dismiss(waiting);
+      toast.success("Home Work Added ",{
+    
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }});
+        
     }
     console.log(data);
+ 
+
+
   };
   return (
     <>
       <Header />
       <div className="h-[90vh] flex flex-col justify-center items-center ">
+      <Toaster position="top-center" />
         {!isloading && (
           <form
             className="w-[35rem] m-auto  h-[70vh] m-auto bg-secoundblack  p-[1rem] border-[rgba(246,247,249,.05)]  border-[2px]  rounded-lg"

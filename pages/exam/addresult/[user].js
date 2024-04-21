@@ -4,6 +4,7 @@ import { getData, isAuthenticated, postData } from "../../../util/apicalls";
 import { useEffect, useState } from "react";
 import Loading from "@/util/loadingPage";
 import Header from "@/util/header";
+import toast, { Toaster } from "react-hot-toast";
 function User() {
   const router = useRouter();
   const [userData, setUserData] = useState(null);
@@ -50,6 +51,15 @@ function User() {
   // "userId":"63e12e165aae5db72f8f4afb"
   const handleSubmit = async (el) => {
     el.preventDefault();
+    let waiting =  toast.loading('Waiting...',{
+    
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
+
     setloading(true);
     const postresult = await postData(
       "/addResult",
@@ -64,13 +74,24 @@ function User() {
     );
     console.log("&****))" + JSON.stringify(postresult));
     if (postresult.success == true) {
-      setloading(false);
-      router.push("/exam/liststudents");
+      toast.dismiss(waiting);
+      toast.success("Login is Successful",{
+   
+       style: {
+         borderRadius: '10px',
+         background: '#333',
+         color: '#fff',
+       }});
+       setTimeout(() => {
+        router.push("/exam/liststudents");
+      }, "600");
+      
     }
   };
   return (
     <>
       <Header />
+      <Toaster position="top-center" />
       <div className="h-[90vh] flex justify-center items-center">
         {!isloading && (
           <form
@@ -104,6 +125,7 @@ departments&& departments.map((data) => {
                   className="rounded-[50%] m-auto  border-lightwg border-[2px]"
                   width={100}
                   height={100}
+                  alt="User"
                 ></Image>{" "}
               </div>
             ) : (

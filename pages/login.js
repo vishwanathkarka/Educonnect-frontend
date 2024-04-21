@@ -49,7 +49,7 @@ function Login() {
     msg: { title: "", msg: "" },
     toastColor: "",
   });
-
+console.log(process.env.URL)
   const { isShownToast, msg, toastColor } = toShowToast;
 
   const { email, password } = loginData;
@@ -138,7 +138,7 @@ function Login() {
         }});
       setTimeout(() => {
         router.push("/dashboard");
-      }, "1000");
+      }, "600");
       setToShowToast({
         ...toShowToast,
         toastColor: "bg-success",

@@ -58,7 +58,7 @@ function Homework() {
                 return (
                   <HomeworkUi
                     title={el.title}
-                    link={"#"} 
+                    link={el.lectureworkFile.secure_url} 
                     // homeworkFile.secure_url
                     id={el._id}
                     key={el._id}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getData, isAuthenticated, postData } from "@/util/apicalls";
 import Header from "@/util/header";
 import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
 function Add() {
   const router = useRouter();
   const [departmentListFetch, setDepartmentListFetch] = useState();
@@ -61,20 +62,48 @@ function Add() {
     el.preventDefault();
     const data = { department: department, section: section, period: period };
     data[day] = true;
+    let waiting =  toast.loading('Waiting...',{
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
+   
     const uploadingTimeTable = await postData(
       "/addtimetable",
       data,
       isAuthenticated().token
     );
-    console.log(uploadingTimeTable);
+  
     if (uploadingTimeTable.success == true) {
-      router.push("/timetable/add");
+      toast.dismiss(waiting);
+      toast.success("TimeTable Added Successful",{
+   
+       style: {
+         borderRadius: '10px',
+         background: '#333',
+         color: '#fff',
+       }});
+
+       setTimeout(() => {
+        router.push("/timetable/add");
+      }, "600");
+      
+      setUserEnteredData({
+        department: "",
+        section: "",
+        period: "",
+        day: "",
+        subjectName: "",
+      })
     }
   };
 
   return (
     <>
       <Header />
+      <Toaster position="top-center" />
       <div className=" flex  justify-center mt-6 h-[90vh] align-middle  bg-slate-50">
         <form
           className="w-[35rem] rounded   m-auto bg-secoundblack p-[1rem]"

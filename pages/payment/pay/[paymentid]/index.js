@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useRouter } from "next/router";
 import {getData, isAuthenticated}from "@/util/apicalls"
 import Image from 'next/image';
+import Loading from '@/util/loading';
 import { redirect } from 'next/navigation';
-import loadingimg from "../../../../util/Spinner-1s-200px.gif";
 export default function Paymentid() {
     const router = useRouter();
     useEffect(() => {
@@ -20,8 +20,8 @@ console.log(pay)
    <>
    <div>
     
-   <div className="h-[80vh] flex justify-center items-center">
-          <Image src={loadingimg} alt="" />
+   <div className="h-[100vh] flex justify-center items-center">
+    <Loading/>
         </div>
    </div>
    </>

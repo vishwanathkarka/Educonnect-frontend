@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Header from "@/util/header";
 import { getData, postData, isAuthenticated } from "@/util/apicalls";
+import NoContent from "../../util/no-content.png"
 import Attendaceui from "@/util/Ui/attendaceui";
 import PaymentAddForm from "@/util/Form/paymentAddForm";
 import PaymentUI from "@/util/Ui/paymentUI";
@@ -63,19 +64,7 @@ function Payment() {
           setUserDataForAttendace(data.user);
           setLoading(true);
         }
-        // if (isAuthenticated()) {
-        //   let departmentlist = await postData(
-        //     "/listdepartmentspecific",
-        //     isAuthenticated().user.departments[0]
-        //   );
-        //   if (departmentlist.success == true) {
-        //     setDepartmentListFetch(departmentlist.listOfDepartment);
-        //   }
-        // }
-        // let sectionlist = await getData("/listsection");
-        // if (sectionlist.success == true) {
-        //   setSectionListFetch(sectionlist.listOfSection);
-        // }
+      
       }
       const userPaymentInfo = async (userid) => {
         const userdata = await getData(
@@ -224,33 +213,53 @@ function Payment() {
                   );
                 })}
             </select>
-            <button className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded">
+            {/* <button className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded">
               Get
-            </button>
+            </button> */}
           </div>
         )}
-        {userCradational == "lecturer" ? (
-          <div className="flex text-whitelight px-5 py-6 mx-4 my-0 gap-10     text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] ">
-            <p className="flex-[0.5]">Details</p>
-            <p className="flex-[2]">Student Phone No</p>
-            <p className="flex-[2]">Email</p>
+         {  userDataForAttendace ==undefined  && (
+          <div className="h-[90vh] flex justify-center align-center flex-col items-center">
+          <Image src={NoContent} width={500} height={100} alt="No Result Found" /> 
+          <p className="text-white text-[3rem]">No Content Found</p>
           </div>
-        ) : (
-          <div className="flex text-whitelight px-5 py-6 mx-4 my-3 gap-10   text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] ">
-            <p className="flex-[2]">Title</p>
-            <p className="flex-[3]">Description</p>
-            <p className="flex-[1]">Payment Id</p>
-            <p className="flex-[1]">Amount</p>
-            <p className="flex-[1]">Paid Date</p>
-            <p className="flex-[1]">Last for payment</p>
-            <p className="flex-[1]">Status</p>
-          </div>
-        )}
-        {!loading ? (
+          
+        )
+        }
+         {!loading && (
           <div className="h-[80vh] flex justify-center  items-center">
             <Loading />
+
           </div>
+         
+        ) }
+        
+{ userDataForAttendace !=undefined && (
+        <table className="w-[90vw] m-auto px-[20rem] my-8 ">
+        <tbody>
+        {userCradational == "lecturer" ? (
+          <tr className=" rounded-md text-white text-center">
+            <td className="">Photo</td>
+            <td className="">Details</td>
+            <td className="">Email</td>
+            <td className="">Email</td>
+            <td className="">Email</td>
+          </tr>
         ) : (
+          <tr className=" text-whitelight gap-10   text-center border-b-[rgba(246,247,249,.05)] border-b-[1px] ">
+            <td className=" ">Title</td>
+            <td className="">Description</td>
+            <td className="">Paid Amount</td>
+            <td className="">Paid Fee</td>
+            <td className="">Last for payment</td>
+            <td className="">Status</td>
+          
+          </tr>
+        )}
+       
+       
+       
+        {loading && (
           userDataForAttendace.map((data) => {
             return userCradational == "lecturer" ? (
               <PaymentUI
@@ -294,6 +303,7 @@ function Payment() {
                 status={
                   data.ispaid == true ? true : data.paymentId ? false : ""
                 }
+                isPaid ={data.ispaid}
                 key={data._id}
                 paiddate={data.paidDate || "-"}
                 paymentId={data._id}
@@ -304,6 +314,10 @@ function Payment() {
             );
           })
         )}
+         </tbody>
+         </table>
+)
+}
       </div>
     </>
   );

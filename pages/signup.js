@@ -23,7 +23,7 @@ const Signup = () => {
     parentPhoneNo: "",
     studentEmail:"",
     htno:"",
-    gender:""
+    gender:"",
   };
   const [userData, setUserData] = useState(userInput);
   // for the fetching department form api
