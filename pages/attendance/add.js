@@ -9,6 +9,8 @@ import Image from "next/image";
 import { useState } from "react";
 import Header from "@/util/header";
 import Loading from "@/util/loadingPage";
+import toast, { Toaster } from "react-hot-toast";
+
 
 // adding the attendance
 function Add() {
@@ -115,12 +117,43 @@ function Add() {
   };
 
   async function attendanceSubmit() {
+     
+   let waiting =  toast.loading('Waiting...',{
+    
+    style: {
+      borderRadius: '10px',
+      background: '#333',
+      color: '#fff',
+    },
+  })
+
     let da = await postData(
       "/bulkattendanceadd",
       attendace,
       isAuthenticated().token
     );
+    if(da.success == true){
+      toast.dismiss(waiting);
+           toast.success("Added Attendance Successful",{
+        
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+            }});
+      }
+      else{
+        toast.error("Error In Adding Attendance",{
+        
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          }})
+      }
   }
+
+  
 
   function attendance(data) {
     console.log("DDDTTAAAAA" + JSON.stringify(data));
@@ -166,6 +199,7 @@ function Add() {
   return (
     <>
       <Header />
+      <Toaster position="top-center" />
       <div className=" flex items-center gap-3 px-3 ">
         <select
           name=""

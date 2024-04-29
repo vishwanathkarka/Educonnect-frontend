@@ -246,7 +246,7 @@ const Dashboard = () => {
             Todays Classes {moment().format("dddd").toLowerCase()}
           </h5>
           {!getTimetable && <Loading />}
-          {getTimetable && (
+          {getTimetable && isAuthenticated() !=  (
             <div className="overflow-x-auto ">
               {" "}
               <table className="text-white w-[90vw] m-auto shadow-[#06060669] shadow-md   text-center  rounded-sm  ">
@@ -265,7 +265,7 @@ const Dashboard = () => {
                             <td>
                               {el.lectureId && (  <Image
                                 className="rounded-lg shadow-md "
-                                src={el.lectureId.photo.secure_url}
+                                // src={el.lectureId.photo.secure_url}
                                 alt={
                                   el.lectureId.firstName +
                                   " " +

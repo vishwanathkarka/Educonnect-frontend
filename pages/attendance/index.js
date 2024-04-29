@@ -4,6 +4,9 @@ import moment from "moment";
 import ResultNotFound from "@/util/resultNotFound";
 import Attendaceui from "@/util/Ui/attendaceui";
 import Header from "@/util/header";
+import toast, { Toaster } from "react-hot-toast";
+
+
 function View() {
   const [attendances, setAttendances] = useState();
 
@@ -20,9 +23,12 @@ function View() {
       console.log(isAuthenticated().user._id);
       console.log(data);
       if (data.success == true) {
+
         setAttendances(data.att);
       }
     }
+
+    
 
     isAuthenticated().user.role == "student" &&
       fetchData(isAuthenticated().user._id);
@@ -32,7 +38,9 @@ function View() {
   return (
     <>
       <Header />
+
       <div className="min-h-[90vh]">
+        
         {attendances && attendances.length == 0 ? <ResultNotFound /> : ""}
         {attendances &&
           attendances.map((attendance) => {

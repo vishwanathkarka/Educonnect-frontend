@@ -42,11 +42,23 @@ function Payment() {
         router.query.department == undefined &&
         router.query.section == undefined
       ) {
+        if(isAuthenticated().user.role !="parent" ){
         router.query.department =
-          isAuthenticated().user.departments[0].department._id;
+         isAuthenticated().user.departments[0].department._id
+        }
+         else{
+          router.query.department = isAuthenticated().user.student_id.departments[0].department._id
+         }
+         if(isAuthenticated().user.role !="parent" ){
         router.query.section =
-          isAuthenticated().user.departments[0].section[0]._id;
+        isAuthenticated().user.departments[0].section[0]._id
+         }
+         else{
+        
+          router.query.section = isAuthenticated().user.student_id.departments[0].section[0]._id;
+         }
         router.push(router);
+
       }
       setUserCradational(isAuthenticated().user.role);
 

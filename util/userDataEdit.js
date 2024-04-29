@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Loading from "./loadingPage";
 import { isAuthenticated, updateData } from "@/util/apicalls";
 import Sections from "@/util/Sections"
+import toast, { Toaster } from "react-hot-toast";
 
 function UserDataEdit(props) {
   if (!isAuthenticated()) {
@@ -24,14 +25,43 @@ function UserDataEdit(props) {
     parentEmail: props.parentEmail,
     phoneNo: props.phoneNo,
     role: props.role,
-    departments: props.departments,
+    departments: props.departments
+
   });
-  const { firstname, email, htno, parentEmail, phoneNo, role, departments } =
+const [dep,setDep]  = useState([])
+
+
+
+
+
+  const AddDepInProfile = (depId) =>{
+// departments.map((el)=>{
+
+ console.log(`8495995 ${JSON.stringify(depId)}`)
+// })
+
+// departments.push({department:depId})
+
+  }
+
+  console.log(props.departments)
+  const { firstname, email, htno, parentEmail, id, phoneNo, role, departments } =
     userData;
+
+// departments.map((d)=>{
+// //  setDep( dep.push(d.department._id))
+// setAddDep([...dep,d.department._id])
+// console.log(dep)
+// })
+
+
+  console.log(`DEPPP)((())) - ${JSON.stringify(departments)}`)
+
   const inputHandler = (name) => (el) => {
     setUserData({ ...userData, [name]: el.target.value });
     console.log(userData);
   };
+  console.log(props.id)
   console.log("9900" + departmentSelected);
   const onSubmitForm = async (el) => {
     el.preventDefault();
@@ -42,12 +72,21 @@ function UserDataEdit(props) {
       userData,
       isAuthenticated().token
     );
-    if (data.status == true) {
-      props.viewForm(true);
+    if (data.success == true) {
+      // props.viewForm(true);
       setloading(false);
+      toast.success("Updated Successful",{
+    
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }});
     }
     console.log(data);
     if (data.success == true) {
+
+      
     }
   };
   function activeSelect(option, status) {
@@ -59,9 +98,12 @@ function UserDataEdit(props) {
   }
   return (
     <>
-      <div className=" min-h-[100%]  w-[100%] absolute flex justify-center items-center  flex-col top-[5rem]  ">
+      <div className=" min-h-[100px]  w-[100vw] absolute ml-[50%] flex justify-center items-center  flex-col top-[5rem]  " key={props.key}>
+       
+       <Toaster position="top-center" />
+       
         <div
-          className=" h-[100vh] w-[100%] backdrop-blur-[2px] cursor-pointer  absolute  "
+          className=" h-[100rem] w-[180vw] backdrop-blur-[2px] cursor-pointer  absolute  "
           onClick={() => {
             props.closeForm(true);
           }}
@@ -72,7 +114,7 @@ function UserDataEdit(props) {
           <form
             onSubmit={onSubmitForm}
             // className=" w-[450px] my-14 h-[145vh] bg-[white] rounded-[20px] px-[60px] py-[40px]"
-            className="md:w-[371px]  pt-6   w-[351px] min-h-[850px] bg-[#1A1E23]  border-secoundblack drop-shadow-md border-[5px] shadow-md rounded-[35px] drop-shadow-sm shadow-md rounded-[35px] drop-shadow-sm px-[2rem]  flex flex-col gap-[15px] "
+            className="md:w-[371px]  pt-6  ml-auto  w-[351px] min-h-[850px] bg-[#1A1E23]  border-secoundblack drop-shadow-md border-[5px] shadow-md rounded-[35px] drop-shadow-sm shadow-md rounded-[35px] drop-shadow-sm px-[2rem]  flex flex-col gap-[15px] "
           >
             <div className="flex gap-6 items-center m-0 ">
               <h2 className="font-bold text-[1.2rem] text-white m-0">
@@ -83,7 +125,8 @@ function UserDataEdit(props) {
               Editing the role to the person
             </p>
             <hr className="text-[#D5D8D9] m-0"></hr>
-            <p className="py-[1px] text-sm font-bold m-0 text-lightwg">
+            <p className="py-[1px] text-sm font-bold m-0 text-lightwg"
+            >
               First Name{" "}
             </p>
             <input
@@ -163,6 +206,7 @@ function UserDataEdit(props) {
                               setDepartmentSelected(dep._id);
                           }}
                         >
+                          
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
                           <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
@@ -288,7 +332,7 @@ function UserDataEdit(props) {
                           <option
                             value={data._id}
                             //  selected = {activeSelect(data._id,departmentSelected)}
-                            onChange={()=>console.log(data.department)}
+                            onChange={()=>console.log(`DEEEPPP ${data.department}`)}
                             // selected={
                             //   data._id == dep.department._id ? true : false
                             // }
@@ -303,18 +347,21 @@ function UserDataEdit(props) {
                   </>
                 ))}
 
+                
+
               {addDep && (
                 <select
                   className="block w-full rounded-md border-0 bg-secoundblack text-white py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
                   id="section"
                   onChange={inputHandler("addingDep")}
                 >
+                  <option value="" selected={true}> Select Dep </option>
                   {props.departmentListFetch.map((data) => (
                     <option
                       value={data._id}
                       //  selected = {activeSelect(data._id,departmentSelected)}
                       // selected = {data._id == dep.department._id ?true:false}
-
+                      onClick={()=>AddDepInProfile(data._id)}
                       key={data._id}
                     >
                       {console.log(data._id)}
