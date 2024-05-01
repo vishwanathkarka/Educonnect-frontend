@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Header from "@/util/header";
 import Loading from "@/util/loadingPage";
+
 import toast, { Toaster } from "react-hot-toast";
 
 
@@ -254,6 +255,8 @@ function Add() {
         >
           submit
         </button>
+
+        <button className=" border-[1.5px]  border-primarycolor p-2  bg-secoundblack   rounded-md   text-white my-3 " onClick={()=>router.push('/attendance')}>View Attendance </button>
       </div>
       {!loading ? (
         <Loading />

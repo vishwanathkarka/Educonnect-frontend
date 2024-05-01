@@ -16,6 +16,7 @@ console.log(pay)
         }
         router.query.paymentid &&   payment()
     }, [router,router.query.paymentid]);
+    
   return (
    <>
    <div>

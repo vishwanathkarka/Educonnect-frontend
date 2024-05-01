@@ -8,7 +8,7 @@ function Homework() {
   // const [sectionDepartment,setSectionDepartment] = useState(null)
   const [userData, setUserData] = useState(null);
   const [homework, setHomeWork] = useState();
-
+  const [lecturerAddedHomework, setLecturerAddedHomework] = useState();
   useEffect(() => {
     if (!isAuthenticated()) {
       router.push("/login");
@@ -23,6 +23,19 @@ function Homework() {
       );
       setHomeWork(homeworkList.Homeworks);
     };
+
+
+    const getLecturerAddedHomework = async() =>{
+const data = await getData(`/homeworkaddedlecturer`,isAuthenticated().token)
+if(data.success == true){
+setLecturerAddedHomework(data)
+}
+console.log(data)
+    }
+
+    
+
+    
     isAuthenticated().user.role == "student" &&
       fetchdata(
         isAuthenticated().user.departments[0].department._id,
@@ -33,6 +46,12 @@ function Homework() {
         isAuthenticated().user.student_id.departments[0].department,
         isAuthenticated().user.student_id.departments[0].section[0]
       );
+      
+      if(isAuthenticated().user.role = "lecturer"){
+        getLecturerAddedHomework()
+      }
+
+
   }, []);
 
   return (
@@ -63,6 +82,27 @@ function Homework() {
                     id={el._id}
                     key={el._id}
                     img={el.lectureId.photo.secure_url}
+                    uploaded={el.timeStamp}
+                    lemail={el.lectureId.email}
+                    lname={el.lectureId.firstName + " " + el.lectureId.lastName}
+                    lastupload={el.submissionDate}
+                    status={el.isSubmittedWork}
+                    homeworkID={el._id}
+                  />
+                );
+              })}
+
+{userData && lecturerAddedHomework &&
+              lecturerAddedHomework.homeWork.map((el) => {
+               console.log(el)
+                return (
+                  <HomeworkUi
+                    title={el.title}
+                    link={el.lectureworkFile.secure_url} 
+                    // homeworkFile.secure_url
+                    id={el._id}
+                    key={el._id}
+                    // img={el.lectureId.photo.secure_url}
                     uploaded={el.timeStamp}
                     lemail={el.lectureId.email}
                     lname={el.lectureId.firstName + " " + el.lectureId.lastName}

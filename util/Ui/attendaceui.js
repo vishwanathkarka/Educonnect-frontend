@@ -10,10 +10,10 @@ function Attendaceui(props) {
   return (
     <>
       {/* <Link href={props.link} className='no-underline text-inherit decoration-inherit rounded' style={{ color: 'inherit', textDecoration: 'inherit'}} >  */}
-      <div className="px-[5rem] py-2 flex justify-around items-center rounded-lg flex-w bg-secoundblack my-3.5  shadow-xl mx-2 text-[#717377]">
+      <tr className="px-[5rem] py-2 flex justify-around items-center rounded-lg flex-w bg-secoundblack my-3.5  shadow-xl mx-2 text-[#717377] w-[100vw] text-center">
         {/* <input type="checkbox" name="topping" value="Regular" id="regular" className='w-[1.2rem] h-[1.2rem]' /> */}
         {props.img ? (
-          <div className="">
+          <td className=" text-center ">
             <Image
               src={
                 props.img
@@ -25,25 +25,25 @@ function Attendaceui(props) {
               height={40}
               className="rounded-md shadow-md border-lightwg border-[1px]"
             />
-          </div>
+          </td>
         ) : (
           " "
         )}
-        <div class="flex flex-col text-center">
+        <td class="flex flex-col text-center">
           <p className="text-[1.2rem] text-white m-0">{props.name}</p>
           <p class="text-[#606F7B] font-[Avenirregular] ">
             {" "}
             {props.department}
           </p>{" "}
-        </div>
-        <p className="text-primarycolor font-bold"> {props.htno}</p>
+        </td>
+        <td className="text-primarycolor font-bold"> {props.htno}</td>
         {props.date && (
-          <p className="">{moment(props.date).format("MMMM Do YYYY")}</p>
+          <td className="">{moment(props.date).format("MMMM Do YYYY")}</td>
         )}
 
-        {props.email && <p> {props.email}</p>}
+        {props.email && <td> {props.email}</td>}
         {props.isAddAttendance ? (
-          <div className="flex justify-around gap-3 items-center  text-center">
+          <td className="flex justify-around gap-3 items-center  text-center ">
             <input
               type="radio"
               name={props.name}
@@ -74,13 +74,13 @@ function Attendaceui(props) {
               }
             />
             <label htmlFor="absent">Absent</label>
-          </div>
+          </td>
         ) : (
           ""
         )}
         {props.isAttendaceview ? (
           props.isPresent ? (
-            <p class=" w-[100px] text-[rgb(0,128,0)] flex justify-center  items-center gap-1 ">
+            <td class=" w-[100px] text-[rgb(0,128,0)] flex justify-center  items-center gap-1 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -108,9 +108,9 @@ function Attendaceui(props) {
                 ></path>
               </svg>
               Present
-            </p>
+            </td>
           ) : (
-            <p class=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1">
+            <td class=" w-[100px] text-[#EA8B9E] flex justify-center  items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="27"
@@ -134,10 +134,10 @@ function Attendaceui(props) {
                 ></path>
               </svg>
               Absent
-            </p>
+            </td>
           )
         ) : null}
-      </div>
+      </tr>
       {/* </Link> */}
     </>
   );

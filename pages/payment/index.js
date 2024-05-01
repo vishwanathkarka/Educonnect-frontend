@@ -17,11 +17,14 @@ function Payment() {
   const [paymentFormView, setPaymentFormView] = useState(false);
   const [attendace, setAttendace] = useState({ data: [] });
   const [userCradational, setUserCradational] = useState(null);
+  const [viewPaymentAddingPage, setViewPaymentAddingPage] = useState(true);
   // const {role,email,_id} = userCradational
   const [departmentSection, setDepartmentSection] = useState({
     department: router.query.department,
     section: router.query.section,
   });
+
+
 
   const [dep, setdep] = useState(0);
   // const {depIndex} = dep;
@@ -165,16 +168,11 @@ function Payment() {
   return (
     <>
       <Header />
-      {/* <div className="h-[100vh] flex items-center justify-center relative l-[50vw]">
-  
-    </div> */}
-
-      {/* { <Add/>} */}
-      {/* opening the form for adding detals */}
+      
       {paymentFormView && <PaymentAddForm sid={userId} closeForm={closeForm} />}
 
       <div className="bg-secoundblack rounded-md h-[100vh]  mx-8 my-9   ">
-        {userCradational && userCradational == "lecturer" && (
+        {userCradational && userCradational == "lecturer" &&  (
           <div className=" flex items-center gap-3 px-3   ">
             <select
               name=""
@@ -225,9 +223,8 @@ function Payment() {
                   );
                 })}
             </select>
-            {/* <button className="bg-primarycolor text-white py-2 px-3 h-[2.5rem] rounded">
-              Get
-            </button> */}
+            <button className=" border-primarycolor border-[1.5px]  p-1 rounded-md text-white" onClick={()=>{setViewPaymentAddingPage(!viewPaymentAddingPage)}}> {viewPaymentAddingPage == true ?"View Status":"Add Payment"}</button>
+        
           </div>
         )}
          {  userDataForAttendace ==undefined  && (
@@ -246,7 +243,7 @@ function Payment() {
          
         ) }
         
-{ userDataForAttendace !=undefined && (
+{ userDataForAttendace !=undefined && viewPaymentAddingPage == true &&  (
         <table className="w-[90vw] m-auto px-[20rem] my-8 ">
         <tbody>
         {userCradational == "lecturer" ? (
@@ -271,7 +268,7 @@ function Payment() {
        
        
        
-        {loading && (
+        {loading &&  (
           userDataForAttendace.map((data) => {
             return userCradational == "lecturer" ? (
               <PaymentUI
