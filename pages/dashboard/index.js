@@ -246,13 +246,13 @@ const Dashboard = () => {
             Todays Classes {moment().format("dddd").toLowerCase()}
           </h5>
           {!getTimetable && <Loading />}
-          {getTimetable && isAuthenticated() !=  (
+          {getTimetable && isAuthenticated() && isAuthenticated() &&  (
             <div className="overflow-x-auto ">
               {" "}
               <table className="text-white w-[90vw] m-auto shadow-[#06060669] shadow-md   text-center  rounded-sm  ">
                 <thead>
                   <tr className="py-2 px-6 m-auto ">
-                    <td>Photo</td>
+                  {isAuthenticated().user.role == "student" && ( <td>Photo</td> )}
                     <td className="">Name</td>
                     <td>Period</td>
                   </tr>
@@ -276,11 +276,12 @@ const Dashboard = () => {
                               ></Image>)
                   }
                             </td>
-                            <td>
+                            
+                            { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
+                            </td>) }
 
                             <td>{el.period}</td>
                           </tr>
@@ -306,11 +307,11 @@ const Dashboard = () => {
                   }
                             </td>
 
-                            <td>
+                          { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
+                            </td>) }
 
                             <td>{el.period}</td>
                           </tr>
@@ -337,12 +338,11 @@ const Dashboard = () => {
                               ></Image>)
                   }
                             </td>
-
-                            <td>
+                            { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
+                            </td>) }
 
                             <td>{el.period}</td>
                           </tr>
@@ -368,12 +368,11 @@ const Dashboard = () => {
                   }
                             </td>
 
-                            <td>
+                            { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
-
+                            </td>) }
                             <td>{el.period}</td>
                           </tr>
                         ) : (
@@ -397,11 +396,11 @@ const Dashboard = () => {
                               ></Image>) }
                             </td>
 
-                            <td>
+                            { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
+                            </td>) }
 
                             <td>{el.period}</td>
                           </tr>
@@ -427,11 +426,12 @@ const Dashboard = () => {
                  
                             </td>
 
-                            <td>
+                            { isAuthenticated().user.role == "student" && ( <td>
                               {el.lectureId.firstName +
                                 " " +
                                 el.lectureId.lastName}
-                            </td>
+                            </td>) }
+
                             <td>{el.period}</td>
                           </tr>
                         ) : (
@@ -457,6 +457,7 @@ const Dashboard = () => {
                 </tr>
                 {settingarragement &&
                   settingarragement.map((el) => {
+                   if( new Date(el.examDate) > new Date() ){
                     return (
                       <>
                         <tr>
@@ -466,6 +467,7 @@ const Dashboard = () => {
                         </tr>
                       </>
                     );
+                  }
                   })}
               </thead>
             </table>

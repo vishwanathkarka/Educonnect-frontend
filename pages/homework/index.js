@@ -9,6 +9,14 @@ function Homework() {
   const [userData, setUserData] = useState(null);
   const [homework, setHomeWork] = useState();
   const [lecturerAddedHomework, setLecturerAddedHomework] = useState();
+ 
+  const getLecturerAddedHomework = async() =>{
+    const data = await getData(`/homeworkaddedlecturer`,isAuthenticated().token)
+    if(data.success == true){
+    setLecturerAddedHomework(data)
+    }
+    console.log(data)
+        }
   useEffect(() => {
     if (!isAuthenticated()) {
       router.push("/login");
@@ -25,13 +33,7 @@ function Homework() {
     };
 
 
-    const getLecturerAddedHomework = async() =>{
-const data = await getData(`/homeworkaddedlecturer`,isAuthenticated().token)
-if(data.success == true){
-setLecturerAddedHomework(data)
-}
-console.log(data)
-    }
+  
 
     
 

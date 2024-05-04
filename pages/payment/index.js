@@ -18,6 +18,7 @@ function Payment() {
   const [attendace, setAttendace] = useState({ data: [] });
   const [userCradational, setUserCradational] = useState(null);
   const [viewPaymentAddingPage, setViewPaymentAddingPage] = useState(true);
+  const [lecturerAddedPayment, setLecturerAddedPayment]  = useState(null)
   // const {role,email,_id} = userCradational
   const [departmentSection, setDepartmentSection] = useState({
     department: router.query.department,
@@ -81,6 +82,19 @@ function Payment() {
         }
       
       }
+
+      const fetchAllLecturerAddedData = async()=>{
+        // setLoading(true)
+        const paymentData = await getData(`/viewpaymentstatuslecturer`,isAuthenticated().token)
+        console.log(paymentData)
+        if(paymentData.success == true){
+          // setLoading(false)
+          setLecturerAddedPayment(paymentData.paymentList)
+        }
+      }
+      if(viewPaymentAddingPage == false && isAuthenticated().user.role == "lecturer"){
+        fetchAllLecturerAddedData()
+      }
       const userPaymentInfo = async (userid) => {
         const userdata = await getData(
           `/getpaymentlist/${userid}`,
@@ -95,10 +109,10 @@ function Payment() {
         userPaymentInfo(isAuthenticated().user._id);
       isAuthenticated().user.role == "parent" &&
         userPaymentInfo(isAuthenticated().user.student_id._id);
-      isAuthenticated().user.role == "lecturer" && fetchdata();
+      isAuthenticated().user.role == "lecturer" &&  viewPaymentAddingPage == true && fetchdata();
       setUser(isAuthenticated().user);
     }
-  }, [section, department]);
+  }, [section, department,viewPaymentAddingPage]);
   const inputHandle = (name) => (el) => {
     const { section, department } = router.query;
     if (name == "department") {
@@ -242,6 +256,44 @@ function Payment() {
           </div>
          
         ) }
+
+<table className="w-[90vw] m-auto px-[20rem] my-8 ">
+        {
+       lecturerAddedPayment !=null &&   viewPaymentAddingPage == false &&  (
+       
+      
+     
+lecturerAddedPayment.map(data=> (
+
+            <PaymentUI
+                title={data.title}
+                amount={data.amount + "/-"}
+                description={data.description}
+                status={
+                  data.ispaid == true ? true : data.paymentId ? false : ""
+                }
+                img= {data.sid.photo.secure_url}
+                htno={data.sid.htno}
+                name ={data.sid.firstName}
+                isPaid ={data.ispaid}
+                key={data._id}
+                payButton= {true}
+                // paiddate={data.paidDate || "-"}
+                paymentId={data._id}
+                lastday={data.lastDay}
+                link={'#'}
+                payid={data.paymentId}
+              />
+            
+
+))
+
+
+           
+
+          )
+        }
+        </table>
         
 { userDataForAttendace !=undefined && viewPaymentAddingPage == true &&  (
         <table className="w-[90vw] m-auto px-[20rem] my-8 ">

@@ -54,9 +54,9 @@ function PaymentUI(props) {
               <>
               <p
                 className="  text-[rgb(0,128,0)]"
-                onClick={() => {
-                  setIsApp(1);
-                }}
+                // onClick={() => {
+                //   setIsApp(1);
+                // }}
               > Paid</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ function PaymentUI(props) {
             )
           }
             
-            {props.isPaid == false && (<button className=" bg-primarycolor text-white px-5 rounded-xl"><Link href={props.link} >Pay Now </Link> </button>)}
+            {props.isPaid == false && props.payButton == undefined && (<button className=" bg-primarycolor text-white px-5 rounded-xl"><Link href={props.link} >Pay Now </Link> </button>)}
             {props.add && (
               <div className="my-2">
                <Link href={props.link} onClick={() => props.userId(props.id)}  >
@@ -112,6 +112,43 @@ function PaymentUI(props) {
                 </Link>
               </div>
             )}
+
+{props.isPaid == false && props.payButton == true &&  (
+  <>
+    <td className="flex items-center gap-2 justify-center "></td>
+  <p
+    className="  text-[#FFD43B]"
+   
+  > Pending</p>
+    <svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="27"
+   height="21"
+   viewBox="0 0 27 21"
+ >
+   <g id="Group_51" data-name="Group 51">
+     <rect
+       id="Rectangle_16"
+       data-name="Rectangle 16"
+       width="27"
+       height="21"
+       rx="8"
+       fill="rgba(255,212,59,0.36)"
+     />
+   </g>
+   <path
+     id="Icon_awesome-clock"
+     data-name="Icon awesome-clock"
+     d="M7.562.562c-3.866,0-7,2.21-7,4.938s3.133,4.937,7,4.937,7-2.21,7-4.937S11.428.562,7.562.562Zm1.611,6.97L6.684,6.257a.228.228,0,0,1-.138-.193V2.713c0-.131.152-.239.339-.239H8.239c.186,0,.339.108.339.239V5.454l1.792.92a.2.2,0,0,1,.073.334l-.8.772A.441.441,0,0,1,9.173,7.533Z"
+     transform="translate(5.938 5)"
+     fill="#ffd43b"
+   />
+ </svg>
+
+    </>
+  
+)
+}
           </td>
         )}
         {/* </div> */}

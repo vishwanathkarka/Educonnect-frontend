@@ -7,6 +7,7 @@ import moment from "moment";
 // import {postData,getData,isAuthenticated }  from "../../util/apicalls"
 import { postData, getData, isAuthenticated } from "@/util/apicalls";
 import { useRouter } from "next/router";
+
 import Loading from "@/util/loadingPage";
 import Image from "next/image";
 
@@ -217,6 +218,7 @@ function Add() {
               );
             })}
         </select>
+        <button className="text-white border-primarycolor border-[1px] p-2 rounded-lg" onClick={()=> router.push("/exam/result")}>View Added Results</button>
         {/* <button
           className="bg-primary text-white py-2 px-3 h-[2.5rem] rounded"
           onClick={attendanceSubmit}
