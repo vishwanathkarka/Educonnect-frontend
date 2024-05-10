@@ -3,7 +3,7 @@ import { BASEURL } from "@next/env";
 // https://college-mangment.onrender.com
 export const postData = async (url, post, token) => {
   const res = await fetch(
-    `http://localhost:4000/api/v1${url}`,
+    `https://college-mangment.onrender.com/api/v1${url}`,
     {
       method: "POST",
       headers: {
@@ -62,7 +62,7 @@ export const signout = () => {
 
 export const postDataForm = async (url, post, token) => {
   const res = await fetch(
-    `http://localhost:4000/api/v1${url}`,
+    `https://college-mangment.onrender.com/api/v1${url}`,
     {
       method: "POST",
       headers: {
@@ -85,7 +85,7 @@ export const postDataForm = async (url, post, token) => {
 
 export const postDataJson = async (url, post, token) => {
   const res = await fetch(
-    `http://localhost:4000/api/v1${url}`,
+    `https://college-mangment.onrender.com/api/v1${url}`,
     {
       method: "POST",
       headers: {
@@ -106,7 +106,7 @@ export const postDataJson = async (url, post, token) => {
 };
 
 export const getData = async (url, token) => {
-  return await fetch(`http://localhost:4000/api/v1${url}`, {
+  return await fetch(`https://college-mangment.onrender.com/api/v1${url}`, {
     method: "GET",
     headers: {
       Authorization: token,
@@ -142,7 +142,7 @@ export const updateData = async (url, post, token) => {
 
 export const deleteData = async (url, token) => {
   const res = await fetch(
-    `http://localhost:4000/api/v1${url}`,
+    `https://college-mangment.onrender.com/api/v1${url}`,
     {
       method: "DELETE",
       headers: {

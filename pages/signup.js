@@ -92,6 +92,7 @@ const Signup = () => {
     el.preventDefault();
     console.log(JSON.stringify(userData));
     console.log(userData);
+    console.log(`IMMMGGG - ${JSON.stringify(img)}`)
     bodyFormData.append("data", JSON.stringify(userData));
     bodyFormData.append("photo", img);
     setloading(true)
