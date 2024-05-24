@@ -44,21 +44,7 @@ const [showMobileBar,setShowMobileBar] = useState(false)
       <>
         <div className="relative onHover p-5 bg-black  border-b-[rgba(246,247,249,.05)] border-[1px]">
           <div className="flex  justify-center items-center gap-[12px] cursor-pointer">
-            {/* {display} */}
-            // <svg
-            //   width="11"
-            //   height="6"
-            //   viewBox="0 0 11 6"
-            //   fill="none"
-            //   xmlns="http://www.w3.org/2000/svg"
-            //   class="mt-1"
-            // >
-            //   <path
-            //     d="M2.03243 0.261745L5.50447 3.73379L8.97651 0.261745C9.3255 -0.0872484 9.88926 -0.0872484 10.2383 0.261745C10.5872 0.610739 10.5872 1.1745 10.2383 1.52349L6.13087 5.63088C5.78187 5.97987 5.21811 5.97987 4.86912 5.63088L0.761732 1.52349C0.594168 1.3563 0.5 1.12932 0.5 0.892619C0.5 0.655913 0.594168 0.428933 0.761732 0.261745C1.11073 -0.0782999 1.68343 -0.0872484 2.03243 0.261745Z"
-            //     fill="#B8C2CC"
-            //   ></path>
-            // </svg>
-      <h1 className="text-primarycolor">HITAM</h1>
+           
           </div>
         </div>
       </>
@@ -69,15 +55,15 @@ const [showMobileBar,setShowMobileBar] = useState(false)
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
        <Link href="/" className="no-underline"> 
-//        <svg xmlns="http://www.w3.org/2000/svg" width="175.5" height="36" viewBox="0 0 175.5 36">
-//   <text id="duconnect" transform="translate(23.5 28)" fill="#fff" font-size="30" font-family="Rubik"><tspan x="0" y="0">duconnect</tspan></text>
-//   <line id="Line_1" data-name="Line 1" x2="20.937" transform="translate(0 4.5)" fill="none" stroke="#28abe2" stroke-width="4"/>
-//   <line id="Line_5" data-name="Line 5" x2="20.937" transform="translate(0 28.077)" fill="none" stroke="#2e3192" stroke-width="4"/>
-//   <line id="Line_3" data-name="Line 3" x2="20.937" transform="translate(0 16.276)" fill="none" stroke="#0171bb" stroke-width="4"/>
-//   <line id="Line_2" data-name="Line 2" y2="10.5" transform="translate(2 3)" fill="none" stroke="#28abe2" stroke-width="4"/>
-//   <line id="Line_4" data-name="Line 4" y2="10.5" transform="translate(2 14.577)" fill="none" stroke="#0171bb" stroke-width="4"/>
-// </svg>
-    <h1 className="text-primarycolor">HITAM</h1>
+ {/* <svg xmlns="http://www.w3.org/2000/svg" width="175.5" height="36" viewBox="0 0 175.5 36">
+  <text id="duconnect" transform="translate(23.5 28)" fill="#fff" font-size="30" font-family="Rubik"><tspan x="0" y="0">duconnect</tspan></text>
+  <line id="Line_1" data-name="Line 1" x2="20.937" transform="translate(0 4.5)" fill="none" stroke="#28abe2" stroke-width="4"/>
+  <line id="Line_5" data-name="Line 5" x2="20.937" transform="translate(0 28.077)" fill="none" stroke="#2e3192" stroke-width="4"/>
+  <line id="Line_3" data-name="Line 3" x2="20.937" transform="translate(0 16.276)" fill="none" stroke="#0171bb" stroke-width="4"/>
+  <line id="Line_2" data-name="Line 2" y2="10.5" transform="translate(2 3)" fill="none" stroke="#28abe2" stroke-width="4"/>
+  <line id="Line_4" data-name="Line 4" y2="10.5" transform="translate(2 14.577)" fill="none" stroke="#0171bb" stroke-width="4"/>
+</svg> */}
+   <h1 className="text-primarycolor text-[1.5rem]">HITAM</h1>
        </Link>
       </div>
       {userData && (
