@@ -69,14 +69,15 @@ const [showMobileBar,setShowMobileBar] = useState(false)
     <div className="flex  h-[9vh] justify-between items-center lg:p-[40px]  border-b-[rgba(246,247,249,.05)]  border-[1px] bg-secoundblack ">
       <div className="w-[16rem]">
        <Link href="/" className="no-underline"> 
-       <svg xmlns="http://www.w3.org/2000/svg" width="175.5" height="36" viewBox="0 0 175.5 36">
-  <text id="duconnect" transform="translate(23.5 28)" fill="#fff" font-size="30" font-family="Rubik"><tspan x="0" y="0">duconnect</tspan></text>
-  <line id="Line_1" data-name="Line 1" x2="20.937" transform="translate(0 4.5)" fill="none" stroke="#28abe2" stroke-width="4"/>
-  <line id="Line_5" data-name="Line 5" x2="20.937" transform="translate(0 28.077)" fill="none" stroke="#2e3192" stroke-width="4"/>
-  <line id="Line_3" data-name="Line 3" x2="20.937" transform="translate(0 16.276)" fill="none" stroke="#0171bb" stroke-width="4"/>
-  <line id="Line_2" data-name="Line 2" y2="10.5" transform="translate(2 3)" fill="none" stroke="#28abe2" stroke-width="4"/>
-  <line id="Line_4" data-name="Line 4" y2="10.5" transform="translate(2 14.577)" fill="none" stroke="#0171bb" stroke-width="4"/>
-</svg>
+//        <svg xmlns="http://www.w3.org/2000/svg" width="175.5" height="36" viewBox="0 0 175.5 36">
+//   <text id="duconnect" transform="translate(23.5 28)" fill="#fff" font-size="30" font-family="Rubik"><tspan x="0" y="0">duconnect</tspan></text>
+//   <line id="Line_1" data-name="Line 1" x2="20.937" transform="translate(0 4.5)" fill="none" stroke="#28abe2" stroke-width="4"/>
+//   <line id="Line_5" data-name="Line 5" x2="20.937" transform="translate(0 28.077)" fill="none" stroke="#2e3192" stroke-width="4"/>
+//   <line id="Line_3" data-name="Line 3" x2="20.937" transform="translate(0 16.276)" fill="none" stroke="#0171bb" stroke-width="4"/>
+//   <line id="Line_2" data-name="Line 2" y2="10.5" transform="translate(2 3)" fill="none" stroke="#28abe2" stroke-width="4"/>
+//   <line id="Line_4" data-name="Line 4" y2="10.5" transform="translate(2 14.577)" fill="none" stroke="#0171bb" stroke-width="4"/>
+// </svg>
+    <h1 className="text-primarycolor">HITAM</h1>
        </Link>
       </div>
       {userData && (
