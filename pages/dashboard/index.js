@@ -237,7 +237,7 @@ const Dashboard = () => {
                 </svg>
               </div>
               <h1 className="text-white">{failedCount}</h1>
-              <p className="text-white">Failed Subject count</p>
+              <p className="text-white">Marks</p>
             </div>
           </Link>
         </div>
